@@ -1,0 +1,110 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Construction_System
+{
+    public partial class MType : Form
+    {
+        private string _empId;
+        public MType(string empId)
+        {
+            InitializeComponent();
+            _empId = empId;
+        }
+
+        private void sumQty()
+        {
+            try
+            {
+                if (dataGridView1.Rows.Count != 0)
+                {
+                    label4.Text = dataGridView1.RowCount.ToString("#,###") + "    ລາຍການ";
+                    //int totalQty = 0;
+                    //for (int i = 0; i < dataGridView1.RowCount; i++)
+                    //{
+                    //    totalQty += Convert.ToInt32(dataGridView1.Rows[i].Cells["Column24"].Value.ToString());
+                    //}
+                    //label2.Text = totalQty.ToString("#,###") + "   ອັນ";
+                }
+                else
+                {
+                    label4.Text = "0" + "    ລາຍການ";
+                }
+            }
+            catch (Exception ex)
+            {
+                MyMessageBox.ShowMessage("ເກີດຂໍ້ຜີດພາດ " + ex + " ", "", "ເກີດຂໍ້ຜີດພາດ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void dataGridView1_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            dataGridView1.ClearSelection();
+        }
+
+        private void dataGridView1_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            dataGridView1.ClearSelection();
+            sumQty();
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                var senderGrid = (DataGridView)sender;
+
+                if (senderGrid.Columns[e.ColumnIndex] is DataGridViewImageColumn &&
+                e.RowIndex >= 0)
+                {
+                    //TODO - Button Clicked - Execute Code Here
+                    dataGridView1.Rows.RemoveAt(dataGridView1.Rows[e.RowIndex].Index);
+                    sumQty();
+                    MyMessageBox.ShowMessage("ລົບຂໍ້ມູນສຳເລັດແລ້ວ", "", "ສຳເລັດ", MessageBoxButtons.OK, MessageBoxIcon.None);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MyMessageBox.ShowMessage("ເກີດຂໍ້ຜີດພາດ " + ex + " ", "", "ເກີດຂໍ້ຜີດພາດ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                (dataGridView1.DataSource as DataTable).DefaultView.RowFilter = string.Format("name LIKE '%{0}%'", textBox1.Text);
+                sumQty();
+            }
+            catch (Exception ex)
+            {
+
+                MyMessageBox.ShowMessage("ເກີດຂໍ້ຜີດພາດ " + ex + " ", "", "ເກີດຂໍ້ຜີດພາດ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void MType_Load(object sender, EventArgs e)
+        {
+            DataSet data1 = new DataSet("Contruction_System");
+            DataTable table1 = new DataTable("Matype");
+            table1.Columns.Add("id", typeof(int));
+            table1.Columns.Add("name");
+            table1.Rows.Add(1, "ໄຟຟ້າ");
+            table1.Rows.Add(2, "ເຄື່ອງມື");
+            table1.Rows.Add(3, "ວັດສະດຸງານປູນ");
+            table1.Rows.Add(9, "ວັດສະດຸງານເພດດານ");
+            table1.Rows.Add(10, "ນ໊ອດ");
+            table1.Rows.Add(11, "ຕະປູ");
+            data1.Tables.Add(table1);
+            dataGridView1.DataSource = table1;
+        }
+    }
+}

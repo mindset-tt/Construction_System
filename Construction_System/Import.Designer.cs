@@ -131,7 +131,6 @@
             this.dataGridView2.Margin = new System.Windows.Forms.Padding(3, 3, 3, 5);
             this.dataGridView2.MultiSelect = false;
             this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.ReadOnly = true;
             this.dataGridView2.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.dataGridView2.RowHeadersVisible = false;
             this.dataGridView2.RowTemplate.Height = 25;
@@ -432,7 +431,6 @@
             this.Column21.Image = global::Construction_System.Properties.Resources.bin;
             this.Column21.MinimumWidth = 30;
             this.Column21.Name = "Column21";
-            this.Column21.ReadOnly = true;
             this.Column21.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.Column21.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.Column21.Width = 30;
@@ -445,7 +443,6 @@
             this.Column22.Image = ((System.Drawing.Image)(resources.GetObject("Column22.Image")));
             this.Column22.MinimumWidth = 45;
             this.Column22.Name = "Column22";
-            this.Column22.ReadOnly = true;
             this.Column22.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.Column22.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.Column22.Width = 45;
@@ -457,7 +454,6 @@
             this.Column23.HeaderText = "ລາຍການ";
             this.Column23.MinimumWidth = 100;
             this.Column23.Name = "Column23";
-            this.Column23.ReadOnly = true;
             // 
             // Column24
             // 
@@ -467,7 +463,6 @@
             this.Column24.HeaderText = "ຈຳນວນ";
             this.Column24.MinimumWidth = 55;
             this.Column24.Name = "Column24";
-            this.Column24.ReadOnly = true;
             // 
             // Column25
             // 
@@ -477,7 +472,6 @@
             this.Column25.HeaderText = "ຫົວໜ່ວຍ";
             this.Column25.MinimumWidth = 65;
             this.Column25.Name = "Column25";
-            this.Column25.ReadOnly = true;
             // 
             // Column26
             // 
@@ -487,7 +481,6 @@
             this.Column26.HeaderText = "ລວມລາຄາ";
             this.Column26.MinimumWidth = 80;
             this.Column26.Name = "Column26";
-            this.Column26.ReadOnly = true;
             this.Column26.Width = 86;
             // 
             // id2
@@ -495,7 +488,6 @@
             this.id2.DataPropertyName = "prodID";
             this.id2.HeaderText = "id";
             this.id2.Name = "id2";
-            this.id2.ReadOnly = true;
             this.id2.Visible = false;
             // 
             // price
@@ -503,23 +495,20 @@
             this.price.DataPropertyName = "prodPrice";
             this.price.HeaderText = "price";
             this.price.Name = "price";
-            this.price.ReadOnly = true;
             this.price.Visible = false;
             // 
             // difFromOrder
             // 
-            this.difFromOrder.DataPropertyName = "orderQty";
+            this.difFromOrder.DataPropertyName = "orderQtyss";
             this.difFromOrder.HeaderText = "difFromOrder";
             this.difFromOrder.Name = "difFromOrder";
-            this.difFromOrder.ReadOnly = true;
             this.difFromOrder.Visible = false;
             // 
             // originalOrder
             // 
-            this.originalOrder.DataPropertyName = "orderQty";
+            this.originalOrder.DataPropertyName = "orderQtys";
             this.originalOrder.HeaderText = "originalOrder";
             this.originalOrder.Name = "originalOrder";
-            this.originalOrder.ReadOnly = true;
             this.originalOrder.Visible = false;
             // 
             // Import

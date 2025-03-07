@@ -30,11 +30,21 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Import));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Import));
             this.dataGridViewImageColumn2 = new System.Windows.Forms.DataGridViewImageColumn();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.Column21 = new System.Windows.Forms.DataGridViewImageColumn();
+            this.Column22 = new System.Windows.Forms.DataGridViewImageColumn();
+            this.Column23 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column24 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column25 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column26 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.id2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.price = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.difFromOrder = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.originalOrder = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
@@ -55,16 +65,6 @@
             this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
             this.dataGridViewImageColumn3 = new System.Windows.Forms.DataGridViewImageColumn();
             this.dataGridViewImageColumn4 = new System.Windows.Forms.DataGridViewImageColumn();
-            this.Column21 = new System.Windows.Forms.DataGridViewImageColumn();
-            this.Column22 = new System.Windows.Forms.DataGridViewImageColumn();
-            this.Column23 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column24 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column25 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column26 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.id2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.price = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.difFromOrder = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.originalOrder = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.tableLayoutPanel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -141,6 +141,94 @@
             this.dataGridView2.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellContentClick);
             this.dataGridView2.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dataGridView2_DataBindingComplete);
             this.dataGridView2.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dataGridView2_RowPostPaint);
+            // 
+            // Column21
+            // 
+            this.Column21.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Column21.FillWeight = 30F;
+            this.Column21.HeaderText = "ລົບ";
+            this.Column21.Image = global::Construction_System.Properties.Resources.bin;
+            this.Column21.MinimumWidth = 30;
+            this.Column21.Name = "Column21";
+            this.Column21.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Column21.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Column21.Width = 30;
+            // 
+            // Column22
+            // 
+            this.Column22.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Column22.FillWeight = 45F;
+            this.Column22.HeaderText = "ແກ້ໄຂ";
+            this.Column22.Image = ((System.Drawing.Image)(resources.GetObject("Column22.Image")));
+            this.Column22.MinimumWidth = 45;
+            this.Column22.Name = "Column22";
+            this.Column22.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Column22.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Column22.Width = 45;
+            // 
+            // Column23
+            // 
+            this.Column23.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column23.DataPropertyName = "prodName";
+            this.Column23.HeaderText = "ລາຍການ";
+            this.Column23.MinimumWidth = 100;
+            this.Column23.Name = "Column23";
+            // 
+            // Column24
+            // 
+            this.Column24.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column24.DataPropertyName = "orderQty";
+            this.Column24.FillWeight = 55F;
+            this.Column24.HeaderText = "ຈຳນວນ";
+            this.Column24.MinimumWidth = 55;
+            this.Column24.Name = "Column24";
+            // 
+            // Column25
+            // 
+            this.Column25.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column25.DataPropertyName = "unitName";
+            this.Column25.FillWeight = 65F;
+            this.Column25.HeaderText = "ຫົວໜ່ວຍ";
+            this.Column25.MinimumWidth = 65;
+            this.Column25.Name = "Column25";
+            // 
+            // Column26
+            // 
+            this.Column26.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.Column26.DataPropertyName = "totalPrice";
+            this.Column26.FillWeight = 80F;
+            this.Column26.HeaderText = "ລວມລາຄາ";
+            this.Column26.MinimumWidth = 80;
+            this.Column26.Name = "Column26";
+            this.Column26.Width = 86;
+            // 
+            // id2
+            // 
+            this.id2.DataPropertyName = "prodID";
+            this.id2.HeaderText = "id";
+            this.id2.Name = "id2";
+            this.id2.Visible = false;
+            // 
+            // price
+            // 
+            this.price.DataPropertyName = "prodPrice";
+            this.price.HeaderText = "price";
+            this.price.Name = "price";
+            this.price.Visible = false;
+            // 
+            // difFromOrder
+            // 
+            this.difFromOrder.DataPropertyName = "orderQtyss";
+            this.difFromOrder.HeaderText = "difFromOrder";
+            this.difFromOrder.Name = "difFromOrder";
+            this.difFromOrder.Visible = false;
+            // 
+            // originalOrder
+            // 
+            this.originalOrder.DataPropertyName = "orderQtys";
+            this.originalOrder.HeaderText = "originalOrder";
+            this.originalOrder.Name = "originalOrder";
+            this.originalOrder.Visible = false;
             // 
             // label2
             // 
@@ -422,94 +510,6 @@
             this.dataGridViewImageColumn4.ReadOnly = true;
             this.dataGridViewImageColumn4.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridViewImageColumn4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // Column21
-            // 
-            this.Column21.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.Column21.FillWeight = 30F;
-            this.Column21.HeaderText = "ລົບ";
-            this.Column21.Image = global::Construction_System.Properties.Resources.bin;
-            this.Column21.MinimumWidth = 30;
-            this.Column21.Name = "Column21";
-            this.Column21.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column21.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.Column21.Width = 30;
-            // 
-            // Column22
-            // 
-            this.Column22.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.Column22.FillWeight = 45F;
-            this.Column22.HeaderText = "ແກ້ໄຂ";
-            this.Column22.Image = ((System.Drawing.Image)(resources.GetObject("Column22.Image")));
-            this.Column22.MinimumWidth = 45;
-            this.Column22.Name = "Column22";
-            this.Column22.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column22.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.Column22.Width = 45;
-            // 
-            // Column23
-            // 
-            this.Column23.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column23.DataPropertyName = "prodName";
-            this.Column23.HeaderText = "ລາຍການ";
-            this.Column23.MinimumWidth = 100;
-            this.Column23.Name = "Column23";
-            // 
-            // Column24
-            // 
-            this.Column24.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column24.DataPropertyName = "orderQty";
-            this.Column24.FillWeight = 55F;
-            this.Column24.HeaderText = "ຈຳນວນ";
-            this.Column24.MinimumWidth = 55;
-            this.Column24.Name = "Column24";
-            // 
-            // Column25
-            // 
-            this.Column25.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column25.DataPropertyName = "unitName";
-            this.Column25.FillWeight = 65F;
-            this.Column25.HeaderText = "ຫົວໜ່ວຍ";
-            this.Column25.MinimumWidth = 65;
-            this.Column25.Name = "Column25";
-            // 
-            // Column26
-            // 
-            this.Column26.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.Column26.DataPropertyName = "totalPrice";
-            this.Column26.FillWeight = 80F;
-            this.Column26.HeaderText = "ລວມລາຄາ";
-            this.Column26.MinimumWidth = 80;
-            this.Column26.Name = "Column26";
-            this.Column26.Width = 86;
-            // 
-            // id2
-            // 
-            this.id2.DataPropertyName = "prodID";
-            this.id2.HeaderText = "id";
-            this.id2.Name = "id2";
-            this.id2.Visible = false;
-            // 
-            // price
-            // 
-            this.price.DataPropertyName = "prodPrice";
-            this.price.HeaderText = "price";
-            this.price.Name = "price";
-            this.price.Visible = false;
-            // 
-            // difFromOrder
-            // 
-            this.difFromOrder.DataPropertyName = "orderQtyss";
-            this.difFromOrder.HeaderText = "difFromOrder";
-            this.difFromOrder.Name = "difFromOrder";
-            this.difFromOrder.Visible = false;
-            // 
-            // originalOrder
-            // 
-            this.originalOrder.DataPropertyName = "orderQtys";
-            this.originalOrder.HeaderText = "originalOrder";
-            this.originalOrder.Name = "originalOrder";
-            this.originalOrder.Visible = false;
             // 
             // Import
             // 

@@ -268,12 +268,14 @@ namespace Construction_System
                                $"VALUES ('{orderId}', '{productId}', {row.Cells["Column24"].Value})");
             }
             ShowMessage("ສິ່ງຊື້ສຳເລັດແລ້ວ", "ສຳເລັດ");
-            FM_Bill fM_Bill = new FM_Bill();
-            fM_Bill.ShowDialog();
-            dataGridView2.Rows.Clear();
+            //FM_Bill fM_Bill = new FM_Bill();
+            //fM_Bill.ShowDialog();
+            //dataGridView2.Rows.Clear();
+            dataGridView2.DataSource = null;
             label2.Text = "0   ອັນ";
-            comboBox1.SelectedIndex = -1;
-            LoadData();
+            //clear the combobox
+            comboBox1.SelectedIndex = 0;
+            LoadProducts();
         }
     }
 }

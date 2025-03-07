@@ -15,11 +15,13 @@ namespace Construction_System
     public partial class SEditQty : Form
     {
         Sale sale; MSaleEdit mSale;
-        public SEditQty(Sale sale, MSaleEdit mSale)
+        private string _qtyInStore;
+        public SEditQty(Sale sale, MSaleEdit mSale, string qtyInStore)
         {
             InitializeComponent();
             this.sale = sale;
             this.mSale = mSale;
+            _qtyInStore = qtyInStore;
             textBox2.Select();
         }
 
@@ -32,89 +34,86 @@ namespace Construction_System
         {
             this.Close();
         }
-
+        bool isCollapsed;
         //Sale saleData = new Sale();
         private void button1_Click(object sender, EventArgs e)
         {
             try
             {
-
-                if (label1.Text == " ເພີ່ມຈຳນວນຂາຍສິນຄ້າ")
+                if (string.IsNullOrWhiteSpace(textBox2.Text) || textBox2.Text == "0")
                 {
-                    if (textBox2.Text == "" || textBox2.Text == "0")
+                    MyMessageBox.ShowMessage("ທ່ານໄດ້ປ້ອນຂໍ້ມູນຈຳນວນຖືກຕ້ອງແລ້ວ ຫຼື ບໍ່?", "", "ກວດສອບ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                int inputQty = Convert.ToInt32(textBox2.Text);
+                int qtyInStore = Convert.ToInt32(_qtyInStore);
+
+                if (inputQty > qtyInStore)
+                {
+                    MyMessageBox.ShowMessage("ຈຳນວນທີ່ເພີ່ມຫຼາຍກວ່າຈຳນວນທີ່ມີໃນຮ້ານ", "", "ຄໍາຖາມ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                if (label1.Text.Contains("ຂາຍສິນຄ້າ"))
+                {
+                    foreach (DataGridViewRow row in sale.dataGridView2.Rows)
                     {
-                        MyMessageBox.ShowMessage("ທ່ານໄດ້ປ້ອນຂໍ້ມູນຈຳນວນຖືກຕ້ອງແລ້ວ ຫຼື ບໍ່?", "", "ກວດສອບ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        if (row.Cells["id2"].Value.ToString() == lblId.Text)
+                        {
+                            int currentQty = Convert.ToInt32(row.Cells["Column24"].Value);
+                            int totalQty = inputQty + currentQty;
+
+                            if (totalQty > qtyInStore)
+                            {
+                                MyMessageBox.ShowMessage("ຈຳນວນທີ່ເພີ່ມຫຼາຍກວ່າຈຳນວນທີ່ມີໃນຮ້ານ", "", "ຄໍາຖາມ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return;
+                            }
+
+                            sale.updateQty(totalQty, Convert.ToInt32(lblPrice.Text) * totalQty);
+                            isCollapsed = false;
+                            break;
+                        }
                     }
-                    else
+
+                    if (isCollapsed)
                     {
                         sale.dataGridView2.Rows.Add(Construction_System.Properties.Resources.bin,
-                            Construction_System.Properties.Resources.pencil, textBox1.Text,
-                            Convert.ToInt32(textBox2.Text), lblUnit.Text,
-                            Convert.ToInt32(lblPrice.Text)*Convert.ToInt32(textBox2.Text), lblId.Text);
-                        MyMessageBox.ShowMessage("ເພີ່ມຂໍ້ມູນສຳເລັດແລ້ວ", "", "ສຳເລັດ", MessageBoxButtons.OK, MessageBoxIcon.None);
-                        this.Close();
+                                                    Construction_System.Properties.Resources.pencil, textBox1.Text,
+                                                    inputQty, lblUnit.Text,
+                                                    Convert.ToInt32(lblPrice.Text) * inputQty, lblId.Text, _qtyInStore);
                     }
 
+                    MyMessageBox.ShowMessage("ເພີ່ມຂໍ້ມູນສຳເລັດແລ້ວ", "", "ສຳເລັດ", MessageBoxButtons.OK, MessageBoxIcon.None);
                 }
-                else if (label1.Text == "ແກ້ໄຂຈຳນວນຂາຍສິນຄ້າ")
+                else if (label1.Text.Contains("ແກ້ໄຂຈຳນວນຂາຍສິນຄ້າ"))
                 {
-                    if (textBox2.Text == "" || textBox2.Text == "0")
-                    {
-                        MyMessageBox.ShowMessage("ທ່ານໄດ້ປ້ອນຂໍ້ມູນຈຳນວນຖືກຕ້ອງແລ້ວ ຫຼື ບໍ່?", "", "ກວດສອບ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }
-                    else
-                    {
-                        sale.updateQty(Convert.ToInt32(textBox2.Text),
-                         (Convert.ToInt32(lblPrice.Text) / Convert.ToInt32(lblQtyEdit.Text)) * Convert.ToInt32(textBox2.Text));
-                        MyMessageBox.ShowMessage("ແກ້ໄຂຂໍ້ມູນສຳເລັດແລ້ວ", "", "ສຳເລັດ", MessageBoxButtons.OK, MessageBoxIcon.None);
-                        this.Close();
-                    }
-                    
+                    sale.updateQty(inputQty, (Convert.ToInt32(lblPrice.Text) / Convert.ToInt32(lblQtyEdit.Text)) * inputQty);
+                    MyMessageBox.ShowMessage("ແກ້ໄຂຂໍ້ມູນສຳເລັດແລ້ວ", "", "ສຳເລັດ", MessageBoxButtons.OK, MessageBoxIcon.None);
                 }
-                else if (label1.Text == " ຈັດການເພີ່ມຈຳນວນຂາຍສິນຄ້າ")
+                else if (label1.Text.Contains("ຈຳນວນຂາຍສິນຄ້າ"))
                 {
-                    if (textBox2.Text == "" || textBox2.Text == "0")
-                    {
-                        MyMessageBox.ShowMessage("ທ່ານໄດ້ປ້ອນຂໍ້ມູນຈຳນວນຖືກຕ້ອງແລ້ວ ຫຼື ບໍ່?", "", "ກວດສອບ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }
-                    else
-                    {
-                        //ແນະນຳໃຫ້ update ຈຳນວນ ແລະ ລາຄາຜ່ານ Database
-                        mSale.dataGridView2.Rows.Add(Construction_System.Properties.Resources.bin,
-                            Construction_System.Properties.Resources.pencil, textBox1.Text,
-                            Convert.ToInt32(textBox2.Text), lblUnit.Text,
-                            Convert.ToInt32(lblPrice.Text) * Convert.ToInt32(textBox2.Text), lblId.Text);
-                        MyMessageBox.ShowMessage("ເພີ່ມຂໍ້ມູນສຳເລັດແລ້ວ", "", "ສຳເລັດ", MessageBoxButtons.OK, MessageBoxIcon.None);
-                        this.Close();
-                    }
+                    mSale.dataGridView2.Rows.Add(Construction_System.Properties.Resources.bin,
+                                                 Construction_System.Properties.Resources.pencil, textBox1.Text,
+                                                 inputQty, lblUnit.Text,
+                                                 Convert.ToInt32(lblPrice.Text) * inputQty, lblId.Text);
+                    MyMessageBox.ShowMessage("ເພີ່ມຂໍ້ມູນສຳເລັດແລ້ວ", "", "ສຳເລັດ", MessageBoxButtons.OK, MessageBoxIcon.None);
                 }
-                else if (label1.Text == "ຈັດການແກ້ໄຂຈຳນວນຂາຍສິນຄ້າ")
+                else if (label1.Text.Contains("ແກ້ໄຂຈຳນວນຂາຍສິນຄ້າ"))
                 {
-                    if (textBox2.Text == "" || textBox2.Text == "0")
-                    {
-                        MyMessageBox.ShowMessage("ທ່ານໄດ້ປ້ອນຂໍ້ມູນຈຳນວນຖືກຕ້ອງແລ້ວ ຫຼື ບໍ່?", "", "ກວດສອບ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }
-                    else
-                    {
-                        //ແນະນຳໃຫ້ update ຈຳນວນ ແລະ ລາຄາຜ່ານ Database
-                        mSale.updateQtyMS(Convert.ToInt32(textBox2.Text),
-                            (Convert.ToInt32(lblPrice.Text) / Convert.ToInt32(lblQtyEdit.Text)) * Convert.ToInt32(textBox2.Text));
-                        MyMessageBox.ShowMessage("ແກ້ໄຂຂໍ້ມູນສຳເລັດແລ້ວ", "", "ສຳເລັດ", MessageBoxButtons.OK, MessageBoxIcon.None);
-                        this.Close();
-                    }
-                    
+                    mSale.updateQtyMS(inputQty, (Convert.ToInt32(lblPrice.Text) / Convert.ToInt32(lblQtyEdit.Text)) * inputQty);
+                    MyMessageBox.ShowMessage("ແກ້ໄຂຂໍ້ມູນສຳເລັດແລ້ວ", "", "ສຳເລັດ", MessageBoxButtons.OK, MessageBoxIcon.None);
                 }
                 else
                 {
                     MyMessageBox.ShowMessage("ຂໍອະໄພ, ລະບົບຂັດຂ້ອງ!", "", "ຜິດພາດ", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
+                this.Close();
             }
-            catch
+            catch (Exception ex)
             {
-
-                //MyMessageBox.ShowMessage("ເກີດຂໍ້ຜີດພາດ " + ex + " ", "", "ເກີດຂໍ້ຜີດພາດ", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                MyMessageBox.ShowMessage("ທ່ານໄດ້ປ້ອນຂໍ້ມູນຈຳນວນຖືກຕ້ອງແລ້ວ ຫຼື ບໍ່?", "", "ກວດສອບ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MyMessageBox.ShowMessage($"ເກີດຂໍ້ຜີດພາດ {ex.Message}", "", "ເກີດຂໍ້ຜິດພາດ", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

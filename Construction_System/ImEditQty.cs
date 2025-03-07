@@ -24,12 +24,14 @@ namespace Construction_System
 
         private void pictureBox2_Click(object sender, EventArgs e)
         {
-            Close();
+            _import.updateQty(Convert.ToInt32(textBox2.Text), Convert.ToInt32(textBox3.Text), int.Parse(_originalQty) - Convert.ToInt32(textBox2.Text));
+            this.Close();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Close();
+            _import.updateQty(Convert.ToInt32(textBox2.Text), Convert.ToInt32(textBox3.Text), int.Parse(_originalQty) - Convert.ToInt32(textBox2.Text));
+            this.Close();
         }
 
         private void textBox3_TextChanged(object sender, EventArgs e)
@@ -67,6 +69,11 @@ namespace Construction_System
             switch (label1.Text)
             {
                 case "ແກ້ໄຂຂໍ້ມູນນຳເຂົ້າສິນຄ້າ":
+                    if(int.Parse(textBox2.Text) > int.Parse(_originalQty))
+                    {
+                        MyMessageBox.ShowMessage("ຈຳນວນທີ່ເພີ່ມຫຼາຍກວ່າຈຳນວນທີ່ສັ່ງຊື້", "", "ຄໍາຖາມ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
                     _import.updateQty(Convert.ToInt32(textBox2.Text), Convert.ToInt32(textBox3.Text), int.Parse(_originalQty) - Convert.ToInt32(textBox2.Text));
                     MyMessageBox.ShowMessage("ແກ້ໄຂຂໍ້ມູນສຳເລັດແລ້ວ", "", "ສຳເລັດ", MessageBoxButtons.OK, MessageBoxIcon.None);
                     Close();
@@ -79,6 +86,11 @@ namespace Construction_System
                     break;
 
                 case "ຈັດການແກ້ໄຂຈຳນວນນຳເຂົ້າສິນຄ້າ":
+                    if(int.Parse(textBox2.Text) > int.Parse(_originalQty))
+                    {
+                        MyMessageBox.ShowMessage("ຈຳນວນທີ່ເພີ່ມຫຼາຍກວ່າຈຳນວນທີ່ສັ່ງຊື້", "", "ຄໍາຖາມ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
                     _mImport.updateQty(Convert.ToInt32(textBox2.Text), Convert.ToInt32(textBox3.Text));
                     MyMessageBox.ShowMessage("ແກ້ໄຂຂໍ້ມູນສຳເລັດແລ້ວ", "", "ສຳເລັດ", MessageBoxButtons.OK, MessageBoxIcon.None);
                     Close();

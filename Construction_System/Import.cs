@@ -28,9 +28,17 @@ namespace Construction_System
 
         private void LoadProducts(string filter = "")
         {
-            var query = "SELECT o.[orderId], o.[orderDate], o.[totalOrder], s.[supplierName] " +
-                        "FROM [POSSALE].[dbo].[order] o " +
-                        "INNER JOIN [POSSALE].[dbo].[supplier] s ON o.orderFrom = s.supplierId " + filter;
+            if (filter != "")
+            {
+                filter = $"AND ({filter})";
+            }
+            else
+            {
+                filter = "";
+            }
+            var query = $"SELECT o.[orderId], o.[orderDate], o.[totalOrder], s.[supplierName] " +
+                        $"FROM [POSSALE].[dbo].[order] o " +
+                        $"INNER JOIN [POSSALE].[dbo].[supplier] s ON o.orderFrom = s.supplierId WHERE o.[orderStatus] = 'ສິ່ງຊື້ແລ້ວ' {filter}";
             _config.LoadData(query, dataGridView1);
         }
 
@@ -38,9 +46,17 @@ namespace Construction_System
         {
             try
             {
-                var totalPrice = dataGridView2.Rows.Cast<DataGridViewRow>()
-                    .Sum(row => Convert.ToInt32(row.Cells["Column26"].Value));
-                label2.Text = $"{totalPrice:#,###} ກີບ";
+                if (dataGridView2.Columns.Contains("Column26"))
+                {
+                    var totalPrice = dataGridView2.Rows.Cast<DataGridViewRow>()
+                        .Sum(row => Convert.ToInt32(row.Cells["Column26"].Value));
+                    label2.Text = $"{totalPrice:#,###} ກີບ";
+                }
+                else
+                {
+                    // Handle the case where the column does not exist
+                    label2.Text = "0 ກີບ";
+                }
             }
             catch (Exception ex)
             {
@@ -86,8 +102,12 @@ namespace Construction_System
         {
             try
             {
-                var filter = $"WHERE o.[orderId] LIKE '%{textBox1.Text}%' OR s.[supplierName] LIKE '%{textBox1.Text}%' " +
-                             $"OR o.[totalOrder] LIKE '%{textBox1.Text}%' OR o.[orderDate] LIKE '%{textBox1.Text}%'";
+                string filter = "";
+                if (textBox1.Text != "")
+                {
+                    filter = $"o.[orderId] LIKE '%{textBox1.Text}%' OR s.[supplierName] LIKE '%{textBox1.Text}%' " +
+                                 $"OR o.[totalOrder] LIKE '%{textBox1.Text}%' OR o.[orderDate] LIKE '%{textBox1.Text}%'";
+                }
                 LoadProducts(filter);
             }
             catch (Exception ex)
@@ -100,10 +120,6 @@ namespace Construction_System
         {
             try
             {
-                if (dataGridView2.RowCount != 0)
-                {
-                    dataGridView2.DataSource = null;
-                }
 
                 var query = $"SELECT p.[prodId], p.[prodName], o.[orderQty], o.[orderQty] as [orderQtys], o.[orderQty] as [orderQtyss], u.[unitName], " +
                             $"(p.[prodPrice] * o.[orderQty]) as [totalPrice], p.[prodPrice] " +
@@ -178,7 +194,8 @@ namespace Construction_System
 
             try
             {
-                var query = "SELECT TOP 1 [importId] FROM [POSSALE].[dbo].[import] ORDER BY [importId] DESC";
+                string query;
+                query = "SELECT TOP 1 [importId] FROM [POSSALE].[dbo].[import] ORDER BY [importId] DESC";
                 var dr = _config.getData(query);
                 dr.Read();
 
@@ -191,18 +208,44 @@ namespace Construction_System
                 query = $"INSERT INTO [POSSALE].[dbo].[import] ([importId], [whoImport], [importDate], [totalImport], [importFromOrder], [importStatus], [totalPriceImport]) " +
                         $"VALUES ('{importID}', '{_empId}', '{DateTime.Now:yyyy-MM-dd}', {dataGridView2.RowCount}, '{dataGridView1.CurrentRow.Cells["id1"].Value}', 'ອະນຸມັດ', {totalOrder})";
                 _config.setData(query);
-
+                int getQty = 0;
                 foreach (DataGridViewRow row in dataGridView2.Rows)
                 {
+                    int CalculateDif() => int.Parse(row.Cells["difFromOrder"].Value.ToString()) - int.Parse(row.Cells["Column24"].Value.ToString());
+                    int dif = CalculateDif() != 0 ? int.Parse(row.Cells["difFromOrder"].Value.ToString()) : CalculateDif();
+                    
                     query = $"INSERT INTO [POSSALE].[dbo].[importDetail] ([importId], [product], [importQty], [price], [totalPrice], [difFromOrder]) " +
-                            $"VALUES ('{importID}', '{row.Cells["Column22"].Value}', {row.Cells["Column24"].Value}, {row.Cells["price"].Value}, {row.Cells["Column26"].Value}, {row.Cells["difFromOrder"].Value})";
+                                  $"VALUES ('{importID}', '{row.Cells["id2"].Value}', {row.Cells["Column24"].Value}, {row.Cells["price"].Value}, {row.Cells["Column26"].Value}, {dif})";
                     _config.setData(query);
-                }
 
-                query = $"UPDATE [POSSALE].[dbo].[order] SET [orderStatus] = 'ອະນຸມັດ' WHERE [orderId] = '{dataGridView1.Rows[0].Cells["id1"].Value}'";
+                    // get the current stock of the product
+                    query = $"SELECT [prodQty] FROM [POSSALE].[dbo].[product] WHERE [prodId] = '{row.Cells["id2"].Value}'";
+                    dr = _config.getData(query);
+                    dr.Read();
+                    var currentStock = int.Parse(dr["prodQty"].ToString());
+                    dr.Close();
+                    _config.closeConnection();
+
+                    // update the stock of the product
+                    query = $"UPDATE [POSSALE].[dbo].[product] SET [prodQty] = {currentStock + int.Parse(row.Cells["Column24"].Value.ToString())} WHERE [prodId] = '{row.Cells["id2"].Value}'";
+                    _config.setData(query);
+                    getQty += int.Parse(row.Cells["Column24"].Value.ToString());
+
+                }
+                //update totalImport in import table
+                query = $"UPDATE [POSSALE].[dbo].[import] SET [totalImport] = {getQty} WHERE [importId] = '{importID}'";
+                _config.setData(query);
+
+                //update the order status to 'ອະນຸມັດ'
+                query = $"UPDATE [POSSALE].[dbo].[order] SET [orderStatus] = 'ອະນຸມັດ' WHERE [orderId] = '{dataGridView1.CurrentRow.Cells["id1"].Value}'";
                 _config.setData(query);
 
                 ShowMessage("ການນຳເຂົ້າສິນຄ້າສຳເລັດ", "ສຳເລັດ");
+
+                //clear the datagridview
+                dataGridView2.DataSource = null;
+
+                label2.Text = "0   ອັນ";
                 LoadProducts();
             }
             catch (Exception ex)

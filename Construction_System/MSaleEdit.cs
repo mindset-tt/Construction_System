@@ -80,7 +80,7 @@ namespace Construction_System
         {
             try
             {
-                SEditQty editQty = new SEditQty(null, this);
+                SEditQty editQty = new SEditQty(null, this, null);
                 var senderGrid1 = (DataGridView)sender;
                 if (senderGrid1.Columns[e.ColumnIndex] is DataGridViewImageColumn &&
                     e.RowIndex >= 0)
@@ -124,7 +124,7 @@ namespace Construction_System
         {
             try
             {
-                SEditQty editQty = new SEditQty(null, this);
+                SEditQty editQty = new SEditQty(null, this, null);
                 var senderGrid = (DataGridView)sender;
 
                 if (senderGrid.Columns[e.ColumnIndex] is DataGridViewImageColumn &&

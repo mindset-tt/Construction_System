@@ -1,5 +1,6 @@
 ﻿using System.Data.SqlClient;
 using System.Data;
+using System;
 using System.Windows.Forms;
 using Construction_System;
 using System.Configuration;
@@ -10,63 +11,102 @@ class config
     SqlCommand cmd = new SqlCommand();
     SqlDataReader dr;
 
-
     public config()
     {
-        // Initialize connection string or other settings here
-        con.ConnectionString = ConfigurationManager.ConnectionStrings["Construction_System.Properties.Settings.POSSALEConnectionString"].ConnectionString;
+        try
+        {
+            // Initialize connection string or other settings here
+            con.ConnectionString = ConfigurationManager.ConnectionStrings["Construction_System.Properties.Settings.POSSALEConnectionString"].ConnectionString;
+        }
+        catch (Exception ex)
+        {
+            ShowMessage($"Error initializing connection: {ex.Message}", "Error");
+        }
     }
 
     public void openConnection()
     {
-        if (con.State == ConnectionState.Closed)
+        try
         {
-            con.Open();
+            if (con.State == ConnectionState.Closed)
+            {
+                con.Open();
+            }
+        }
+        catch (Exception ex)
+        {
+            ShowMessage($"Error opening connection: {ex.Message}", "Error");
         }
     }
 
     public void closeConnection()
     {
-        if (con.State == ConnectionState.Open)
+        try
         {
-            con.Close();
+            if (con.State == ConnectionState.Open)
+            {
+                con.Close();
+            }
+        }
+        catch (Exception ex)
+        {
+            ShowMessage($"Error closing connection: {ex.Message}", "Error");
         }
     }
+
     private void ShowMessage(string message, string content)
     {
         MyMessageBox.ShowMessage(message, "", content, MessageBoxButtons.OK, MessageBoxIcon.None);
     }
+
     public SqlDataReader getData(string sql)
     {
-        openConnection();
-        cmd = new SqlCommand(sql, con);
-        return cmd.ExecuteReader();
+        try
+        {
+            openConnection();
+            cmd = new SqlCommand(sql, con);
+            return cmd.ExecuteReader();
+        }
+        catch (Exception ex)
+        {
+            ShowMessage($"Error getting data: {ex.Message}", "Error");
+            return null;
+        }
     }
 
     public void setData(string sql)
     {
-        openConnection();
-        cmd = new SqlCommand(sql, con);
-        int result = cmd.ExecuteNonQuery(); // Execute the command once and store the result
-
-        // Check if the query is successful or not, if not, show a message box with the error message and rollback the transaction
-        if (result == 0)
+        try
         {
-            ShowMessage("ບໍ່ສາມາດບັນທຶກຂໍ້ມູນໄດ້", "ຂໍ້ມູນບໍ່ຖືກບັນທຶກ");
-            cmd.Transaction.Rollback();
-        }
-        closeConnection();
-    }
+            openConnection();
+            cmd = new SqlCommand(sql, con);
+            int result = cmd.ExecuteNonQuery(); // Execute the command once and store the result
 
+            // Check if the query is successful or not, if not, show a message box with the error message and rollback the transaction
+            if (result == 0)
+            {
+                ShowMessage("ບໍ່ສາມາດບັນທຶກຂໍ້ມູນໄດ້", "ຂໍ້ມູນບໍ່ຖືກບັນທຶກ");
+                cmd.Transaction.Rollback();
+            }
+        }
+        catch (Exception ex)
+        {
+            ShowMessage($"Error setting data: {ex.Message}", "Error");
+        }
+        finally
+        {
+            closeConnection();
+        }
+    }
 
     public void LoadData(string query, ComboBox comboBox, string valueMember, string displayMember, string defaultText = null)
     {
-        openConnection();
-        SqlDataReader dr = getData(query);
-        DataTable dt = new DataTable();
-        if (dr.HasRows)
+        try
         {
-            dt.Load(dr);
+            openConnection();
+            SqlDataAdapter adapter = new SqlDataAdapter(query, con);
+            DataTable dt = new DataTable();
+            adapter.Fill(dt);
             if (!string.IsNullOrEmpty(defaultText))
             {
                 DataRow row = dt.NewRow();
@@ -79,25 +119,33 @@ class config
             comboBox.DisplayMember = displayMember;
             comboBox.SelectedIndex = 0;
         }
-        closeConnection();
+        catch (Exception ex)
+        {
+            ShowMessage($"Error loading data: {ex.Message}", "Error");
+        }
+        finally
+        {
+            closeConnection();
+        }
     }
 
     public void LoadData(string query, DataGridView dataGridView)
     {
-        openConnection();
-        SqlDataReader dr = getData(query);
-        DataTable dt = new DataTable();
-        if (dr.HasRows)
+        try
         {
-            dt.Load(dr);
+            openConnection();
+            SqlDataAdapter adapter = new SqlDataAdapter(query, con);
+            DataTable dt = new DataTable();
+            adapter.Fill(dt);
             dataGridView.DataSource = dt;
         }
-        else
+        catch (Exception ex)
         {
-            //clear the data grid view has one row with no data
-            dt.Rows.Clear();
-            dataGridView.DataSource = dt;
+            ShowMessage($"Error loading data: {ex.Message}", "Error");
         }
-        closeConnection();
+        finally
+        {
+            closeConnection();
+        }
     }
 }

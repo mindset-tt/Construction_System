@@ -2,94 +2,40 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Net.Mime.MediaTypeNames;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Construction_System
 {
     public partial class Sale : Form
     {
         private string _empId;
+        private readonly config _config = new config();
+        string query = "";
         public Sale(string empId)
         {
             InitializeComponent();
             label2.Text = "0 ກີບ";
             _empId = empId;
+            LoadProducts();
         }
 
-        private void Sale_Load(object sender, EventArgs e)
+        private void LoadProducts(string filter = "")
         {
-            try
-            {
-                //#Create Data Table
-                //DataSet data = new DataSet("Contruction_System");
-                //DataTable table = new DataTable("Sale2");
-                //table.Columns.Add("id", typeof(int));
-                //table.Columns.Add("name");
-                //table.Columns.Add("qty");
-                //table.Columns.Add("unit");
-                //table.Columns.Add("price");
-                //table.Rows.Add(1, "ຕະປູແປດ", "1", "ໂລ", "70,000");
-                //table.Rows.Add(2, "ຕະປູຫ້າ", "2", "ໂລ", "70,000");
-                //table.Rows.Add(3, "ຕະປູຫົກ", "3", "ໂລ", "105,000");
-                //table.Rows.Add(4, "ກະເບື່ອງ", "10", "ແຜ່ນ", "560,000");
-                //table.Rows.Add(5, "ຫຼົບກະເບື່ອງ", "4", "ແຜ່ນ", "240,000");
-                //table.Rows.Add(6, "ຊັງກະສີແຜ່ນລຽບ", "12", "ແຜ່ນ", "680,000");
-                //table.Rows.Add(7, "ຊັງກະສີແຜ່ນລ່ອງ", "20", "ແຜ່ນ", "1,320,000");
-                //table.Rows.Add(8, "ສາຍໄຟ 2.5", "3", "ກໍ່", "850,000");
-                //table.Rows.Add(9, "ຄ້ອນຕີໃຫຍ່", "1", "ອັນ", "120,000");
-                //table.Rows.Add(10, "ຄ້ອນຕີນ້ອຍ", "2", "ອັນ", "140,000");
-                //table.Rows.Add(11, "ຄ້ອນປອນ", "1", "ອັນ", "150,000");
-                //table.Rows.Add(12, "ຕູ້ຈອດຫຼັ້ກ", "1", "ເຄື່ອງ", "570,000");
-                //table.Rows.Add(52, "ໄຟບີຕັດເຫຼັກ", "2", "ເຄື່ອງ", "2,700,000");
-                //table.Rows.Add(63, "ໝືນຕັດເຫຼັກ", "1", "ເຄື່ອງ", "350,000");
-                //table.Rows.Add(72, "ສະຫວ່ານໄຟຟ້າ", "2", "ເຄື່ອງ", "2,620,000");
-                //table.Rows.Add(85, "ສະຫວ່ານແບັກເຕີລີ້", "2", "ເຄື່ອງ", "1,250,000");
-                //table.Rows.Add(85, "ສະຫວ່ານແບັກເຕີລີ້", "2", "ເຄື່ອງ", "1,250,000");
-                //table.Rows.Add(85, "ສະຫວ່ານແບັກເຕີລີ້", "2", "ເຄື່ອງ", "1,250,000");
-                //data.Tables.Add(table);
-                ////dataGridView1.DataSource = table;
-                //dataGridView2.DataSource = table;
-
-
-                DataSet data1 = new DataSet("Contruction_System");
-                DataTable table1 = new DataTable("Sale1");
-                table1.Columns.Add("id", typeof(int));
-                table1.Columns.Add("name");
-                table1.Columns.Add("qty", typeof(int));
-                table1.Columns.Add("unit");
-                table1.Columns.Add("type");
-                table1.Columns.Add("price", typeof(int));
-                table1.Rows.Add(1, "ຕະປູແປດ", 1, "ໂລ", "ເຫຼັກ", 70000);
-                table1.Rows.Add(2, "ຕະປູຫ້າ", 2, "ໂລ", "ເຫຼັກ", 70000);
-                table1.Rows.Add(3, "ຕະປູຫົກ", 3, "ໂລ", "ເຫຼັກ", 105000);
-                table1.Rows.Add(4, "ກະເບື່ອງ", 10, "ແຜ່ນ", "ຫຼັງຄາ", 560000);
-                table1.Rows.Add(5, "ຫຼົບກະເບື່ອງ", 4, "ແຜ່ນ", "ຫຼັງຄາ", 240000);
-                table1.Rows.Add(6, "ຊັງກະສີແຜ່ນລຽບ", 12, "ແຜ່ນ", "ຫຼັງຄາ", 680000);
-                table1.Rows.Add(7, "ຊັງກະສີແຜ່ນລ່ອງ", 20, "ແຜ່ນ", "ຫຼັງຄາ", 1320000);
-                table1.Rows.Add(8, "ສາຍໄຟ 2.5", 3, "ກໍ່", "ໄຟຟ້າ", 850000);
-                table1.Rows.Add(9, "ຄ້ອນຕີໃຫຍ່", 1, "ອັນ", "ເຄື່ອງມື", 120000);
-                table1.Rows.Add(10, "ຄ້ອນຕີນ້ອຍ", 2, "ອັນ", "ເຄື່ອງມື", 140000);
-                table1.Rows.Add(11, "ຄ້ອນປອນ", 1, "ອັນ", "ເຄື່ອງມື", 150000);
-                table1.Rows.Add(12, "ຕູ້ຈອດຫຼັກ", 1, "ເຄື່ອງ", "ໄຟຟ້າ", 570000);
-                table1.Rows.Add(52, "ໄຟບີຕັດເຫຼັກ", 2, "ເຄື່ອງ", "ໄຟຟ້າ", 2700000);
-                table1.Rows.Add(63, "ໝືນຕັດເຫຼັກ", 1, "ເຄື່ອງ", "ໄຟຟ້າ", 350000);
-                table1.Rows.Add(72, "ສະຫວ່ານໄຟຟ້າ", 2, "ເຄື່ອງ", "ໄຟຟ້າ", 2620000);
-                table1.Rows.Add(85, "ສະຫວ່ານແບັກເຕີລີ້", 2, "ເຄື່ອງ", "ໄຟຟ້າ", 1250000);
-                table1.Rows.Add(85, "ສະຫວ່ານແບັກເຕີລີ້", 2, "ເຄື່ອງ", "ໄຟຟ້າ", 1250000);
-                table1.Rows.Add(85, "ສະຫວ່ານແບັກເຕີລີ້", 2, "ເຄື່ອງ", "ໄຟຟ້າ", 1250000);
-                data1.Tables.Add(table1);
-                dataGridView1.DataSource = table1;
-            }
-            catch (Exception ex)
-            {
-
-                MyMessageBox.ShowMessage("ເກີດຂໍ້ຜີດພາດ " + ex + " ", "", "ເກີດຂໍ້ຜີດພາດ", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            query = $"SELECT p.[prodID],p.[prodName], p.[prodQty], p.[prodPrice], t.[typeName], u.[unitName]" +
+                "FROM " +
+                "[POSSALE].[dbo].[product] p " +
+                "INNER JOIN [POSSALE].[dbo].[type] t ON p.typeId = t.typeId " +
+                "INNER JOIN [POSSALE].[dbo].[unit] u ON p.unitId = u.unitId " +
+                filter;
+            _config.LoadData(query, dataGridView1);
         }
 
         private void dataGridView2_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
@@ -102,7 +48,7 @@ namespace Construction_System
         {
             try
             {
-                SEditQty editQty = new SEditQty(this, null);
+                SEditQty editQty = new SEditQty(this, null, dataGridView1.CurrentRow.Cells["column13"].Value.ToString());
                 var senderGrid = (DataGridView)sender;
 
                 if (senderGrid.Columns[e.ColumnIndex] is DataGridViewImageColumn &&
@@ -141,6 +87,7 @@ namespace Construction_System
             rowUp = dataGridView2.Rows[selectRowSale];
             rowUp.Cells["Column24"].Value = qty;
             rowUp.Cells["Column26"].Value = price;
+
         }
 
         public int selectRowSale;
@@ -177,47 +124,25 @@ namespace Construction_System
         {
             try
             {
-                (dataGridView1.DataSource as DataTable).DefaultView.RowFilter = string.Format("name LIKE '%{0}%' or unit LIKE '%{0}%' or type LIKE '%{0}%'", textBox1.Text);
+                //(dataGridView1.DataSource as DataTable).DefaultView.RowFilter = string.Format("name LIKE '%{0}%' or unit LIKE '%{0}%' or type LIKE '%{0}%'", textBox1.Text);
+                var filter = string.IsNullOrEmpty(textBox1.Text)
+                            ? ""
+                            : $"WHERE (p.prodID LIKE '%{textBox1.Text}%' OR p.prodName LIKE '%{textBox1.Text}%' OR p.prodQty LIKE '%{textBox1.Text}%' OR p.prodPrice LIKE '%{textBox1.Text}%' OR p.typeId LIKE '%{textBox1.Text}%' OR p.` LIKE '%{textBox1.Text}%')";
+                LoadProducts(filter);
             }
             catch (Exception ex)
             {
 
                 MyMessageBox.ShowMessage("ເກີດຂໍ້ຜີດພາດ " + ex + " ", "", "ເກີດຂໍ້ຜີດພາດ", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            
+
         }
 
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
-                SEditQty editQty = new SEditQty(this, null);
-                var senderGrid1 = (DataGridView)sender;
-                if (senderGrid1.Columns[e.ColumnIndex] is DataGridViewImageColumn &&
-                    e.RowIndex >= 0)
-                {
-                    //TODO - Button Clicked - Execute Code Here
-                    //MyMessageBox.ShowMessage(dataGridView2.Rows[e.RowIndex].Cells[3].Value.ToString(), "", "ຍິນດີຕ້ອນຮັບ", MessageBoxButtons.OK, MessageBoxIcon.None);
-                    editQty.label1.Text = " ເພີ່ມຈຳນວນຂາຍສິນຄ້າ";
-                    editQty.label1.Image = Construction_System.Properties.Resources.add_button;
-                    editQty.button1.Text = "ເພີ່ມ";
-                    editQty.textBox1.Text = dataGridView1.Rows[e.RowIndex].Cells["Column12"].Value.ToString();
-                    editQty.lblUnit.Text = dataGridView1.Rows[e.RowIndex].Cells["Column14"].Value.ToString();
-                    editQty.lblPrice.Text = dataGridView1.Rows[e.RowIndex].Cells["Column16"].Value.ToString();
-                    editQty.lblId.Text = dataGridView1.Rows[e.RowIndex].Cells["id1"].Value.ToString();
-                    editQty.ShowDialog();
-                    dataGridView1.ClearSelection();
-                    //dataGridView2.Columns["Column24"].DefaultCellStyle.Format = "#,###";
-                    //dataGridView2.Columns["Column26"].DefaultCellStyle.Format = "#,###";
-                }
-            }
-            catch (Exception ex)
-            {
 
-                MyMessageBox.ShowMessage("ເກີດຂໍ້ຜີດພາດ " + ex + " ", "", "ເກີດຂໍ້ຜີດພາດ", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            
+
         }
 
         private void dataGridView1_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
@@ -242,8 +167,124 @@ namespace Construction_System
 
         private void button1_Click(object sender, EventArgs e)
         {
-            FM_Bill fM_Bill = new FM_Bill();
-            fM_Bill.ShowDialog();
+            try
+            {
+                if (dataGridView2.RowCount == 0)
+                {
+                    MyMessageBox.ShowMessage("ທ່ານຍັງບໍ່ໄດ້ເພີ່ມສິນຄ້າໃນການສິ່ງຊື້", "", "ເກີດຂໍ້ຜີດພາດ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                // Get latest sell id
+                query = "SELECT TOP 1 sellId FROM [POSSALE].[dbo].[sell] ORDER BY sellId DESC";
+                var dr = _config.getData(query);
+                dr.Read();
+                // If sell id is null, set it to SE0001
+                var sellId = dr.HasRows ? $"SE{int.Parse(dr["sellId"].ToString().Substring(2)) + 1:D4}" : "SE0001";
+                dr.Close();
+                _config.closeConnection();
+
+                var totalPrice = int.Parse(label2.Text.Split(' ')[0].Replace(",", ""));
+
+
+
+
+                // Insert into sell table and sell_detail tableUSE [POSSALE]
+
+                //                INSERT INTO[dbo].[sell]
+                //                           ([sellId]
+                //                           , [whoSell]
+                //                           , [sellDate]
+                //                           , [totalSell]
+                //                           , [totalPriceSell]
+                //                           , [sellStatus]
+                //                           , [reason])
+                //     VALUES
+                //           (< sellId, nvarchar(50),>
+                //           ,< whoSell, nvarchar(20),>
+                //           ,< sellDate, datetime,>
+                //           ,< totalSell, bigint,>
+                //           ,< totalPriceSell, bigint,>
+                //           ,< sellStatus, nvarchar(50),>
+                //           ,< reason, text,>)
+
+                //INSERT INTO[dbo].[sellDetail]
+                //           ([sellId]
+                //           , [product]
+                //           , [price]
+                //           , [sellQty]
+                //           , [totalPrice])
+                //     VALUES
+                //           (< sellId, nvarchar(50),>
+                //           ,< product, nvarchar(50),>
+                //           ,< price, bigint,>
+                //           ,< sellQty, bigint,>
+                //           ,< totalPrice, bigint,>)
+                query = $"INSERT INTO [POSSALE].[dbo].[sell] ([sellId], [whoSell], [sellDate], [totalSell], [totalPriceSell], [sellStatus], [reason]) " +
+                    $"VALUES ('{sellId}', '{_empId}', GETDATE(), {dataGridView2.RowCount}, {totalPrice}, 'ສຳເລັດ', '')";
+                _config.setData(query);
+                int getQty = 0;
+
+                foreach (DataGridViewRow row in dataGridView2.Rows)
+                {
+                    query = $"SELECT prodQty FROM [POSSALE].[dbo].[product] WHERE prodID = '{row.Cells["id2"].Value}'";
+                    var dr1 = _config.getData(query);
+                    dr1.Read();
+                    int qtyFromProduct = int.Parse(dr1["prodQty"].ToString());
+                    dr1.Close();
+                    _config.closeConnection();
+                    query = $"INSERT INTO [POSSALE].[dbo].[sellDetail] ([sellId], [product], [price], [sellQty], [totalPrice]) " +
+                        $"VALUES ('{sellId}', '{row.Cells["Column21"].Value}', {row.Cells["Column26"].Value}, {row.Cells["Column24"].Value}, {int.Parse(row.Cells["Column26"].Value.ToString()) * int.Parse(row.Cells["Column24"].Value.ToString())})";
+                    _config.setData(query);
+                    query = $"UPDATE [POSSALE].[dbo].[product] SET prodQty = {qtyFromProduct - int.Parse(row.Cells["Column24"].Value.ToString())} WHERE prodID = '{row.Cells["id2"].Value}'";
+                    _config.setData(query);
+                    getQty += int.Parse(row.Cells["Column24"].Value.ToString());
+                }
+
+                //update total sell in sell table
+                query = $"UPDATE [POSSALE].[dbo].[sell] SET totalSell = {getQty} WHERE sellId = '{sellId}'";
+                _config.setData(query);
+
+                MyMessageBox.ShowMessage("ການສັ່ງຊື້ສິນຄ້າສຳເລັດ", "", "ສຳເລັດ", MessageBoxButtons.OK, MessageBoxIcon.None);
+            }
+            catch (Exception ex)
+            {
+                MyMessageBox.ShowMessage("ເກີດຂໍ້ຜີດພາດ " + ex + " ", "", "ເກີດຂໍ້ຜີດພາດ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            //FM_Bill fM_Bill = new FM_Bill();
+            //fM_Bill.ShowDialog();
+        }
+
+        private void dataGridView1_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                SEditQty editQty = new SEditQty(this, null, dataGridView1.CurrentRow.Cells["column13"].Value.ToString());
+                var senderGrid1 = (DataGridView)sender;
+                if (senderGrid1.Columns[e.ColumnIndex] is DataGridViewImageColumn &&
+                    e.RowIndex >= 0)
+                {
+                    //TODO - Button Clicked - Execute Code Here
+                    //MyMessageBox.ShowMessage(dataGridView2.Rows[e.RowIndex].Cells[3].Value.ToString(), "", "ຍິນດີຕ້ອນຮັບ", MessageBoxButtons.OK, MessageBoxIcon.None);
+                    editQty.label1.Text = " ເພີ່ມຈຳນວນຂາຍສິນຄ້າ";
+                    editQty.label1.Image = Construction_System.Properties.Resources.add_button;
+                    editQty.button1.Text = "ເພີ່ມ";
+                    editQty.textBox1.Text = dataGridView1.Rows[e.RowIndex].Cells["Column12"].Value.ToString();
+                    editQty.lblUnit.Text = dataGridView1.Rows[e.RowIndex].Cells["Column14"].Value.ToString();
+                    editQty.lblPrice.Text = dataGridView1.Rows[e.RowIndex].Cells["Column16"].Value.ToString();
+                    editQty.lblId.Text = dataGridView1.Rows[e.RowIndex].Cells["id1"].Value.ToString();
+                    editQty.ShowDialog();
+                    dataGridView1.ClearSelection();
+                    //dataGridView2.Columns["Column24"].DefaultCellStyle.Format = "#,###";
+                    //dataGridView2.Columns["Column26"].DefaultCellStyle.Format = "#,###";
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MyMessageBox.ShowMessage("ເກີດຂໍ້ຜີດພາດ " + ex + " ", "", "ເກີດຂໍ້ຜີດພາດ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

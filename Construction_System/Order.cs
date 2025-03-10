@@ -62,13 +62,13 @@ namespace Construction_System
                 else
                 {
                     var filter = string.IsNullOrEmpty(textBox1.Text) && (comboBox1.SelectedValue.ToString() != "-1")
-                            ? $"WHERE sp.supplierId LIKE '%{comboBox1.SelectedValue}%' AND p.cancel = 'no'"
+                            ? $"WHERE sp.supplierId LIKE '%{comboBox1.SelectedValue}%' AND p.cancel = 'yes' "
                             : string.IsNullOrEmpty(textBox1.Text) || comboBox1.Text == "ກະລຸນາເລືອກ"
-                            ? "WHERE p.cancel = 'yes'"
+                            ? "WHERE p.cancel = 'none'"
                             : $"WHERE (p.prodID LIKE '%{textBox1.Text}%' OR p.prodName LIKE '%{textBox1.Text}%' " +
                             $"OR p.prodQty LIKE '%{textBox1.Text}%' OR p.prodPrice LIKE '%{textBox1.Text}%' " +
                             $"OR p.typeId LIKE '%{textBox1.Text}%' OR p.unitId LIKE '%{textBox1.Text}%') AND " +
-                            $"sp.supplierId LIKE '%{comboBox1.SelectedValue}%' AND p.cancel = 'yes'";
+                            $"sp.supplierId LIKE '%{comboBox1.SelectedValue}%' AND p.cancel = 'yes' ";
                     LoadProducts(filter);
                 }
             }
@@ -85,9 +85,11 @@ namespace Construction_System
                 if (string.IsNullOrEmpty(comboBox1.Text) || comboBox1.Text == "ກະລຸນາເລືອກ")
                 {
                     ShowMessage("ກະລຸນາເລືອກຂໍ້ມູນຜູ້ສະໜອງ", "ຂໍ້ຜິດພາດ");
+                    //var filter = "WHERE p.cancel = 'none'";
                     dataGridView2.Rows.Clear();
+                    dataGridView1.DataSource = null;
                     label2.Text = "0   ອັນ";
-                    LoadProducts();
+                    //LoadProducts();
                 }
                 else
                 {
@@ -152,7 +154,7 @@ namespace Construction_System
             {
                 if (dataGridView1.Columns[e.ColumnIndex] is DataGridViewImageColumn && e.RowIndex >= 0)
                 {
-                    var editQty = new OrEditQty(this, null, dataGridView1.Rows[e.RowIndex].Cells["Column8"].Value.ToString(), true)
+                    var editQty = new OrEditQty(this, null, dataGridView1.Rows[e.RowIndex].Cells["Column8"].Value.ToString(), true, false)
                     {
                         label1 = { Text = " ເພີ່ມຈຳນວນສັ່ງຊື້ສິນຄ້າ", Image = Construction_System.Properties.Resources.add_button },
                         button1 = { Text = "ເພີ່ມ" },
@@ -185,7 +187,7 @@ namespace Construction_System
                     }
                     else if (dataGridView2.Columns[e.ColumnIndex].HeaderCell.Value.ToString() == "ແກ້ໄຂ")
                     {
-                        var editQty = new OrEditQty(this, null, null, true)
+                        var editQty = new OrEditQty(this, null, null, true, true)
                         {
                             label1 = { Text = "ແກ້ໄຂຈຳນວນສັ່ງຊື້ສິນຄ້າ", Image = Construction_System.Properties.Resources.pencil },
                             button1 = { Text = "ແກ້ໄຂ" },
@@ -290,12 +292,13 @@ namespace Construction_System
             label2.Text = "0   ອັນ";
             //clear the combobox
             comboBox1.SelectedIndex = 0;
-            LoadProducts();
+            //LoadProducts();
             FM_Bill fM_Bill = new FM_Bill();
             OrderBill orderBill = new OrderBill();
             orderBill.SetParameterValue("orderId", orderId);
             fM_Bill.crystalReportViewer1.ReportSource = orderBill;
             fM_Bill.ShowDialog();
+            //dataGridView1.Rows.Clear();
         }
     }
 }

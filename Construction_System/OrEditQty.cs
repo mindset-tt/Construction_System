@@ -16,11 +16,13 @@ namespace Construction_System
         MOrderEdit mOrder;
         private string _idSup;
         private bool _isOrderPage;
-        public OrEditQty(Order order, MOrderEdit mOrder, string idSup, bool isOrderPage)
+        private bool _isDataGrid2 = false;
+        public OrEditQty(Order order, MOrderEdit mOrder, string idSup, bool isOrderPage, bool isDataGrid1)
         {
             InitializeComponent();
             this.order = order;
             this.mOrder = mOrder;
+            _isDataGrid2 = isDataGrid1;
             textBox2.Select();
             _isOrderPage = isOrderPage;
             _idSup = idSup;
@@ -57,7 +59,7 @@ namespace Construction_System
                         if (row.Cells["id2"].Value.ToString() == lblId.Text)
                         {
                             int currentQty = Convert.ToInt32(row.Cells["Column24"].Value);
-                            order.updateQty(inputQty + currentQty, lblId.Text);
+                            order.updateQty(_isDataGrid2 ? inputQty : inputQty + currentQty, lblId.Text);
                             isCollapsed = false;
                             break;
                         }
@@ -74,8 +76,8 @@ namespace Construction_System
                 }
                 else if (label1.Text.Contains("ແກ້ໄຂຈຳນວນສັ່ງຊື້ສິນຄ້າ") && _isOrderPage)
                 {
-                    Console.WriteLine("label text", lblId.Text);
-                    //Console.WriteLine("data in grid", row.Cells["id2"].Value.ToString());
+                    //Console.WriteLine("label text", lblId.Text);
+                    ////Console.WriteLine("data in grid", row.Cells["id2"].Value.ToString());
                     order.updateQty(inputQty, lblId.Text);
                     MyMessageBox.ShowMessage("ແກ້ໄຂຂໍ້ມູນສຳເລັດແລ້ວ", "", "ສຳເລັດ", MessageBoxButtons.OK, MessageBoxIcon.None);
                 }

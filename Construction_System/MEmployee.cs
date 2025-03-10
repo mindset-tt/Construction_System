@@ -153,7 +153,7 @@ namespace Construction_System
                 var senderGrid = (DataGridView)sender;
 
                 if (senderGrid.Columns[e.ColumnIndex] is DataGridViewImageColumn &&
-                e.RowIndex >= 0)
+                e.RowIndex >= 0 && dataGridView1.Columns[e.ColumnIndex].HeaderCell.Value.ToString() == "ລົບ")
                 {
                     //TODO - Button Clicked - Execute Code Here
                     mEmpEdit.label1.Text = " ລົບຂໍ້ມູນພະນັກງານ";

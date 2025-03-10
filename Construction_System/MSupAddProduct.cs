@@ -20,8 +20,10 @@ namespace Construction_System
         }
 
         private readonly config _config = new config();
+        string[] _removeProduct = null;
         string query = "";
-
+        List<DataGridViewRow> rowsToRemove = new List<DataGridViewRow>();
+        HashSet<string> idSet = new HashSet<string>();
         private void LoadProducts(string filter = "WHERE p.[cancel] = 'yes'")
         {
             query = $"SELECT p.[prodID], p.[prodName], t.[typeName], u.[unitName] FROM " +
@@ -30,6 +32,27 @@ namespace Construction_System
                 "INNER JOIN [POSSALE].[dbo].[unit] u ON p.unitId = u.unitId " +
                 filter;
             _config.LoadData(query, dataGridView1);
+            productSupplier();
+            foreach (DataGridViewRow row in dataGridView2.Rows)
+            {
+                if (row.Cells["id2"].Value != null)
+                {
+                    idSet.Add(row.Cells["id2"].Value.ToString());
+                }
+            }
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                if (row.Cells["id1"].Value != null && idSet.Contains(row.Cells["id1"].Value.ToString()))
+                {
+                    rowsToRemove.Add(row);
+                }
+            }
+            foreach (DataGridViewRow row in rowsToRemove)
+            {
+                dataGridView1.Rows.Remove(row);
+            }
+
+            rowsToRemove.Clear();
         }
 
 
@@ -49,19 +72,7 @@ namespace Construction_System
         private void MSupAddProduct_Load(object sender, EventArgs e)
         {
             LoadProducts();
-            productSupplier();
-            foreach (DataGridViewRow row in dataGridView1.Rows)
-            {
-                foreach (DataGridViewRow row2 in dataGridView2.Rows)
-                {
-                    if (row.Cells["id1"].Value.ToString() == row2.Cells["id2"].Value.ToString())
-                    {
-                        // remove row from dataGridView1
-                        dataGridView1.Rows.Remove(row);
-                    }
-                }
-            }
-            //MyMessageBox.ShowMessage("ເກີດຂໍ້ຜີດພາດ " + msupplier.supplierIdAddPro + " ", "", "ເກີດຂໍ້ຜີດພາດ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+           
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -90,12 +101,17 @@ namespace Construction_System
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            query = $"INSERT INTO [POSSALE].[dbo].[supplierDetail] ([supplierId], [prodId]) " +
-                    $"VALUES ('{msupplier.supplierIdAddPro}', '{dataGridView1.CurrentRow.Cells["id1"].Value}')";
-            _config.setData(query);
-            MyMessageBox.ShowMessage("ເພິ່ມຂໍ້ມູນສຳເລັດແລ້ວ", "", "ສຳເລັດ", MessageBoxButtons.OK, MessageBoxIcon.None);
-            LoadProducts();
-            productSupplier();
+            var senderGrid = (DataGridView)sender;
+
+            if (senderGrid.Columns[e.ColumnIndex] is DataGridViewImageColumn &&
+            e.RowIndex >= 0 && dataGridView1.Columns[e.ColumnIndex].HeaderCell.Value.ToString() == "ເພີ່ມ")
+            {
+                query = $"INSERT INTO [POSSALE].[dbo].[supplierDetail] ([supplierId], [prodId]) " +
+                        $"VALUES ('{msupplier.supplierIdAddPro}', '{dataGridView1.CurrentRow.Cells["id1"].Value}')";
+                _config.setData(query);
+                MyMessageBox.ShowMessage("ເພິ່ມຂໍ້ມູນສຳເລັດແລ້ວ", "", "ສຳເລັດ", MessageBoxButtons.OK, MessageBoxIcon.None);
+                LoadProducts();
+            }
         }
 
         private void dataGridView2_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
@@ -105,17 +121,27 @@ namespace Construction_System
 
         private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            query = $"DELETE FROM [POSSALE].[dbo].[supplierDetail] WHERE [prodId] = '{dataGridView2.CurrentRow.Cells["id2"].Value}' " +
+            var senderGrid = (DataGridView)sender;
+
+            if (senderGrid.Columns[e.ColumnIndex] is DataGridViewImageColumn &&
+            e.RowIndex >= 0 && dataGridView2.Columns[e.ColumnIndex].HeaderCell.Value.ToString() == "ລົບ")
+            {
+                query = $"DELETE FROM [POSSALE].[dbo].[supplierDetail] WHERE [prodId] = '{dataGridView2.CurrentRow.Cells["id2"].Value}' " +
                 $"and [supplierId] = '{msupplier.supplierIdAddPro}'";
-            _config.deleteData(query);
-            MyMessageBox.ShowMessage("ລົບຂໍ້ມູນສຳເລັດແລ້ວ", "", "ສຳເລັດ", MessageBoxButtons.OK, MessageBoxIcon.None);
-            LoadProducts();
-            productSupplier();
+                _config.deleteData(query);
+                MyMessageBox.ShowMessage("ລົບຂໍ້ມູນສຳເລັດແລ້ວ", "", "ສຳເລັດ", MessageBoxButtons.OK, MessageBoxIcon.None);
+                LoadProducts();
+            }
         }
 
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void dataGridView2_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            dataGridView2.ClearSelection();
         }
     }
 }

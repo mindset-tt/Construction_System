@@ -16,11 +16,13 @@ namespace Construction_System
     {
         Sale sale; MSaleEdit mSale;
         private string _qtyInStore;
-        public SEditQty(Sale sale, MSaleEdit mSale, string qtyInStore)
+        private bool _fromDataGrid1 = false;
+        public SEditQty(Sale sale, MSaleEdit mSale, string qtyInStore, bool fromDataGrid1)
         {
             InitializeComponent();
             this.sale = sale;
             this.mSale = mSale;
+            _fromDataGrid1 = fromDataGrid1;
             _qtyInStore = qtyInStore;
             textBox2.Select();
         }
@@ -62,7 +64,7 @@ namespace Construction_System
                         if (row.Cells["id2"].Value.ToString() == lblId.Text)
                         {
                             int currentQty = Convert.ToInt32(row.Cells["Column24"].Value);
-                            int totalQty = inputQty + currentQty;
+                            int totalQty = !_fromDataGrid1 ? inputQty : inputQty + currentQty;
 
                             if (totalQty > qtyInStore)
                             {
@@ -70,8 +72,9 @@ namespace Construction_System
                                 return;
                             }
 
-                            sale.updateQty(totalQty, Convert.ToInt32(lblPrice.Text) * totalQty);
+                            sale.updateQty(totalQty, Convert.ToInt32(lblPrice.Text) * totalQty, lblId.Text);
                             isCollapsed = false;
+                            _fromDataGrid1 = false;
                             break;
                         }
                     }
@@ -88,7 +91,7 @@ namespace Construction_System
                 }
                 else if (label1.Text.Contains("ແກ້ໄຂຈຳນວນຂາຍສິນຄ້າ"))
                 {
-                    sale.updateQty(inputQty, (Convert.ToInt32(lblPrice.Text) / Convert.ToInt32(lblQtyEdit.Text)) * inputQty);
+                    sale.updateQty(inputQty, (Convert.ToInt32(lblPrice.Text) / Convert.ToInt32(lblQtyEdit.Text)) * inputQty, lblId.Text);
                     MyMessageBox.ShowMessage("ແກ້ໄຂຂໍ້ມູນສຳເລັດແລ້ວ", "", "ສຳເລັດ", MessageBoxButtons.OK, MessageBoxIcon.None);
                 }
                 else if (label1.Text.Contains("ຈຳນວນຂາຍສິນຄ້າ"))

@@ -11,7 +11,7 @@ namespace Construction_System
         private readonly string _originalQty;
         private readonly string _difFromOrder;
 
-        public ImEditQty(Import import, MImportEdit mImport, string price, string originalQty, string difFromOrder)
+        public ImEditQty(Import import, MImportEdit mImport, string price, string difFromOrder, string originalQty)
         {
             InitializeComponent();
             _import = import;
@@ -24,13 +24,13 @@ namespace Construction_System
 
         private void pictureBox2_Click(object sender, EventArgs e)
         {
-            _import.updateQty(Convert.ToInt32(textBox2.Text), Convert.ToInt32(textBox3.Text), int.Parse(_originalQty) - Convert.ToInt32(textBox2.Text));
+            _import.updateQty(Convert.ToInt32(textBox2.Text), Convert.ToInt32(textBox3.Text), int.Parse(_originalQty) - Convert.ToInt32(textBox2.Text), lblId.Text);
             this.Close();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            _import.updateQty(Convert.ToInt32(textBox2.Text), Convert.ToInt32(textBox3.Text), int.Parse(_originalQty) - Convert.ToInt32(textBox2.Text));
+            _import.updateQty(Convert.ToInt32(textBox2.Text), Convert.ToInt32(textBox3.Text), int.Parse(_originalQty) - Convert.ToInt32(textBox2.Text), lblId.Text);
             this.Close();
         }
 
@@ -75,7 +75,7 @@ namespace Construction_System
                         MyMessageBox.ShowMessage("ຈຳນວນທີ່ເພີ່ມຫຼາຍກວ່າຈຳນວນທີ່ສັ່ງຊື້", "", "ຄໍາຖາມ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
-                    _import.updateQty(Convert.ToInt32(textBox2.Text), Convert.ToInt32(textBox3.Text), int.Parse(_originalQty) - Convert.ToInt32(textBox2.Text));
+                    _import.updateQty(Convert.ToInt32(textBox2.Text), Convert.ToInt32(textBox3.Text), int.Parse(_originalQty) - Convert.ToInt32(textBox2.Text), lblId.Text);
                     MyMessageBox.ShowMessage("ແກ້ໄຂຂໍ້ມູນສຳເລັດແລ້ວ", "", "ສຳເລັດ", MessageBoxButtons.OK, MessageBoxIcon.None);
                     Close();
                     break;

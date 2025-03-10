@@ -12,6 +12,7 @@ namespace Construction_System
         private string _editQty;
         private string _totalPrice;
         private string _dif;
+        private string _originalOrder;
 
         public Import(string empId)
         {
@@ -137,11 +138,18 @@ namespace Construction_System
             }
         }
 
-        public void updateQty(int qty, int price, int dif)
+        public void updateQty(int qty, int price, int dif, string proId)
         {
-            _editQty = qty.ToString();
-            _totalPrice = price.ToString();
-            _dif = dif.ToString();
+            //dataGridView2.Rows[selectRowOr].Cells["Column24"].Value = qty;
+            foreach (DataGridViewRow row in dataGridView2.Rows)
+            {
+                if (row.Cells["id2"].Value.ToString() == proId)
+                {
+                    row.Cells["Column24"].Value = qty;
+                    row.Cells["Column26"].Value = price;
+                    row.Cells["difFromOrder"].Value = qty - int.Parse(_originalOrder);
+                }
+            }
         }
 
         public int selectRowIm;
@@ -168,13 +176,15 @@ namespace Construction_System
                         {
                             textBox1 = { Text = dataGridView2.Rows[e.RowIndex].Cells["Column23"].Value.ToString() },
                             textBox2 = { Text = dataGridView2.Rows[e.RowIndex].Cells["Column24"].Value.ToString() },
-                            textBox3 = { Text = dataGridView2.Rows[e.RowIndex].Cells["Column26"].Value.ToString() }
+                            textBox3 = { Text = dataGridView2.Rows[e.RowIndex].Cells["Column26"].Value.ToString() },
+                            lblId = { Text = dataGridView2.Rows[e.RowIndex].Cells["id2"].Value.ToString() },
                         };
+                        _originalOrder = dataGridView2.Rows[e.RowIndex].Cells["originalOrder"].Value.ToString();
                         editQty.ShowDialog();
 
-                        dataGridView2.Rows[e.RowIndex].Cells["Column24"].Value = _editQty;
-                        dataGridView2.Rows[e.RowIndex].Cells["Column26"].Value = _totalPrice;
-                        dataGridView2.Rows[e.RowIndex].Cells["difFromOrder"].Value = _dif;
+                        //dataGridView2.Rows[e.RowIndex].Cells["Column24"].Value = _editQty;
+                        //dataGridView2.Rows[e.RowIndex].Cells["Column26"].Value = _totalPrice;
+                        //dataGridView2.Rows[e.RowIndex].Cells["difFromOrder"].Value = _dif;
                     }
                 }
             }
@@ -243,9 +253,15 @@ namespace Construction_System
                 ShowMessage("ການນຳເຂົ້າສິນຄ້າສຳເລັດ", "ສຳເລັດ");
 
                 //clear the datagridview
-                dataGridView2.DataSource = null;
-
+                this.dataGridView2.DataSource = null;
+                this.dataGridView2.Rows.Clear();
                 label2.Text = "0   ອັນ";
+
+                FM_Bill bill = new FM_Bill();
+                ImportBill importBill = new ImportBill();
+                importBill.SetParameterValue("importId", importID);
+                bill.crystalReportViewer1.ReportSource = importBill;
+                bill.ShowDialog();
                 LoadProducts();
             }
             catch (Exception ex)

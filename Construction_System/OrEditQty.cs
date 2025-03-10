@@ -54,8 +54,6 @@ namespace Construction_System
                 {
                     foreach (DataGridViewRow row in order.dataGridView2.Rows)
                     {
-                        Console.WriteLine("label text", lblId.Text);
-                        Console.WriteLine("data in grid", row.Cells["id2"].Value.ToString());
                         if (row.Cells["id2"].Value.ToString() == lblId.Text)
                         {
                             int currentQty = Convert.ToInt32(row.Cells["Column24"].Value);
@@ -76,6 +74,8 @@ namespace Construction_System
                 }
                 else if (label1.Text.Contains("ແກ້ໄຂຈຳນວນສັ່ງຊື້ສິນຄ້າ") && _isOrderPage)
                 {
+                    Console.WriteLine("label text", lblId.Text);
+                    //Console.WriteLine("data in grid", row.Cells["id2"].Value.ToString());
                     order.updateQty(inputQty, lblId.Text);
                     MyMessageBox.ShowMessage("ແກ້ໄຂຂໍ້ມູນສຳເລັດແລ້ວ", "", "ສຳເລັດ", MessageBoxButtons.OK, MessageBoxIcon.None);
                 }

@@ -48,7 +48,7 @@ namespace Construction_System
         {
             try
             {
-                SEditQty editQty = new SEditQty(this, null, dataGridView1.CurrentRow.Cells["column13"].Value.ToString());
+                SEditQty editQty = new SEditQty(this, null, dataGridView1.CurrentRow.Cells["column13"].Value.ToString(), false);
                 var senderGrid = (DataGridView)sender;
 
                 if (senderGrid.Columns[e.ColumnIndex] is DataGridViewImageColumn &&
@@ -63,7 +63,6 @@ namespace Construction_System
                     e.RowIndex >= 0 && dataGridView2.Columns[e.ColumnIndex].HeaderCell.Value.ToString() == "ແກ້ໄຂ")
                 {
                     //TODO - Button Clicked - Execute Code Here
-                    //MyMessageBox.ShowMessage(dataGridView2.Rows[e.RowIndex].Cells[3].Value.ToString(), "", "ຍິນດີຕ້ອນຮັບ", MessageBoxButtons.OK, MessageBoxIcon.None);
                     editQty.label1.Text = "ແກ້ໄຂຈຳນວນຂາຍສິນຄ້າ";
                     editQty.label1.Image = Construction_System.Properties.Resources.pencil;
                     editQty.button1.Text = "ແກ້ໄຂ";
@@ -71,7 +70,7 @@ namespace Construction_System
                     editQty.textBox2.Text = dataGridView2.Rows[e.RowIndex].Cells["Column24"].Value.ToString();
                     editQty.lblQtyEdit.Text = dataGridView2.Rows[e.RowIndex].Cells["Column24"].Value.ToString();
                     editQty.lblPrice.Text = dataGridView2.Rows[e.RowIndex].Cells["Column26"].Value.ToString();
-                    //editQty.lblId.Text = dataGridView2.Rows[e.RowIndex].Cells["id2"].Value.ToString();
+                    editQty.lblId.Text = dataGridView2.Rows[e.RowIndex].Cells["id2"].Value.ToString();
                     editQty.ShowDialog();
                 }
             }
@@ -81,12 +80,20 @@ namespace Construction_System
                 MyMessageBox.ShowMessage("ເກີດຂໍ້ຜີດພາດ " + ex + " ", "", "ເກີດຂໍ້ຜີດພາດ", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        public void updateQty(int qty, int price)
+        public void updateQty(int qty, int price, string id)
         {
-            DataGridViewRow rowUp = new DataGridViewRow();
-            rowUp = dataGridView2.Rows[selectRowSale];
-            rowUp.Cells["Column24"].Value = qty;
-            rowUp.Cells["Column26"].Value = price;
+            //DataGridViewRow rowUp = new DataGridViewRow();
+            //rowUp = dataGridView2.Rows[selectRowSale];
+            //rowUp.Cells["Column24"].Value = qty;
+            //rowUp.Cells["Column26"].Value = price;
+            foreach (DataGridViewRow row in dataGridView2.Rows)
+            {
+                if (row.Cells["id2"].Value.ToString() == id)
+                {
+                    row.Cells["Column24"].Value = qty;
+                    row.Cells["Column26"].Value = price;
+                }
+            }
 
         }
 
@@ -201,7 +208,7 @@ namespace Construction_System
                     _config.closeConnection();
 
                     query = $"INSERT INTO [POSSALE].[dbo].[sellDetail] ([sellId], [product], [price], [sellQty], [totalPrice]) " +
-                        $"VALUES ('{sellId}', '{row.Cells["Column21"].Value}', {row.Cells["Column26"].Value}, {row.Cells["Column24"].Value}, {int.Parse(row.Cells["Column26"].Value.ToString()) * int.Parse(row.Cells["Column24"].Value.ToString())})";
+                        $"VALUES ('{sellId}', '{row.Cells["id2"].Value}', {int.Parse(row.Cells["Column26"].Value.ToString()) / int.Parse(row.Cells["Column24"].Value.ToString())}, {row.Cells["Column24"].Value}, {int.Parse(row.Cells["Column26"].Value.ToString())})";
                     _config.setData(query);
 
                     query = $"UPDATE [POSSALE].[dbo].[product] SET prodQty = {qtyFromProduct - int.Parse(row.Cells["Column24"].Value.ToString())} WHERE prodID = '{row.Cells["id2"].Value}'";
@@ -215,6 +222,17 @@ namespace Construction_System
                 _config.setData(query);
 
                 MyMessageBox.ShowMessage("ການສັ່ງຊື້ສິນຄ້າສຳເລັດ", "", "ສຳເລັດ", MessageBoxButtons.OK, MessageBoxIcon.None);
+
+                dataGridView2.Rows.Clear();
+                label2.Text = "0 ກີບ";
+                LoadProducts();
+
+                FM_Bill fM_Bill = new FM_Bill();
+                SaleBill saleBill = new SaleBill();
+                saleBill.SetParameterValue("sellId", sellId);
+                fM_Bill.crystalReportViewer1.ReportSource = saleBill;
+                fM_Bill.ShowDialog();
+
             }
             catch (Exception ex)
             {
@@ -229,7 +247,7 @@ namespace Construction_System
         {
             try
             {
-                SEditQty editQty = new SEditQty(this, null, dataGridView1.CurrentRow.Cells["column13"].Value.ToString());
+                SEditQty editQty = new SEditQty(this, null, dataGridView1.CurrentRow.Cells["column13"].Value.ToString(), true);
                 var senderGrid1 = (DataGridView)sender;
                 if (senderGrid1.Columns[e.ColumnIndex] is DataGridViewImageColumn &&
                     e.RowIndex >= 0)

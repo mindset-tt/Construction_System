@@ -100,7 +100,7 @@
     <Compile Include="Import.Designer.cs">
       <DependentUpon>Import.cs</DependentUpon>
     </Compile>
-    <Compile Include="ImportBill.cs">
+    <Compile Include="ImportBill1.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ImportBill.rpt</DependentUpon>
@@ -317,7 +317,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ImportBill.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>ImportBill.cs</LastGenOutput>
+      <LastGenOutput>ImportBill1.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>

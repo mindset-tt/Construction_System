@@ -190,7 +190,8 @@ namespace Construction_System
                             label1 = { Text = "ແກ້ໄຂຈຳນວນສັ່ງຊື້ສິນຄ້າ", Image = Construction_System.Properties.Resources.pencil },
                             button1 = { Text = "ແກ້ໄຂ" },
                             textBox1 = { Text = dataGridView2.Rows[e.RowIndex].Cells["Column23"].Value.ToString() },
-                            textBox2 = { Text = dataGridView2.Rows[e.RowIndex].Cells["Column24"].Value.ToString() }
+                            textBox2 = { Text = dataGridView2.Rows[e.RowIndex].Cells["Column24"].Value.ToString() },
+                            lblId = { Text = dataGridView2.Rows[e.RowIndex].Cells["id2"].Value.ToString() }
                         };
                         editQty.ShowDialog();
                     }
@@ -284,13 +285,16 @@ namespace Construction_System
             }
             ShowMessage("ສິ່ງຊື້ສຳເລັດແລ້ວ", "ສຳເລັດ");
             
-            //dataGridView2.Rows.Clear();
-            dataGridView2.DataSource = null;
+            dataGridView2.Rows.Clear();
+            //dataGridView2.DataSource = null;
             label2.Text = "0   ອັນ";
             //clear the combobox
             comboBox1.SelectedIndex = 0;
             LoadProducts();
             FM_Bill fM_Bill = new FM_Bill();
+            OrderBill orderBill = new OrderBill();
+            orderBill.SetParameterValue("orderId", orderId);
+            fM_Bill.crystalReportViewer1.ReportSource = orderBill;
             fM_Bill.ShowDialog();
         }
     }

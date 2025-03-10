@@ -31,13 +31,13 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.crystalReportViewer1 = new CrystalDecisions.Windows.Forms.CrystalReportViewer();
-            this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
-            this.dataGridViewImageColumn2 = new System.Windows.Forms.DataGridViewImageColumn();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.crystalReportViewer1 = new CrystalDecisions.Windows.Forms.CrystalReportViewer();
+            this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
+            this.dataGridViewImageColumn2 = new System.Windows.Forms.DataGridViewImageColumn();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -86,44 +86,6 @@
             this.panel1.Size = new System.Drawing.Size(784, 100);
             this.panel1.TabIndex = 0;
             // 
-            // crystalReportViewer1
-            // 
-            this.crystalReportViewer1.ActiveViewIndex = -1;
-            this.crystalReportViewer1.Cursor = System.Windows.Forms.Cursors.Default;
-            this.crystalReportViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.crystalReportViewer1.Location = new System.Drawing.Point(0, 100);
-            this.crystalReportViewer1.Margin = new System.Windows.Forms.Padding(0);
-            this.crystalReportViewer1.Name = "crystalReportViewer1";
-            this.crystalReportViewer1.ShowCloseButton = false;
-            this.crystalReportViewer1.ShowCopyButton = false;
-            this.crystalReportViewer1.ShowExportButton = false;
-            this.crystalReportViewer1.ShowGroupTreeButton = false;
-            this.crystalReportViewer1.ShowLogo = false;
-            this.crystalReportViewer1.ShowParameterPanelButton = false;
-            this.crystalReportViewer1.ShowPrintButton = false;
-            this.crystalReportViewer1.Size = new System.Drawing.Size(784, 465);
-            this.crystalReportViewer1.TabIndex = 1;
-            // 
-            // dataGridViewImageColumn1
-            // 
-            this.dataGridViewImageColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.dataGridViewImageColumn1.FillWeight = 45F;
-            this.dataGridViewImageColumn1.HeaderText = "ຍົກເລິກ";
-            this.dataGridViewImageColumn1.Image = global::Construction_System.Properties.Resources.delete;
-            this.dataGridViewImageColumn1.MinimumWidth = 45;
-            this.dataGridViewImageColumn1.Name = "dataGridViewImageColumn1";
-            this.dataGridViewImageColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewImageColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // dataGridViewImageColumn2
-            // 
-            this.dataGridViewImageColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.dataGridViewImageColumn2.FillWeight = 45F;
-            this.dataGridViewImageColumn2.HeaderText = "ແກ້ໄຂ";
-            this.dataGridViewImageColumn2.Image = global::Construction_System.Properties.Resources.pencil;
-            this.dataGridViewImageColumn2.MinimumWidth = 45;
-            this.dataGridViewImageColumn2.Name = "dataGridViewImageColumn2";
-            // 
             // comboBox2
             // 
             this.comboBox2.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -134,6 +96,7 @@
             this.comboBox2.FormattingEnabled = true;
             this.comboBox2.ItemHeight = 25;
             this.comboBox2.Items.AddRange(new object[] {
+            "ທັງໝົດ",
             "Admin",
             "User"});
             this.comboBox2.Location = new System.Drawing.Point(154, 57);
@@ -169,6 +132,7 @@
             this.button2.TabIndex = 73;
             this.button2.Text = "ພິມເອກະສານ";
             this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button1
             // 
@@ -184,6 +148,46 @@
             this.button1.TabIndex = 72;
             this.button1.Text = "ສະແດງຂໍ້ມູນ";
             this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // crystalReportViewer1
+            // 
+            this.crystalReportViewer1.ActiveViewIndex = -1;
+            this.crystalReportViewer1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.crystalReportViewer1.Cursor = System.Windows.Forms.Cursors.Default;
+            this.crystalReportViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.crystalReportViewer1.Location = new System.Drawing.Point(0, 100);
+            this.crystalReportViewer1.Margin = new System.Windows.Forms.Padding(0);
+            this.crystalReportViewer1.Name = "crystalReportViewer1";
+            this.crystalReportViewer1.ShowCloseButton = false;
+            this.crystalReportViewer1.ShowCopyButton = false;
+            this.crystalReportViewer1.ShowExportButton = false;
+            this.crystalReportViewer1.ShowGroupTreeButton = false;
+            this.crystalReportViewer1.ShowLogo = false;
+            this.crystalReportViewer1.ShowParameterPanelButton = false;
+            this.crystalReportViewer1.ShowPrintButton = false;
+            this.crystalReportViewer1.Size = new System.Drawing.Size(784, 465);
+            this.crystalReportViewer1.TabIndex = 1;
+            // 
+            // dataGridViewImageColumn1
+            // 
+            this.dataGridViewImageColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.dataGridViewImageColumn1.FillWeight = 45F;
+            this.dataGridViewImageColumn1.HeaderText = "ຍົກເລິກ";
+            this.dataGridViewImageColumn1.Image = global::Construction_System.Properties.Resources.delete;
+            this.dataGridViewImageColumn1.MinimumWidth = 45;
+            this.dataGridViewImageColumn1.Name = "dataGridViewImageColumn1";
+            this.dataGridViewImageColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewImageColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // dataGridViewImageColumn2
+            // 
+            this.dataGridViewImageColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.dataGridViewImageColumn2.FillWeight = 45F;
+            this.dataGridViewImageColumn2.HeaderText = "ແກ້ໄຂ";
+            this.dataGridViewImageColumn2.Image = global::Construction_System.Properties.Resources.pencil;
+            this.dataGridViewImageColumn2.MinimumWidth = 45;
+            this.dataGridViewImageColumn2.Name = "dataGridViewImageColumn2";
             // 
             // RepEmployee
             // 

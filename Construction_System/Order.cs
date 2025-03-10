@@ -16,7 +16,8 @@ namespace Construction_System
         {
             InitializeComponent();
             label2.Text = "0   ອັນ";
-            LoadData();
+            //LoadData();
+            LoadSuppliers();
             _empId = empID;
         }
 
@@ -56,14 +57,18 @@ namespace Construction_System
                 {
                     //ShowMessage("ກະລຸນາເລືອກຂໍ້ມູນຜູ້ສະໜອງ");
                     ShowMessage("ກະລຸນາເລືອກຂໍ້ມູນຜູ້ສະໜອງ", "ຂໍ້ຜິດພາດ");
+                    dataGridView1.DataSource = null;
                 }
                 else
                 {
                     var filter = string.IsNullOrEmpty(textBox1.Text) && (comboBox1.SelectedValue.ToString() != "-1")
-                            ? $"WHERE sp.supplierId LIKE '%{comboBox1.SelectedValue}%'"
+                            ? $"WHERE sp.supplierId LIKE '%{comboBox1.SelectedValue}%' AND p.cancel = 'no'"
                             : string.IsNullOrEmpty(textBox1.Text) || comboBox1.Text == "ກະລຸນາເລືອກ"
-                            ? ""
-                            : $"WHERE (p.prodID LIKE '%{textBox1.Text}%' OR p.prodName LIKE '%{textBox1.Text}%' OR p.prodQty LIKE '%{textBox1.Text}%' OR p.prodPrice LIKE '%{textBox1.Text}%' OR p.typeId LIKE '%{textBox1.Text}%' OR p.unitId LIKE '%{textBox1.Text}%') AND sp.supplierId LIKE '%{comboBox1.SelectedValue}%'";
+                            ? "WHERE p.cancel = 'yes'"
+                            : $"WHERE (p.prodID LIKE '%{textBox1.Text}%' OR p.prodName LIKE '%{textBox1.Text}%' " +
+                            $"OR p.prodQty LIKE '%{textBox1.Text}%' OR p.prodPrice LIKE '%{textBox1.Text}%' " +
+                            $"OR p.typeId LIKE '%{textBox1.Text}%' OR p.unitId LIKE '%{textBox1.Text}%') AND " +
+                            $"sp.supplierId LIKE '%{comboBox1.SelectedValue}%' AND p.cancel = 'yes'";
                     LoadProducts(filter);
                 }
             }
@@ -80,11 +85,15 @@ namespace Construction_System
                 if (string.IsNullOrEmpty(comboBox1.Text) || comboBox1.Text == "ກະລຸນາເລືອກ")
                 {
                     ShowMessage("ກະລຸນາເລືອກຂໍ້ມູນຜູ້ສະໜອງ", "ຂໍ້ຜິດພາດ");
+                    dataGridView2.Rows.Clear();
+                    label2.Text = "0   ອັນ";
                     LoadProducts();
                 }
                 else
                 {
                     var filter = $"WHERE sp.supplierId LIKE '%{comboBox1.SelectedValue}%'";
+                    dataGridView2.Rows.Clear();
+                    label2.Text = "0   ອັນ";
                     LoadProducts(filter);
                 }
             }
@@ -143,7 +152,7 @@ namespace Construction_System
             {
                 if (dataGridView1.Columns[e.ColumnIndex] is DataGridViewImageColumn && e.RowIndex >= 0)
                 {
-                    var editQty = new OrEditQty(this, null, dataGridView1.Rows[e.RowIndex].Cells["Column8"].Value.ToString())
+                    var editQty = new OrEditQty(this, null, dataGridView1.Rows[e.RowIndex].Cells["Column8"].Value.ToString(), true)
                     {
                         label1 = { Text = " ເພີ່ມຈຳນວນສັ່ງຊື້ສິນຄ້າ", Image = Construction_System.Properties.Resources.add_button },
                         button1 = { Text = "ເພີ່ມ" },
@@ -176,7 +185,7 @@ namespace Construction_System
                     }
                     else if (dataGridView2.Columns[e.ColumnIndex].HeaderCell.Value.ToString() == "ແກ້ໄຂ")
                     {
-                        var editQty = new OrEditQty(this, null, null)
+                        var editQty = new OrEditQty(this, null, null, true)
                         {
                             label1 = { Text = "ແກ້ໄຂຈຳນວນສັ່ງຊື້ສິນຄ້າ", Image = Construction_System.Properties.Resources.pencil },
                             button1 = { Text = "ແກ້ໄຂ" },
@@ -193,9 +202,16 @@ namespace Construction_System
             }
         }
 
-        public void updateQty(int qty)
+        public void updateQty(int qty, string proId)
         {
-            dataGridView2.Rows[selectRowOr].Cells["Column24"].Value = qty;
+            //dataGridView2.Rows[selectRowOr].Cells["Column24"].Value = qty;
+            foreach (DataGridViewRow row in dataGridView2.Rows)
+            {
+                if (row.Cells["id2"].Value.ToString() == proId)
+                {
+                    row.Cells["Column24"].Value = qty;
+                }
+            }
         }
 
         public int selectRowOr;
@@ -241,7 +257,6 @@ namespace Construction_System
 
             // Get only number on label2
             var totalOrder = int.Parse(label2.Text.Split(' ')[0].Replace(",", ""));
-            MessageBox.Show("test" + orderId);
             _config.setData("INSERT INTO [POSSALE].[dbo].[order] ([orderId], [whoOrder], [orderDate], [totalOrder], [orderFrom], [orderStatus]) " +
                            $"VALUES ('{orderId}','{_empId}', GETDATE(), {totalOrder}, '{comboBox1.SelectedValue}', 'ສິ່ງຊື້ແລ້ວ')");
 
@@ -268,14 +283,15 @@ namespace Construction_System
                                $"VALUES ('{orderId}', '{productId}', {row.Cells["Column24"].Value})");
             }
             ShowMessage("ສິ່ງຊື້ສຳເລັດແລ້ວ", "ສຳເລັດ");
-            //FM_Bill fM_Bill = new FM_Bill();
-            //fM_Bill.ShowDialog();
+            
             //dataGridView2.Rows.Clear();
             dataGridView2.DataSource = null;
             label2.Text = "0   ອັນ";
             //clear the combobox
             comboBox1.SelectedIndex = 0;
             LoadProducts();
+            FM_Bill fM_Bill = new FM_Bill();
+            fM_Bill.ShowDialog();
         }
     }
 }

@@ -15,12 +15,14 @@ namespace Construction_System
         Order order;
         MOrderEdit mOrder;
         private string _idSup;
-        public OrEditQty(Order order, MOrderEdit mOrder, string idSup)
+        private bool _isOrderPage;
+        public OrEditQty(Order order, MOrderEdit mOrder, string idSup, bool isOrderPage)
         {
             InitializeComponent();
             this.order = order;
             this.mOrder = mOrder;
             textBox2.Select();
+            _isOrderPage = isOrderPage;
             _idSup = idSup;
         }
 
@@ -52,10 +54,12 @@ namespace Construction_System
                 {
                     foreach (DataGridViewRow row in order.dataGridView2.Rows)
                     {
+                        Console.WriteLine("label text", lblId.Text);
+                        Console.WriteLine("data in grid", row.Cells["id2"].Value.ToString());
                         if (row.Cells["id2"].Value.ToString() == lblId.Text)
                         {
                             int currentQty = Convert.ToInt32(row.Cells["Column24"].Value);
-                            order.updateQty(inputQty + currentQty);
+                            order.updateQty(inputQty + currentQty, lblId.Text);
                             isCollapsed = false;
                             break;
                         }
@@ -70,9 +74,9 @@ namespace Construction_System
 
                     MyMessageBox.ShowMessage("ເພີ່ມຂໍ້ມູນສຳເລັດແລ້ວ", "", "ສຳເລັດ", MessageBoxButtons.OK, MessageBoxIcon.None);
                 }
-                else if (label1.Text.Contains("ແກ້ໄຂຈຳນວນສັ່ງຊື້ສິນຄ້າ"))
+                else if (label1.Text.Contains("ແກ້ໄຂຈຳນວນສັ່ງຊື້ສິນຄ້າ") && _isOrderPage)
                 {
-                    order.updateQty(inputQty);
+                    order.updateQty(inputQty, lblId.Text);
                     MyMessageBox.ShowMessage("ແກ້ໄຂຂໍ້ມູນສຳເລັດແລ້ວ", "", "ສຳເລັດ", MessageBoxButtons.OK, MessageBoxIcon.None);
                 }
                 else if (label1.Text.Contains("ຈຳນວນສັ່ງຊື້ສິນຄ້າ"))
@@ -82,7 +86,7 @@ namespace Construction_System
                                                   textBox1.Text, inputQty, lblUnit.Text, lblId.Text);
                     MyMessageBox.ShowMessage("ເພີ່ມຂໍ້ມູນສຳເລັດແລ້ວ", "", "ສຳເລັດ", MessageBoxButtons.OK, MessageBoxIcon.None);
                 }
-                else if (label1.Text.Contains("ແກ້ໄຂຈຳນວນສັ່ງຊື້ສິນຄ້າ"))
+                else if (label1.Text.Contains("ແກ້ໄຂຈຳນວນສັ່ງຊື້ສິນຄ້າ") && !_isOrderPage)
                 {
                     mOrder.updateQtyMOr(inputQty);
                     MyMessageBox.ShowMessage("ແກ້ໄຂຂໍ້ມູນສຳເລັດແລ້ວ", "", "ສຳເລັດ", MessageBoxButtons.OK, MessageBoxIcon.None);

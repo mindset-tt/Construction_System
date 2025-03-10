@@ -17,8 +17,12 @@ namespace Construction_System
         {
             InitializeComponent();
             timer1.Start();
-            txtbUesername.Select();
+            //txtbUesername.Select();
+            this.ActiveControl = txtbUesername;
+            txtbUesername.Focus();
 
+            txtbUesername.Text = "Yai";
+            txtbPassword.Text = "1234";
         }
 
         config config = new config();
@@ -36,6 +40,7 @@ namespace Construction_System
                 MyMessageBox.ShowMessage("ເຂົ້າສູ່ລະບົບສຳເລັດ!", "", "ຍິນດີຕ້ອນຮັບ", MessageBoxButtons.OK, MessageBoxIcon.None);
                 form1.label2.Text = dr["empRole"].ToString();
                 form1.EMPID = dr["empId"].ToString();
+                form1.EMPPAss = dr["empPass"].ToString();
                 form1.Show();
                 txtbUesername.Text = "";
                 txtbPassword.Text = "";
@@ -87,50 +92,51 @@ namespace Construction_System
             //    MyMessageBox.ShowMessage("ເກີດຂໍ້ຜີດພາດ " + ex + " ", "", "ເກີດຂໍ້ຜີດພາດ", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             //}
-}
-
-private void btnCloseLogin_Click(object sender, EventArgs e)
-{
-    Application.Exit();
-}
-
-
-private void timer1_Tick(object sender, EventArgs e)
-{
-    //label4.Text = DateTime.Now.ToString();
-    label4.Text = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss");
-}
-
-private void btnLogin_KeyDown(object sender, KeyEventArgs e)
-{
-    try
-    {
-        if (e.KeyCode == Keys.Enter)
-        {
-            btnLogin.PerformClick();
         }
-    }
-    catch (Exception ex)
-    {
 
-        MyMessageBox.ShowMessage("ເກີດຂໍ້ຜີດພາດ " + ex + " ", "", "ເກີດຂໍ້ຜີດພາດ", MessageBoxButtons.OK, MessageBoxIcon.Error);
-    }
-}
+        private void btnCloseLogin_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
 
-private void textbPassword_KeyDown(object sender, KeyEventArgs e)
-{
-    if (e.KeyValue.Equals(Convert.ToChar(13)))
-    {
-        btnLogin_Click(sender, e);
-    }
-}
 
-private void textbUesername_KeyDown(object sender, KeyEventArgs e)
-{
-    if (e.KeyValue.Equals(Convert.ToChar(13)))
-    {
-        btnLogin_Click(sender, e);
-    }
-}
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            //label4.Text = DateTime.Now.ToString();
+            label4.Text = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss");
+        }
+
+        private void btnLogin_KeyDown(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                if (e.KeyCode == Keys.Enter)
+                {
+                    btnLogin.PerformClick();
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MyMessageBox.ShowMessage("ເກີດຂໍ້ຜີດພາດ " + ex + " ", "", "ເກີດຂໍ້ຜີດພາດ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void textbPassword_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btnLogin.PerformClick();
+            }
+        }
+
+        private void textbUesername_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                txtbPassword.Focus();
+                e.SuppressKeyPress = true;
+            }
+        }
     }
 }

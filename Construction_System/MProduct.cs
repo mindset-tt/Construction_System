@@ -26,12 +26,6 @@ namespace Construction_System
                 if (dataGridView1.Rows.Count != 0)
                 {
                     label4.Text = dataGridView1.RowCount.ToString("#,###") + "    ລາຍການ";
-                    //int totalQty = 0;
-                    //for (int i = 0; i < dataGridView1.RowCount; i++)
-                    //{
-                    //    totalQty += Convert.ToInt32(dataGridView1.Rows[i].Cells["Column24"].Value.ToString());
-                    //}
-                    //label2.Text = totalQty.ToString("#,###") + "   ອັນ";
                 }
                 else
                 {
@@ -44,43 +38,54 @@ namespace Construction_System
             }
         }
 
+        public bool Checkcellclick = false;
+        private readonly config _config = new config();
+        string query = "";
+
+        private void LoadProducts(string filter = "WHERE p.[cancel] = 'yes' ")
+        {
+            query = $"SELECT p.[prodID],p.[prodName], p.[prodQty], u.[unitName], t.[typeName], p.[prodPrice], p.[prodSellPrice]" +
+                "FROM [POSSALE].[dbo].[product] p " +
+                "INNER JOIN [POSSALE].[dbo].[unit] u ON p.unitId = u.unitId " +
+                "INNER JOIN [POSSALE].[dbo].[type] t ON p.typeId = t.typeId " +
+                filter + "ORDER BY p.[prodQty] ASC";
+            _config.LoadData(query, dataGridView1);
+            if (dataGridView1.RowCount <= 0)
+            {
+                MyMessageBox.ShowMessage("ຂໍອະໄພ, ຍັງບໍ່ມີຂໍ້ມູນໃດໆ. ກະລຸນາເພີ່ມຂໍ້ມູນ", "", "ແຈ້ງເຕືອນ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            textBox1.Text = "";
+            textBox2.Text = "";
+            textBox3.Text = "";
+            textBox5.Text = "";
+            textBox4.Text = "";
+            //comboBox1.Text = "ກະລຸນາເລືອກ";
+            //comboBox2.Text = "ກະລຸນາເລືອກ";
+            LoadUnit();
+            LoadType();
+            sumQty();
+        }
+
+        private void LoadUnit()
+        {
+            var query = "SELECT [unitId], [unitName] FROM [POSSALE].[dbo].[unit] ORDER BY [unitName] ASC";
+            _config.LoadData(query, comboBox1, "unitId", "unitName", "ກະລຸນາເລືອກ *");
+        }
+
+        private void LoadType()
+        {
+            var query = "SELECT [typeId], [typeName] FROM [POSSALE].[dbo].[type] ORDER BY [typeName] ASC";
+            _config.LoadData(query, comboBox2, "typeId", "typeName", "ກະລຸນາເລືອກ *");
+        }
+
         private void MProduct_Load(object sender, EventArgs e)
         {
-            DataSet data1 = new DataSet("Contruction_System");
-            DataTable table1 = new DataTable("Sale1");
-            table1.Columns.Add("id", typeof(int));
-            table1.Columns.Add("prodname");
-            table1.Columns.Add("qty", typeof(int));
-            table1.Columns.Add("unit");
-            table1.Columns.Add("type");
-            table1.Columns.Add("priceOrder", typeof(int));
-            table1.Columns.Add("priceSell", typeof(int));
-            table1.Rows.Add(1, "ຕະປູແປດ", 1, "ໂລ", "ເຫຼັກ", 70000, 80000);
-            table1.Rows.Add(2, "ຕະປູຫ້າ", 2, "ໂລ", "ເຫຼັກ", 70000, 80000);
-            table1.Rows.Add(3, "ຕະປູຫົກ", 3, "ໂລ", "ເຫຼັກ", 105000, 1105000);
-            table1.Rows.Add(4, "ກະເບື່ອງ", 10, "ແຜ່ນ", "ຫຼັງຄາ", 560000, 590000);
-            table1.Rows.Add(5, "ຫຼົບກະເບື່ອງ", 4, "ແຜ່ນ", "ຫຼັງຄາ", 240000, 280000);
-            table1.Rows.Add(6, "ຊັງກະສີແຜ່ນລຽບ", 12, "ແຜ່ນ", "ຫຼັງຄາ", 680000, 700000);
-            table1.Rows.Add(7, "ຊັງກະສີແຜ່ນລ່ອງ", 20, "ແຜ່ນ", "ຫຼັງຄາ", 1320000, 240000);
-            table1.Rows.Add(8, "ສາຍໄຟ 2.5", 3, "ກໍ່", "ໄຟຟ້າ", 850000, 900000);
-            table1.Rows.Add(9, "ຄ້ອນຕີໃຫຍ່", 1, "ອັນ", "ເຄື່ອງມື", 120000, 140000);
-            table1.Rows.Add(10, "ຄ້ອນຕີນ້ອຍ", 2, "ອັນ", "ເຄື່ອງມື", 140000, 180000);
-            table1.Rows.Add(11, "ຄ້ອນປອນ", 1, "ອັນ", "ເຄື່ອງມື", 150000, 190000);
-            table1.Rows.Add(12, "ຕູ້ຈອດຫຼັກ", 1, "ເຄື່ອງ", "ໄຟຟ້າ", 570000, 610000);
-            table1.Rows.Add(52, "ໄຟບີຕັດເຫຼັກ", 2, "ເຄື່ອງ", "ໄຟຟ້າ", 2700000, 2800000);
-            table1.Rows.Add(63, "ໝືນຕັດເຫຼັກ", 1, "ເຄື່ອງ", "ໄຟຟ້າ", 350000, 380000);
-            table1.Rows.Add(72, "ສະຫວ່ານໄຟຟ້າ", 2, "ເຄື່ອງ", "ໄຟຟ້າ", 2620000, 2800000);
-            table1.Rows.Add(85, "ສະຫວ່ານແບັກເຕີລີ້", 2, "ເຄື່ອງ", "ໄຟຟ້າ", 1250000, 2240000);
-            table1.Rows.Add(85, "ສະຫວ່ານແບັກເຕີລີ້", 2, "ເຄື່ອງ", "ໄຟຟ້າ", 1250000, 2240000);
-            table1.Rows.Add(85, "ສະຫວ່ານແບັກເຕີລີ້", 2, "ເຄື່ອງ", "ໄຟຟ້າ", 1250000, 2240000);
-            data1.Tables.Add(table1);
-            dataGridView1.DataSource = table1;
+            LoadProducts();
         }
 
         private void dataGridView1_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             dataGridView1.ClearSelection();
-            sumQty();
         }
 
         private void dataGridView1_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
@@ -89,17 +94,128 @@ namespace Construction_System
             dataGridView1.Columns["Column7"].DefaultCellStyle.Format = "#,###";
             dataGridView1.Columns["Column8"].DefaultCellStyle.Format = "#,###";
             dataGridView1.ClearSelection();
-            sumQty();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (textBox2.Text == "" || textBox3.Text == "" || textBox4.Text == "" || 
+                textBox5.Text == "" || comboBox1.Text == "ກະລຸນາເລືອກ *" || comboBox2.Text == "ກະລຸນາເລືອກ *")
+            {
+                MyMessageBox.ShowMessage("ຂໍອະໄພ, ກະລຸນາປ້ອນຂໍ້ມູນໃຫ້ຄົບຖ້ວນ", "", "ຜິດພາດ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+            else
+            {
+                var query = "SELECT TOP 1 prodID FROM [POSSALE].[dbo].[product] ORDER BY prodID DESC";
+                var dr = _config.getData(query);
+                dr.Read();
+
+                // If order id is null, set it to OD0001
+                var prodID = dr.HasRows ? $"P{int.Parse(dr["prodID"].ToString().Substring(2)) + 1:D3}" : "P0001";
+                dr.Close();
+                _config.closeConnection();
+
+                _config.setData("INSERT INTO [POSSALE].[dbo].[product] ([prodID], [prodName], [prodQty], " +
+                    "[unitId], [typeId],[prodPrice],[prodSellPrice], [cancel]) " +
+                    $"VALUES ('{prodID}','{textBox2.Text}','{textBox3.Text}', '{comboBox1.SelectedValue}', '{comboBox2.SelectedValue}', " +
+                    $"'{textBox4.Text}', '{textBox5.Text}', 'yes')");
+                _config.setData(query);
+                MyMessageBox.ShowMessage("ເພິ່ມຂໍ້ມູນສຳເລັດແລ້ວ", "", "ສຳເລັດ", MessageBoxButtons.OK, MessageBoxIcon.None);
+                LoadProducts();
+                textBox2.Select();
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (textBox2.Text == "" || textBox3.Text == "" || textBox4.Text == "" ||
+                textBox5.Text == "" || comboBox1.Text == "ກະລຸນາເລືອກ *" || comboBox2.Text == "ກະລຸນາເລືອກ *")
+            {
+                MyMessageBox.ShowMessage("ຂໍອະໄພ, ກະລຸນາປ້ອນຂໍ້ມູນໃຫ້ຄົບຖ້ວນ", "", "ຜິດພາດ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+            else if (Checkcellclick == false)
+            {
+                MyMessageBox.ShowMessage("ຂໍອະໄພ, ກະລຸນາເລຶອກຂໍ້ມູນທີ່ຕ້ອງການແກ້ໄຂ", "", "ຜິດພາດ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                DialogResult dialog = MyMessageBox.ShowMessage("ທ່ານຕ້ອງການແກ້ໄຂຂໍ້ມູນ ແທ້ ຫຼື ບໍ່", "", "ກວດສອບ", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (dialog == DialogResult.Yes)
+                {
+                    query = $"UPDATE [POSSALE].[dbo].[product] SET prodName = '{textBox2.Text}',prodQty = '{textBox3.Text}', " +
+                        $"unitId = '{comboBox1.SelectedValue}', typeId = '{comboBox2.SelectedValue}', prodPrice = '{textBox4.Text}', " +
+                        $"prodSellPrice = '{textBox5.Text}' WHERE prodID = '{dataGridView1.CurrentRow.Cells["id1"].Value}'";
+                    _config.setData(query);
+                    LoadProducts();
+                    MyMessageBox.ShowMessage("ແກ້ໄຂຂໍ້ມູນສຳເລັດແລ້ວ", "", "ສຳເລັດ", MessageBoxButtons.OK, MessageBoxIcon.None);
+                }
+            }
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            var senderGrid = (DataGridView)sender;
+            if (senderGrid.Columns[e.ColumnIndex] is DataGridViewImageColumn &&
+            e.RowIndex >= 0)
+            {
+                //TODO - Button Clicked - Execute Code Here
+                query = $"UPDATE [POSSALE].[dbo].[product] SET [cancel] = 'no'" +
+                                $" WHERE [prodID] = '{dataGridView1.CurrentRow.Cells["id1"].Value}'";
+                _config.setData(query);
+                LoadProducts();
+                MyMessageBox.ShowMessage("ລົບຂໍ້ມູນສຳເລັດແລ້ວ", "", "ສຳເລັດ", MessageBoxButtons.OK, MessageBoxIcon.None);
+            }
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            Checkcellclick = true;
+            textBox2.Text = dataGridView1.CurrentRow.Cells["Column3"].Value.ToString();
+            textBox3.Text = dataGridView1.CurrentRow.Cells["Column4"].Value.ToString();
+            comboBox1.Text = dataGridView1.CurrentRow.Cells["Column5"].Value.ToString();
+            comboBox2.Text = dataGridView1.CurrentRow.Cells["Column6"].Value.ToString();
+            textBox4.Text = dataGridView1.CurrentRow.Cells["Column7"].Value.ToString();
+            textBox5.Text = dataGridView1.CurrentRow.Cells["Column8"].Value.ToString();
+        }
 
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                (dataGridView1.DataSource as DataTable).DefaultView.RowFilter = string.Format("prodName LIKE '%{0}%' " +
+                    "or typeName LIKE '%{0}%' or unitName LIKE '%{0}%'", textBox1.Text);
+                sumQty();
+            }
+            catch (Exception ex)
+            {
+
+                MyMessageBox.ShowMessage("ເກີດຂໍ້ຜີດພາດ " + ex + " ", "", "ເກີດຂໍ້ຜີດພາດ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void textBox3_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void textBox4_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void textBox5_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
         }
     }
 }

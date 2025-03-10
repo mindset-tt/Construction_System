@@ -126,8 +126,8 @@ namespace Construction_System
             {
                 //(dataGridView1.DataSource as DataTable).DefaultView.RowFilter = string.Format("name LIKE '%{0}%' or unit LIKE '%{0}%' or type LIKE '%{0}%'", textBox1.Text);
                 var filter = string.IsNullOrEmpty(textBox1.Text)
-                            ? ""
-                            : $"WHERE (p.prodID LIKE '%{textBox1.Text}%' OR p.prodName LIKE '%{textBox1.Text}%' OR p.prodQty LIKE '%{textBox1.Text}%' OR p.prodPrice LIKE '%{textBox1.Text}%' OR p.typeId LIKE '%{textBox1.Text}%' OR p.` LIKE '%{textBox1.Text}%')";
+                            ? "WHERE cancel = yes"
+                            : $"WHERE (p.prodID LIKE '%{textBox1.Text}%' OR p.prodName LIKE '%{textBox1.Text}%' OR p.prodQty LIKE '%{textBox1.Text}%' OR p.prodPrice LIKE '%{textBox1.Text}%' OR p.typeId LIKE '%{textBox1.Text}%' OR p.` LIKE '%{textBox1.Text}%') AND cancel = 'yes'";
                 LoadProducts(filter);
             }
             catch (Exception ex)
@@ -186,40 +186,6 @@ namespace Construction_System
 
                 var totalPrice = int.Parse(label2.Text.Split(' ')[0].Replace(",", ""));
 
-
-
-
-                // Insert into sell table and sell_detail tableUSE [POSSALE]
-
-                //                INSERT INTO[dbo].[sell]
-                //                           ([sellId]
-                //                           , [whoSell]
-                //                           , [sellDate]
-                //                           , [totalSell]
-                //                           , [totalPriceSell]
-                //                           , [sellStatus]
-                //                           , [reason])
-                //     VALUES
-                //           (< sellId, nvarchar(50),>
-                //           ,< whoSell, nvarchar(20),>
-                //           ,< sellDate, datetime,>
-                //           ,< totalSell, bigint,>
-                //           ,< totalPriceSell, bigint,>
-                //           ,< sellStatus, nvarchar(50),>
-                //           ,< reason, text,>)
-
-                //INSERT INTO[dbo].[sellDetail]
-                //           ([sellId]
-                //           , [product]
-                //           , [price]
-                //           , [sellQty]
-                //           , [totalPrice])
-                //     VALUES
-                //           (< sellId, nvarchar(50),>
-                //           ,< product, nvarchar(50),>
-                //           ,< price, bigint,>
-                //           ,< sellQty, bigint,>
-                //           ,< totalPrice, bigint,>)
                 query = $"INSERT INTO [POSSALE].[dbo].[sell] ([sellId], [whoSell], [sellDate], [totalSell], [totalPriceSell], [sellStatus], [reason]) " +
                     $"VALUES ('{sellId}', '{_empId}', GETDATE(), {dataGridView2.RowCount}, {totalPrice}, 'ສຳເລັດ', '')";
                 _config.setData(query);
@@ -233,11 +199,14 @@ namespace Construction_System
                     int qtyFromProduct = int.Parse(dr1["prodQty"].ToString());
                     dr1.Close();
                     _config.closeConnection();
+
                     query = $"INSERT INTO [POSSALE].[dbo].[sellDetail] ([sellId], [product], [price], [sellQty], [totalPrice]) " +
                         $"VALUES ('{sellId}', '{row.Cells["Column21"].Value}', {row.Cells["Column26"].Value}, {row.Cells["Column24"].Value}, {int.Parse(row.Cells["Column26"].Value.ToString()) * int.Parse(row.Cells["Column24"].Value.ToString())})";
                     _config.setData(query);
+
                     query = $"UPDATE [POSSALE].[dbo].[product] SET prodQty = {qtyFromProduct - int.Parse(row.Cells["Column24"].Value.ToString())} WHERE prodID = '{row.Cells["id2"].Value}'";
                     _config.setData(query);
+
                     getQty += int.Parse(row.Cells["Column24"].Value.ToString());
                 }
 

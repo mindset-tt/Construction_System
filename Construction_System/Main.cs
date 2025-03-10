@@ -6,6 +6,7 @@ namespace Construction_System
     public partial class Main : Form
     {
         public string EMPID = "";
+        public string EMPPAss = "";
         public Main()
         {
             InitializeComponent();
@@ -84,7 +85,7 @@ namespace Construction_System
         {
             if (MyMessageBox.ShowMessage("ທ່ານຕ້ອງການອອກຈາກລະບົບແທ້ ຫຼື ບໍ່?", "", "ອອກຈາກລະບົບ", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                Application.Exit();
+                Application.Restart();
             }
         }
 
@@ -158,7 +159,7 @@ namespace Construction_System
 
         private void btnMaEmp_Click(object sender, EventArgs e)
         {
-            openChildForm(new MEmployee(EMPID));
+            openChildForm(new MEmployee(EMPID, EMPPAss));
         }
 
         private void btnMaProd_Click(object sender, EventArgs e)

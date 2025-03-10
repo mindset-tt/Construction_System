@@ -20,7 +20,8 @@ class config
         }
         catch (Exception ex)
         {
-            ShowMessage($"Error initializing connection: {ex.Message}", "Error");
+            //ShowMessage($"Error initializing connection: {ex.Message}", "Error");
+            MyMessageBox.ShowMessage($"Error initializing connection: {ex}", "", "ເກີດຂໍ້ຜີດພາດ", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 
@@ -35,7 +36,8 @@ class config
         }
         catch (Exception ex)
         {
-            ShowMessage($"Error opening connection: {ex.Message}", "Error");
+            //ShowMessage($"Error opening connection: {ex.Message}", "Error");
+            MyMessageBox.ShowMessage($"Error opening connection: {ex}", "", "ເກີດຂໍ້ຜີດພາດ", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 
@@ -50,7 +52,8 @@ class config
         }
         catch (Exception ex)
         {
-            ShowMessage($"Error closing connection: {ex.Message}", "Error");
+            //ShowMessage($"Error closing connection: {ex.Message}", "Error");
+            MyMessageBox.ShowMessage($"Error closing connection: {ex}", "", "ເກີດຂໍ້ຜີດພາດ", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 
@@ -69,7 +72,8 @@ class config
         }
         catch (Exception ex)
         {
-            ShowMessage($"Error getting data: {ex.Message}", "Error");
+            //ShowMessage($"Error getting data: {ex.Message}", "Error");
+            MyMessageBox.ShowMessage($"Error getting data: {ex}", "", "ເກີດຂໍ້ຜີດພາດ", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return null;
         }
     }
@@ -91,7 +95,8 @@ class config
         }
         catch (Exception ex)
         {
-            ShowMessage($"Error setting data: {ex.Message}", "Error");
+            //ShowMessage($"Error setting data: {ex.Message}", "Error");
+            MyMessageBox.ShowMessage($"Error setting data: {ex}", "", "ເກີດຂໍ້ຜີດພາດ", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
         finally
         {
@@ -121,7 +126,8 @@ class config
         }
         catch (Exception ex)
         {
-            ShowMessage($"Error loading data: {ex.Message}", "Error");
+            //ShowMessage($"Error loading data: {ex.Message}", "Error");
+            MyMessageBox.ShowMessage($"Error loading data: {ex}", "", "ເກີດຂໍ້ຜີດພາດ", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
         finally
         {
@@ -141,7 +147,89 @@ class config
         }
         catch (Exception ex)
         {
-            ShowMessage($"Error loading data: {ex.Message}", "Error");
+            //ShowMessage($"Error loading data: {ex.Message}", "Error");
+            MyMessageBox.ShowMessage($"Error loading data: {ex}", "", "ເກີດຂໍ້ຜີດພາດ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+        finally
+        {
+            closeConnection();
+        }
+    }
+
+
+    //Yai Create
+    public void deleteData(string sql)
+    {
+        try
+        {
+            openConnection();
+            cmd = new SqlCommand(sql, con);
+            int result = cmd.ExecuteNonQuery(); // Execute the command once and store the result
+
+            // Check if the query is successful or not, if not, show a message box with the error message and rollback the transaction
+            if (result == 0)
+            {
+                ShowMessage("ບໍ່ສາມາດລົບຂໍ້ມູນໄດ້", "ຂໍ້ມູນບໍ່ຖືກບັນທຶກ");
+                cmd.Transaction.Rollback();
+            }
+        }
+        catch (Exception ex)
+        {
+            //ShowMessage($"Error setting data: {ex.Message}", "Error");
+            MyMessageBox.ShowMessage($"Error setting data: {ex}", "", "ເກີດຂໍ້ຜີດພາດ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+        finally
+        {
+            closeConnection();
+        }
+    }
+
+    public void setDataEmp(string sql)
+    {
+        try
+        {
+            openConnection();
+            cmd = new SqlCommand(sql, con);
+            int result = cmd.ExecuteNonQuery(); // Execute the command once and store the result
+            MyMessageBox.ShowMessage("ເພິ່ມຂໍ້ມູນສຳເລັດແລ້ວ", "", "ສຳເລັດ", MessageBoxButtons.OK, MessageBoxIcon.None);
+            // Check if the query is successful or not, if not, show a message box with the error message and rollback the transaction
+            if (result == 0)
+            {
+                ShowMessage("ບໍ່ສາມາດບັນທຶກຂໍ້ມູນໄດ້", "ຂໍ້ມູນບໍ່ຖືກບັນທຶກ");
+                cmd.Transaction.Rollback();
+            }
+        }
+        catch
+        {
+            //ShowMessage($"Error setting data: {ex.Message}", "Error");
+            MyMessageBox.ShowMessage($"ຂໍອະໄພ,ຊື່ຜູ້ໃຊ້ນີ້ມີຢູ່ແລ້ວ ບໍ່ສາມາດບັນທຶກຂໍ້ມູນໄດ້", "", "ເກີດຂໍ້ຜີດພາດ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+        finally
+        {
+            closeConnection();
+        }
+    }
+
+    public void updateDataEmp(string sql)
+    {
+        try
+        {
+            openConnection();
+            cmd = new SqlCommand(sql, con);
+            int result = cmd.ExecuteNonQuery(); // Execute the command once and store the result
+            MyMessageBox.ShowMessage("ແກ້ໄຂຂໍ້ມູນສຳເລັດແລ້ວ", "", "ສຳເລັດ", MessageBoxButtons.OK, MessageBoxIcon.None);
+
+            // Check if the query is successful or not, if not, show a message box with the error message and rollback the transaction
+            if (result == 0)
+            {
+                ShowMessage("ບໍ່ສາມາດບັນທຶກຂໍ້ມູນໄດ້", "ຂໍ້ມູນບໍ່ຖືກບັນທຶກ");
+                cmd.Transaction.Rollback();
+            }
+        }
+        catch (Exception ex)
+        {
+            //ShowMessage($"Error setting data: {ex.Message}", "Error");
+            MyMessageBox.ShowMessage($"ຂໍອະໄພ,ຊື່ຜູ້ໃຊ້ນີ້ມີຢູ່ແລ້ວ ບໍ່ສາມາດບັນທຶກຂໍ້ມູນໄດ້", "", "ເກີດຂໍ້ຜີດພາດ", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
         finally
         {

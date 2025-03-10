@@ -13,11 +13,13 @@ namespace Construction_System
 {
     public partial class MEmployee : Form
     {
-        private string _empId;
-        public MEmployee(string empId)
+        public string _empId;
+        public string _EMPPAss;
+        public MEmployee(string empId, string eMPPAss)
         {
             InitializeComponent();
             _empId = empId;
+            _EMPPAss = eMPPAss;
         }
 
         public void sumQty()
@@ -27,12 +29,6 @@ namespace Construction_System
                 if (dataGridView1.Rows.Count != 0)
                 {
                     label4.Text = dataGridView1.RowCount.ToString("#,###") + "    ລາຍການ";
-                    //int totalQty = 0;
-                    //for (int i = 0; i < dataGridView1.RowCount; i++)
-                    //{
-                    //    totalQty += Convert.ToInt32(dataGridView1.Rows[i].Cells["Column24"].Value.ToString());
-                    //}
-                    //label2.Text = totalQty.ToString("#,###") + "   ອັນ";
                 }
                 else
                 {
@@ -45,26 +41,33 @@ namespace Construction_System
             }
         }
 
+        public bool Checkcellclick = false;
+        private readonly config _config = new config();
+        string query = "";
+        public void LoadData(string filter = "WHERE [empStatus] = 'active' ")
+        {
+            Checkcellclick = false;
+            query = $"SELECT [empName], [empGender], [empTel], [empAdress], [empRole], [empId], [empPass] FROM employee "+ 
+                filter +"ORDER BY [empRole] ASC";
+            _config.LoadData(query, dataGridView1);
+            if (dataGridView1.RowCount <= 0)
+            {
+                MyMessageBox.ShowMessage("ຂໍອະໄພ, ຍັງບໍ່ມີຂໍ້ມູນໃດໆ. ກະລຸນາເພີ່ມຂໍ້ມູນ", "", "ແຈ້ງເຕືອນ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            textBox1.Text = "";
+            textBox2.Text = "";
+            textBox3.Text = "";
+            textBox4.Text = "";
+            textBox5.Text = "";
+            textBox6.Text = "";
+            comboBox1.Text = "ກະລຸນາເລືອກ *";
+            comboBox2.Text = "ກະລຸນາເລືອກ *";
+            sumQty();
+        }
+
         private void MEmployee_Load(object sender, EventArgs e)
         {
-            DataSet data1 = new DataSet("Contruction_System");
-            DataTable table1 = new DataTable("employee");
-            table1.Columns.Add("id", typeof(int));
-            table1.Columns.Add("emName");
-            table1.Columns.Add("empSurnmae");
-            table1.Columns.Add("sex");
-            table1.Columns.Add("number");
-            table1.Columns.Add("username");
-            table1.Columns.Add("password");
-            table1.Columns.Add("root");
-            table1.Rows.Add(1, "ໃຫຍ່", "ສູງສົ່ງ", "ຊາຍ", "5933658", "Yai1", "1234", "Admin");
-            table1.Rows.Add(2, "ນ້ອຍ", "ໃຈໃຫຍ່", "ຊາຍ", "5933658", "Noy", "5678", "Admin");
-            table1.Rows.Add(3, "ສີໄພ", "ຕາງອນ", "ຍິງ", "5933658", "Seephai", "91011", "User");
-            table1.Rows.Add(4, "ຕຸກຕາ", "ໝອນທອງ", "ຍິງ", "5933658", "Tookta", "112211", "User");
-            table1.Rows.Add(5, "ພູທອນ", "ບ້ານນອກ", "ຊາຍ", "5933658", "Phouthone", "332244", "User");
-            table1.Rows.Add(6, "ເພັດສະໝອນ", "ອອນຊອນ", "ຊາຍ", "5933658", "Phetsamone", "886644", "User");
-            data1.Tables.Add(table1);
-            dataGridView1.DataSource = table1;
+            LoadData();
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
@@ -111,11 +114,20 @@ namespace Construction_System
             MEmpEdit mEmpEdit = new MEmpEdit(this);
             try
             {
-                mEmpEdit.label1.Text = " ເພີ່ມຂໍ້ມູນພະນັກງານ";
-                mEmpEdit.label1.Image = Construction_System.Properties.Resources.add_button;
-                mEmpEdit.label1.Size = new System.Drawing.Size(154, 26);
-                mEmpEdit.button1.Text = "ເພີ່ມ";
-                mEmpEdit.ShowDialog();
+                if (textBox2.Text == "" || textBox3.Text == "" || textBox4.Text == "" || textBox5.Text == "" || textBox6.Text == ""
+                     || comboBox1.Text == "ກະລຸນາເລືອກ *" || comboBox2.Text == "ກະລຸນາເລືອກ *")
+                {
+                    MyMessageBox.ShowMessage("ຂໍອະໄພ, ກະລຸນາປ້ອນຂໍ້ມູນໃຫ້ຄົບຖ້ວນ", "", "ຜິດພາດ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                }
+                else
+                {
+                    mEmpEdit.label1.Text = " ເພີ່ມຂໍ້ມູນພະນັກງານ";
+                    mEmpEdit.label1.Image = Construction_System.Properties.Resources.add_button;
+                    mEmpEdit.label1.Size = new System.Drawing.Size(154, 26);
+                    mEmpEdit.button1.Text = "ເພີ່ມ";
+                    mEmpEdit.ShowDialog();
+                }
             }
             catch (Exception ex)
             {
@@ -131,7 +143,6 @@ namespace Construction_System
         private void dataGridView1_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
             dataGridView1.ClearSelection();
-            sumQty();
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -167,9 +178,9 @@ namespace Construction_System
         {
             try
             {
-                (dataGridView1.DataSource as DataTable).DefaultView.RowFilter = string.Format("emName LIKE '%{0}%' " +
-                    "or empSurnmae LIKE '%{0}%' or number LIKE '%{0}%' or username LIKE '%{0}%' " +
-                    "or sex LIKE '%{0}%'", textBox1.Text);
+                (dataGridView1.DataSource as DataTable).DefaultView.RowFilter = string.Format("empName LIKE '%{0}%' " +
+                    "or empId LIKE '%{0}%' or empTel LIKE '%{0}%' or empRole LIKE '%{0}%' " +
+                    "or empAdress LIKE '%{0}%' or empGender LIKE '%{0}%'", textBox1.Text);
                 sumQty();
             }
             catch (Exception ex)
@@ -189,10 +200,11 @@ namespace Construction_System
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            Checkcellclick = true;
             textBox2.Text = dataGridView1.CurrentRow.Cells["Column3"].Value.ToString();
-            textBox3.Text = dataGridView1.CurrentRow.Cells["Column4"].Value.ToString();
-            comboBox1.Text = dataGridView1.CurrentRow.Cells["Column5"].Value.ToString();
-            textBox4.Text = dataGridView1.CurrentRow.Cells["Column6"].Value.ToString();
+            textBox3.Text = dataGridView1.CurrentRow.Cells["Column6"].Value.ToString();
+            comboBox1.Text = dataGridView1.CurrentRow.Cells["Column4"].Value.ToString();
+            textBox4.Text = dataGridView1.CurrentRow.Cells["Column5"].Value.ToString();
             textBox5.Text = dataGridView1.CurrentRow.Cells["Column8"].Value.ToString();
             textBox6.Text = dataGridView1.CurrentRow.Cells["Column9"].Value.ToString();
             comboBox2.Text = dataGridView1.CurrentRow.Cells["Column7"].Value.ToString();
@@ -209,6 +221,18 @@ namespace Construction_System
             //if (textBox4.Text.Length > 1)
             //    textBox4.SelectionStart = textBox4.Text.Length;
             //textBox4.SelectionLength = 0;
+        }
+
+        private void checkBox1_CheckedChanged_1(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked)
+            {
+                textBox6.UseSystemPasswordChar = false;
+            }
+            else
+            {
+                textBox6.UseSystemPasswordChar = true;
+            }
         }
     }
 }

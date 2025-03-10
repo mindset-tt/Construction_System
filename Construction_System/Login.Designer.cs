@@ -142,7 +142,7 @@
             this.txtbPassword.Size = new System.Drawing.Size(306, 32);
             this.txtbPassword.TabIndex = 45;
             this.txtbPassword.UseSystemPasswordChar = true;
-            this.txtbPassword.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textbUesername_KeyDown);
+            this.txtbPassword.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textbPassword_KeyDown);
             // 
             // txtbUesername
             // 
@@ -152,7 +152,7 @@
             this.txtbUesername.Name = "txtbUesername";
             this.txtbUesername.Size = new System.Drawing.Size(306, 32);
             this.txtbUesername.TabIndex = 44;
-            this.txtbUesername.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textbPassword_KeyDown);
+            this.txtbUesername.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textbUesername_KeyDown);
             // 
             // btnCloseLogin
             // 

@@ -69,6 +69,7 @@ namespace Construction_System
             switch (label1.Text)
             {
                 case "ແກ້ໄຂຂໍ້ມູນນຳເຂົ້າສິນຄ້າ":
+                    Console.WriteLine("original", _originalQty);
                     if(int.Parse(textBox2.Text) > int.Parse(_originalQty))
                     {
                         MyMessageBox.ShowMessage("ຈຳນວນທີ່ເພີ່ມຫຼາຍກວ່າຈຳນວນທີ່ສັ່ງຊື້", "", "ຄໍາຖາມ", MessageBoxButtons.OK, MessageBoxIcon.Warning);

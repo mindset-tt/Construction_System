@@ -19,68 +19,46 @@ namespace Construction_System
             this.msupplier = msupplier;
         }
 
-        private void allProduct()
+        private readonly config _config = new config();
+        string query = "";
+
+        private void LoadProducts(string filter = "WHERE p.[cancel] = 'yes'")
         {
-            DataSet data1 = new DataSet("Contruction_System");
-            DataTable table1 = new DataTable("Sale1");
-            table1.Columns.Add("id", typeof(int));
-            table1.Columns.Add("name");
-            table1.Columns.Add("unit");
-            table1.Columns.Add("type");
-            table1.Rows.Add(1, "ຕະປູແປດ", "ໂລ", "ເຫຼັກ");
-            table1.Rows.Add(2, "ຕະປູຫ້າ", "ໂລ", "ເຫຼັກ");
-            table1.Rows.Add(3, "ຕະປູຫົກ", "ໂລ", "ເຫຼັກ");
-            table1.Rows.Add(4, "ກະເບື່ອງ", "ແຜ່ນ", "ຫຼັງຄາ");
-            table1.Rows.Add(5, "ຫຼົບກະເບື່ອງ", "ແຜ່ນ", "ຫຼັງຄາ");
-            table1.Rows.Add(6, "ຊັງກະສີແຜ່ນລຽບ", "ແຜ່ນ", "ຫຼັງຄາ");
-            table1.Rows.Add(7, "ຊັງກະສີແຜ່ນລ່ອງ", "ແຜ່ນ", "ຫຼັງຄາ");
-            table1.Rows.Add(8, "ສາຍໄຟ 2.5", "ກໍ່", "ໄຟຟ້າ");
-            table1.Rows.Add(9, "ຄ້ອນຕີໃຫຍ່", "ອັນ", "ເຄື່ອງມື");
-            table1.Rows.Add(10, "ຄ້ອນຕີນ້ອຍ", "ອັນ", "ເຄື່ອງມື");
-            table1.Rows.Add(11, "ຄ້ອນປອນ", "ອັນ", "ເຄື່ອງມື");
-            table1.Rows.Add(12, "ຕູ້ຈອດຫຼັກ", "ເຄື່ອງ", "ໄຟຟ້າ");
-            table1.Rows.Add(52, "ໄຟບີຕັດເຫຼັກ", "ເຄື່ອງ", "ໄຟຟ້າ");
-            table1.Rows.Add(63, "ໝືນຕັດເຫຼັກ", "ເຄື່ອງ", "ໄຟຟ້າ");
-            table1.Rows.Add(72, "ສະຫວ່ານໄຟຟ້າ", "ເຄື່ອງ", "ໄຟຟ້າ");
-            table1.Rows.Add(85, "ສະຫວ່ານແບັກເຕີລີ້", "ເຄື່ອງ", "ໄຟຟ້າ");
-            table1.Rows.Add(85, "ສະຫວ່ານແບັກເຕີລີ້", "ເຄື່ອງ", "ໄຟຟ້າ");
-            table1.Rows.Add(85, "ສະຫວ່ານແບັກເຕີລີ້", "ເຄື່ອງ", "ໄຟຟ້າ");
-            data1.Tables.Add(table1);
-            dataGridView1.DataSource = table1;
+            query = $"SELECT p.[prodID], p.[prodName], t.[typeName], u.[unitName] FROM " +
+                "[POSSALE].[dbo].[product] p " +
+                "INNER JOIN [POSSALE].[dbo].[type] t ON p.typeId = t.typeId " +
+                "INNER JOIN [POSSALE].[dbo].[unit] u ON p.unitId = u.unitId " +
+                filter;
+            _config.LoadData(query, dataGridView1);
         }
 
-        private void productSupplier()
+
+        private void productSupplier(string filter = "")
         {
-            DataSet data1 = new DataSet("Contruction_System");
-            DataTable table1 = new DataTable("Sale1");
-            table1.Columns.Add("id", typeof(int));
-            table1.Columns.Add("name");
-            table1.Columns.Add("unit");
-            table1.Columns.Add("type");
-            table1.Rows.Add(4, "ກະເບື່ອງ", "ແຜ່ນ", "ຫຼັງຄາ");
-            table1.Rows.Add(9, "ຄ້ອນຕີໃຫຍ່", "ອັນ", "ເຄື່ອງມື");
-            table1.Rows.Add(10, "ຄ້ອນຕີນ້ອຍ", "ອັນ", "ເຄື່ອງມື");
-            table1.Rows.Add(11, "ຄ້ອນປອນ", "ອັນ", "ເຄື່ອງມື");
-            table1.Rows.Add(12, "ຕູ້ຈອດຫຼັກ", "ເຄື່ອງ", "ໄຟຟ້າ");
-            table1.Rows.Add(52, "ໄຟບີຕັດເຫຼັກ", "ເຄື່ອງ", "ໄຟຟ້າ");
-            table1.Rows.Add(63, "ໝືນຕັດເຫຼັກ", "ເຄື່ອງ", "ໄຟຟ້າ");
-            table1.Rows.Add(72, "ສະຫວ່ານໄຟຟ້າ", "ເຄື່ອງ", "ໄຟຟ້າ");
-            table1.Rows.Add(85, "ສະຫວ່ານແບັກເຕີລີ້", "ເຄື່ອງ", "ໄຟຟ້າ");
-            data1.Tables.Add(table1);
-            dataGridView2.DataSource = table1;
+            var query = "SELECT p.[prodID], CAST(p.[prodName] AS NVARCHAR(MAX)) as [prodName], t.[typeName], u.[unitName] " +
+             "FROM [POSSALE].[dbo].[supplierDetail] sp " +
+             "INNER JOIN [POSSALE].[dbo].[product] p ON sp.prodId = p.prodID " +
+             "INNER JOIN [POSSALE].[dbo].[supplier] s ON s.supplierId = sp.supplierId " +
+             "INNER JOIN [POSSALE].[dbo].[type] t ON p.typeId = t.typeId " +
+             "INNER JOIN [POSSALE].[dbo].[unit] u ON p.unitId = u.unitId " +
+             $"WHERE p.[cancel] = 'yes' and sp.[supplierId] = '{msupplier.supplierIdAddPro}' " +
+             "GROUP BY p.[prodID], CAST(p.[prodName] AS NVARCHAR(MAX)), p.[prodQty], p.[prodPrice], t.[typeName], u.[unitName]";
+            _config.LoadData(query, dataGridView2);
         }
 
         private void MSupAddProduct_Load(object sender, EventArgs e)
         {
-            allProduct();
+            LoadProducts();
             productSupplier();
+            //MyMessageBox.ShowMessage("ເກີດຂໍ້ຜີດພາດ " + msupplier.supplierIdAddPro + " ", "", "ເກີດຂໍ້ຜີດພາດ", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             try
             {
-                (dataGridView1.DataSource as DataTable).DefaultView.RowFilter = string.Format("name LIKE '%{0}%' or unit LIKE '%{0}%' or type LIKE '%{0}%'", textBox1.Text);
+                (dataGridView1.DataSource as DataTable).DefaultView.RowFilter = string.Format("prodName LIKE '%{0}%' or unit LIKE '%{0}%' " +
+                    "or typeName LIKE '%{0}%' or unitName LIKE '%{0}%'", textBox1.Text);
             }
             catch (Exception ex)
             {
@@ -101,7 +79,12 @@ namespace Construction_System
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            MyMessageBox.ShowMessage("ເພີ່ມຂໍ້ມູນສຳເລັດແລ້ວ", "", "ສຳເລັດ", MessageBoxButtons.OK, MessageBoxIcon.None);
+            query = $"INSERT INTO [POSSALE].[dbo].[supplierDetail] ([supplierId], [prodId]) " +
+                    $"VALUES ('{msupplier.supplierIdAddPro}', '{dataGridView1.CurrentRow.Cells["id1"].Value}')";
+            _config.setData(query);
+            MyMessageBox.ShowMessage("ເພິ່ມຂໍ້ມູນສຳເລັດແລ້ວ", "", "ສຳເລັດ", MessageBoxButtons.OK, MessageBoxIcon.None);
+            LoadProducts();
+            productSupplier();
         }
 
         private void dataGridView2_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
@@ -111,7 +94,12 @@ namespace Construction_System
 
         private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            query = $"DELETE FROM [POSSALE].[dbo].[supplierDetail] WHERE [prodId] = '{dataGridView2.CurrentRow.Cells["id2"].Value}' " +
+                $"and [supplierId] = '{msupplier.supplierIdAddPro}'";
+            _config.deleteData(query);
             MyMessageBox.ShowMessage("ລົບຂໍ້ມູນສຳເລັດແລ້ວ", "", "ສຳເລັດ", MessageBoxButtons.OK, MessageBoxIcon.None);
+            LoadProducts();
+            productSupplier();
         }
 
         private void btnClose_Click(object sender, EventArgs e)

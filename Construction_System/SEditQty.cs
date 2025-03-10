@@ -34,7 +34,7 @@ namespace Construction_System
         {
             this.Close();
         }
-        bool isCollapsed;
+        bool isCollapsed = true;
         //Sale saleData = new Sale();
         private void button1_Click(object sender, EventArgs e)
         {

@@ -38,10 +38,6 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.label5 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
@@ -54,7 +50,11 @@
             this.label6 = new System.Windows.Forms.Label();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.textBox3 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.textBox2 = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -70,7 +70,6 @@
             this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.id1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel5.SuspendLayout();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -197,8 +196,7 @@
             this.Column6,
             this.Column7,
             this.Column8,
-            this.Column9,
-            this.id1});
+            this.Column9});
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(7)))), ((int)(((byte)(17)))));
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Noto Sans Lao", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -227,48 +225,6 @@
             this.dataGridView1.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dataGridView1_DataBindingComplete);
             this.dataGridView1.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dataGridView1_RowPostPaint);
             // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Noto Sans Lao", 12F, System.Drawing.FontStyle.Bold);
-            this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
-            this.label5.Location = new System.Drawing.Point(25, 193);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(74, 26);
-            this.label5.TabIndex = 58;
-            this.label5.Text = "ນາມສະກຸນ";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // textBox3
-            // 
-            this.textBox3.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.textBox3.Font = new System.Drawing.Font("Noto Sans Lao", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox3.Location = new System.Drawing.Point(25, 221);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(243, 32);
-            this.textBox3.TabIndex = 57;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Noto Sans Lao", 12F, System.Drawing.FontStyle.Bold);
-            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
-            this.label3.Location = new System.Drawing.Point(23, 125);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(82, 26);
-            this.label3.TabIndex = 55;
-            this.label3.Text = "ຊື່ພະນັກງານ";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // textBox2
-            // 
-            this.textBox2.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.textBox2.Font = new System.Drawing.Font("Noto Sans Lao", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(25, 153);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(243, 32);
-            this.textBox2.TabIndex = 54;
-            // 
             // panel2
             // 
             this.panel2.Controls.Add(this.checkBox1);
@@ -290,7 +246,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(294, 504);
+            this.panel2.Size = new System.Drawing.Size(294, 498);
             this.panel2.TabIndex = 0;
             // 
             // checkBox1
@@ -303,13 +259,13 @@
             this.checkBox1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Red;
             this.checkBox1.Font = new System.Drawing.Font("Noto Sans Lao", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkBox1.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.checkBox1.Location = new System.Drawing.Point(25, 468);
+            this.checkBox1.Location = new System.Drawing.Point(23, 460);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(121, 27);
-            this.checkBox1.TabIndex = 70;
+            this.checkBox1.TabIndex = 86;
             this.checkBox1.Text = "ສະແດງລະຫັດຜ່ານ";
             this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged_1);
             // 
             // comboBox2
             // 
@@ -322,23 +278,24 @@
             this.comboBox2.FormattingEnabled = true;
             this.comboBox2.ItemHeight = 23;
             this.comboBox2.Items.AddRange(new object[] {
+            "ກະລຸນາເລືອກ *",
             "Admin",
             "User"});
-            this.comboBox2.Location = new System.Drawing.Point(167, 432);
+            this.comboBox2.Location = new System.Drawing.Point(165, 424);
             this.comboBox2.MaximumSize = new System.Drawing.Size(250, 0);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(101, 31);
-            this.comboBox2.TabIndex = 69;
+            this.comboBox2.TabIndex = 85;
             // 
             // label10
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Noto Sans Lao", 12F, System.Drawing.FontStyle.Bold);
             this.label10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
-            this.label10.Location = new System.Drawing.Point(165, 403);
+            this.label10.Location = new System.Drawing.Point(163, 395);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(60, 26);
-            this.label10.TabIndex = 68;
+            this.label10.TabIndex = 84;
             this.label10.Text = "ສະຖານະ";
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -347,10 +304,10 @@
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Noto Sans Lao", 12F, System.Drawing.FontStyle.Bold);
             this.label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
-            this.label8.Location = new System.Drawing.Point(25, 404);
+            this.label8.Location = new System.Drawing.Point(23, 396);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(77, 26);
-            this.label8.TabIndex = 67;
+            this.label8.TabIndex = 83;
             this.label8.Text = "ລະຫັດຜ່ານ";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -358,10 +315,10 @@
             // 
             this.textBox6.BackColor = System.Drawing.Color.WhiteSmoke;
             this.textBox6.Font = new System.Drawing.Font("Noto Sans Lao", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox6.Location = new System.Drawing.Point(25, 432);
+            this.textBox6.Location = new System.Drawing.Point(23, 424);
             this.textBox6.Name = "textBox6";
             this.textBox6.Size = new System.Drawing.Size(136, 32);
-            this.textBox6.TabIndex = 66;
+            this.textBox6.TabIndex = 82;
             this.textBox6.UseSystemPasswordChar = true;
             // 
             // label9
@@ -369,10 +326,10 @@
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Noto Sans Lao", 12F, System.Drawing.FontStyle.Bold);
             this.label9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
-            this.label9.Location = new System.Drawing.Point(23, 335);
+            this.label9.Location = new System.Drawing.Point(21, 327);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(49, 26);
-            this.label9.TabIndex = 65;
+            this.label9.TabIndex = 81;
             this.label9.Text = "ຊື່ຜູ້ໃຊ້";
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -380,10 +337,10 @@
             // 
             this.textBox5.BackColor = System.Drawing.Color.WhiteSmoke;
             this.textBox5.Font = new System.Drawing.Font("Noto Sans Lao", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox5.Location = new System.Drawing.Point(25, 363);
+            this.textBox5.Location = new System.Drawing.Point(23, 355);
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(243, 32);
-            this.textBox5.TabIndex = 64;
+            this.textBox5.TabIndex = 80;
             // 
             // comboBox1
             // 
@@ -396,23 +353,24 @@
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.ItemHeight = 23;
             this.comboBox1.Items.AddRange(new object[] {
+            "ກະລຸນາເລືອກ *",
             "ຍິງ",
             "ຊາຍ"});
-            this.comboBox1.Location = new System.Drawing.Point(27, 291);
+            this.comboBox1.Location = new System.Drawing.Point(25, 175);
             this.comboBox1.MaximumSize = new System.Drawing.Size(250, 0);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(88, 31);
-            this.comboBox1.TabIndex = 63;
+            this.comboBox1.TabIndex = 79;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Noto Sans Lao", 12F, System.Drawing.FontStyle.Bold);
             this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
-            this.label6.Location = new System.Drawing.Point(116, 262);
+            this.label6.Location = new System.Drawing.Point(114, 146);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(45, 26);
-            this.label6.TabIndex = 62;
+            this.label6.TabIndex = 78;
             this.label6.Text = "ເບີໂທ";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -420,36 +378,78 @@
             // 
             this.textBox4.BackColor = System.Drawing.Color.WhiteSmoke;
             this.textBox4.Font = new System.Drawing.Font("Noto Sans Lao", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox4.Location = new System.Drawing.Point(121, 290);
+            this.textBox4.Location = new System.Drawing.Point(119, 174);
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(147, 32);
-            this.textBox4.TabIndex = 61;
-            this.textBox4.TextChanged += new System.EventHandler(this.textBox4_TextChanged);
-            this.textBox4.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox4_KeyPress);
+            this.textBox4.Size = new System.Drawing.Size(149, 32);
+            this.textBox4.TabIndex = 77;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Noto Sans Lao", 12F, System.Drawing.FontStyle.Bold);
             this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
-            this.label7.Location = new System.Drawing.Point(25, 262);
+            this.label7.Location = new System.Drawing.Point(23, 146);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(39, 26);
-            this.label7.TabIndex = 60;
+            this.label7.TabIndex = 76;
             this.label7.Text = "ເພດ";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Noto Sans Lao", 12F, System.Drawing.FontStyle.Bold);
+            this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
+            this.label5.Location = new System.Drawing.Point(23, 217);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(34, 26);
+            this.label5.TabIndex = 75;
+            this.label5.Text = "ທີ່ຢູ່";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // textBox3
+            // 
+            this.textBox3.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.textBox3.Font = new System.Drawing.Font("Noto Sans Lao", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox3.Location = new System.Drawing.Point(23, 245);
+            this.textBox3.Multiline = true;
+            this.textBox3.Name = "textBox3";
+            this.textBox3.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.textBox3.Size = new System.Drawing.Size(243, 70);
+            this.textBox3.TabIndex = 74;
             // 
             // label1
             // 
             this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label1.Font = new System.Drawing.Font("Noto Sans Lao", 16F, System.Drawing.FontStyle.Bold);
             this.label1.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.label1.Location = new System.Drawing.Point(3, 53);
+            this.label1.Location = new System.Drawing.Point(3, 18);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(288, 60);
-            this.label1.TabIndex = 56;
+            this.label1.TabIndex = 73;
             this.label1.Text = "ປ້ອນຂໍ້ມູນພະນັກງານ";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Noto Sans Lao", 12F, System.Drawing.FontStyle.Bold);
+            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
+            this.label3.Location = new System.Drawing.Point(23, 80);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(82, 26);
+            this.label3.TabIndex = 72;
+            this.label3.Text = "ຊື່ພະນັກງານ";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // textBox2
+            // 
+            this.textBox2.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.textBox2.Font = new System.Drawing.Font("Noto Sans Lao", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox2.Location = new System.Drawing.Point(25, 108);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(243, 32);
+            this.textBox2.TabIndex = 71;
             // 
             // button2
             // 
@@ -489,7 +489,7 @@
             this.panel3.Controls.Add(this.button2);
             this.panel3.Controls.Add(this.button1);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel3.Location = new System.Drawing.Point(0, 504);
+            this.panel3.Location = new System.Drawing.Point(0, 498);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(294, 47);
             this.panel3.TabIndex = 1;
@@ -557,47 +557,47 @@
             // Column3
             // 
             this.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column3.DataPropertyName = "emName";
-            this.Column3.FillWeight = 45F;
+            this.Column3.DataPropertyName = "empName";
+            this.Column3.FillWeight = 70F;
             this.Column3.HeaderText = "ຊື່ພະນັກງານ";
-            this.Column3.MinimumWidth = 45;
+            this.Column3.MinimumWidth = 50;
             this.Column3.Name = "Column3";
             this.Column3.ReadOnly = true;
             // 
             // Column4
             // 
             this.Column4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column4.DataPropertyName = "empSurnmae";
-            this.Column4.FillWeight = 45F;
-            this.Column4.HeaderText = "ນາມສະກຸນ";
-            this.Column4.MinimumWidth = 45;
+            this.Column4.DataPropertyName = "empGender";
+            this.Column4.FillWeight = 30F;
+            this.Column4.HeaderText = "ເພດ";
+            this.Column4.MinimumWidth = 30;
             this.Column4.Name = "Column4";
             this.Column4.ReadOnly = true;
             // 
             // Column5
             // 
             this.Column5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column5.DataPropertyName = "sex";
-            this.Column5.FillWeight = 30F;
-            this.Column5.HeaderText = "ເພດ";
-            this.Column5.MinimumWidth = 30;
+            this.Column5.DataPropertyName = "empTel";
+            this.Column5.FillWeight = 50F;
+            this.Column5.HeaderText = "ເບີໂທ";
+            this.Column5.MinimumWidth = 50;
             this.Column5.Name = "Column5";
             this.Column5.ReadOnly = true;
             // 
             // Column6
             // 
             this.Column6.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column6.DataPropertyName = "number";
-            this.Column6.FillWeight = 50F;
-            this.Column6.HeaderText = "ເບີໂທ";
-            this.Column6.MinimumWidth = 50;
+            this.Column6.DataPropertyName = "empAdress";
+            this.Column6.FillWeight = 40F;
+            this.Column6.HeaderText = "ທີ່ຢູ່";
+            this.Column6.MinimumWidth = 40;
             this.Column6.Name = "Column6";
             this.Column6.ReadOnly = true;
             // 
             // Column7
             // 
             this.Column7.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column7.DataPropertyName = "root";
+            this.Column7.DataPropertyName = "empRole";
             this.Column7.FillWeight = 50F;
             this.Column7.HeaderText = "ສະຖານະ";
             this.Column7.MinimumWidth = 50;
@@ -607,28 +607,22 @@
             // Column8
             // 
             this.Column8.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column8.DataPropertyName = "username";
-            this.Column8.FillWeight = 31.64511F;
+            this.Column8.DataPropertyName = "empId";
+            this.Column8.FillWeight = 50F;
             this.Column8.HeaderText = "ຊື່ຜູ້ໃຊ້";
+            this.Column8.MinimumWidth = 50;
             this.Column8.Name = "Column8";
             this.Column8.ReadOnly = true;
             // 
             // Column9
             // 
             this.Column9.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column9.DataPropertyName = "password";
-            this.Column9.FillWeight = 36.3994F;
+            this.Column9.DataPropertyName = "empPass";
+            this.Column9.FillWeight = 60F;
             this.Column9.HeaderText = "ລະຫັດຜ່ານ";
+            this.Column9.MinimumWidth = 60;
             this.Column9.Name = "Column9";
             this.Column9.ReadOnly = true;
-            // 
-            // id1
-            // 
-            this.id1.DataPropertyName = "id";
-            this.id1.HeaderText = "id";
-            this.id1.Name = "id1";
-            this.id1.ReadOnly = true;
-            this.id1.Visible = false;
             // 
             // MEmployee
             // 
@@ -669,28 +663,28 @@
         private System.Windows.Forms.DataGridViewImageColumn dataGridViewImageColumn1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         public System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Label label5;
-        public System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.Label label3;
-        public System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button2;
         public System.Windows.Forms.Button button1;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Label label6;
-        public System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.CheckBox checkBox1;
+        public System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label8;
         public System.Windows.Forms.TextBox textBox6;
         private System.Windows.Forms.Label label9;
         public System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.CheckBox checkBox1;
+        public System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Label label6;
+        public System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label5;
+        public System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label3;
+        public System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.DataGridViewImageColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
@@ -699,6 +693,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column9;
-        private System.Windows.Forms.DataGridViewTextBoxColumn id1;
     }
 }

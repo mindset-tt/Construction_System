@@ -50,6 +50,17 @@ namespace Construction_System
         {
             LoadProducts();
             productSupplier();
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                foreach (DataGridViewRow row2 in dataGridView2.Rows)
+                {
+                    if (row.Cells["id1"].Value.ToString() == row2.Cells["id2"].Value.ToString())
+                    {
+                        // remove row from dataGridView1
+                        dataGridView1.Rows.Remove(row);
+                    }
+                }
+            }
             //MyMessageBox.ShowMessage("ເກີດຂໍ້ຜີດພາດ " + msupplier.supplierIdAddPro + " ", "", "ເກີດຂໍ້ຜີດພາດ", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 

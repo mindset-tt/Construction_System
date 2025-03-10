@@ -85,7 +85,7 @@ namespace Construction_System
         {
             if (MyMessageBox.ShowMessage("ທ່ານຕ້ອງການອອກຈາກລະບົບແທ້ ຫຼື ບໍ່?", "", "ອອກຈາກລະບົບ", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                Application.Restart();
+                Application.Exit();
             }
         }
 

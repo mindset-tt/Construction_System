@@ -13,41 +13,43 @@ namespace Construction_System
     public partial class MOrder : Form
     {
         private string _empId;
+        private readonly config _config = new config();
+
         public MOrder(string empId)
         {
             InitializeComponent();
             label4.Text = "ລວມລາຍການທັງໝົດ:  " + "0" + "  ລາຍການ";
+            LoadOrders();
             _empId = empId;
         }
 
-        private void dataOrderBill()
+        private void LoadOrders(string filter = "")
         {
-            DataSet data1 = new DataSet("Contruction_System");
-            DataTable table1 = new DataTable("Order1");
-            table1.Columns.Add("idSale", typeof(int));
-            table1.Columns.Add("empName");
-            table1.Columns.Add("datetime");
-            table1.Columns.Add("supName");
-            table1.Columns.Add("qty", typeof(int));
-            table1.Rows.Add(23, "ນ້ອຍ", "20/02/2025", "ເອສຊີຈີ (SCG)", 15);
-            table1.Rows.Add(54, "ນ້ອຍ", "19/02/2025", "ຊີເອສຊີ (CSC)", 14);
-            table1.Rows.Add(58, "ລີຊາ", "21/02/2025", "ເອສຊີຈີ (SCG)", 12);
-            table1.Rows.Add(87, "ລີຊາ", "21/02/2025", "ສຸວັນນີ", 128);
-            table1.Rows.Add(98, "ລີຊາ", "21/02/2025", "ຊີເອສຊີ (CSC)", 112);
-            data1.Tables.Add(table1);
-            dataGridView1.DataSource = table1;
+            if (filter != "")
+            {
+                filter = $"AND ({filter})";
+            }
+            else
+            {
+                filter = "";
+            }
+            var query = $"SELECT o.[orderId], e.[empName], o.[orderDate], o.[totalOrder], s.[supplierName], s.[supplierId] " +
+                        $"FROM [POSSALE].[dbo].[order] o " +
+                        $"INNER JOIN [POSSALE].[dbo].[supplier] s ON o.orderFrom = s.supplierId " +
+                        $"INNER JOIN [POSSALE].[dbo].[employee] e ON o.whoOrder = e.empId WHERE o.[orderStatus] = 'ສັ່ງຊື້ແລ້ວ' {filter}";
+            _config.LoadData(query, dataGridView1);
         }
 
         private void MOrder_Load(object sender, EventArgs e)
         {
-            dataOrderBill();
+            //dataOrderBill();
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             try
             {
-                MOrderEdit editOrderBill = new MOrderEdit(this);
+                MOrderEdit editOrderBill = new MOrderEdit(this, _empId, dataGridView1.CurrentRow.Cells["Column3"].Value.ToString(), dataGridView1.CurrentRow.Cells["supId"].Value.ToString() );
                 var senderGrid = (DataGridView)sender;
 
                 if (senderGrid.Columns[e.ColumnIndex] is DataGridViewImageColumn &&
@@ -120,15 +122,15 @@ namespace Construction_System
         {
             try
             {
-                (dataGridView1.DataSource as DataTable).DefaultView.RowFilter = string.Format("empName LIKE '%{0}%' " +
-                    "or datetime LIKE '%{0}%' or supName LIKE '%{0}%'", textBox1.Text);
+                var filter = $"WHERE e.[empName] LIKE '%{textBox1.Text}%' OR s.[supplierName] LIKE '%{textBox1.Text}%' OR o.[orderDate] LIKE '%{textBox1.Text}%' OR o.[totalOrder] LIKE '%{textBox1.Text}%'";
+                LoadOrders(filter);
                 sumQty();
             }
             catch (Exception ex)
             {
-
                 MyMessageBox.ShowMessage("ເກີດຂໍ້ຜີດພາດ " + ex + " ", "", "ເກີດຂໍ້ຜີດພາດ", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
     }
 }

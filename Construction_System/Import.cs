@@ -39,7 +39,7 @@ namespace Construction_System
             }
             var query = $"SELECT o.[orderId], o.[orderDate], o.[totalOrder], s.[supplierName] " +
                         $"FROM [POSSALE].[dbo].[order] o " +
-                        $"INNER JOIN [POSSALE].[dbo].[supplier] s ON o.orderFrom = s.supplierId WHERE o.[orderStatus] = 'ສິ່ງຊື້ແລ້ວ' {filter}";
+                        $"INNER JOIN [POSSALE].[dbo].[supplier] s ON o.orderFrom = s.supplierId WHERE o.[orderStatus] = 'ສັ່ງຊື້ແລ້ວ' {filter}";
             _config.LoadData(query, dataGridView1);
         }
 

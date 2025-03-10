@@ -21,11 +21,11 @@ namespace Construction_System
             _empId = empID;
         }
 
-        private void LoadData()
-        {
-            LoadSuppliers();
-            LoadProducts();
-        }
+        //private void LoadData()
+        //{
+        //    LoadSuppliers();
+        //    LoadProducts();
+        //}
 
         private void LoadSuppliers()
         {
@@ -85,11 +85,11 @@ namespace Construction_System
                 if (string.IsNullOrEmpty(comboBox1.Text) || comboBox1.Text == "ກະລຸນາເລືອກ")
                 {
                     ShowMessage("ກະລຸນາເລືອກຂໍ້ມູນຜູ້ສະໜອງ", "ຂໍ້ຜິດພາດ");
-                    //var filter = "WHERE p.cancel = 'none'";
+                    var filter = "WHERE p.cancel = 'none'";
                     dataGridView2.Rows.Clear();
-                    dataGridView1.DataSource = null;
+                    //dataGridView1.DataSource = null;
                     label2.Text = "0   ອັນ";
-                    //LoadProducts();
+                    LoadProducts(filter);
                 }
                 else
                 {
@@ -154,7 +154,7 @@ namespace Construction_System
             {
                 if (dataGridView1.Columns[e.ColumnIndex] is DataGridViewImageColumn && e.RowIndex >= 0)
                 {
-                    var editQty = new OrEditQty(this, null, dataGridView1.Rows[e.RowIndex].Cells["Column8"].Value.ToString(), true, false)
+                    var editQty = new OrEditQty(this, null, dataGridView1.Rows[e.RowIndex].Cells["Column8"].Value.ToString(), true, false, null)
                     {
                         label1 = { Text = " ເພີ່ມຈຳນວນສັ່ງຊື້ສິນຄ້າ", Image = Construction_System.Properties.Resources.add_button },
                         button1 = { Text = "ເພີ່ມ" },
@@ -187,7 +187,7 @@ namespace Construction_System
                     }
                     else if (dataGridView2.Columns[e.ColumnIndex].HeaderCell.Value.ToString() == "ແກ້ໄຂ")
                     {
-                        var editQty = new OrEditQty(this, null, null, true, true)
+                        var editQty = new OrEditQty(this, null, null, true, true, null)
                         {
                             label1 = { Text = "ແກ້ໄຂຈຳນວນສັ່ງຊື້ສິນຄ້າ", Image = Construction_System.Properties.Resources.pencil },
                             button1 = { Text = "ແກ້ໄຂ" },
@@ -261,7 +261,7 @@ namespace Construction_System
             // Get only number on label2
             var totalOrder = int.Parse(label2.Text.Split(' ')[0].Replace(",", ""));
             _config.setData("INSERT INTO [POSSALE].[dbo].[order] ([orderId], [whoOrder], [orderDate], [totalOrder], [orderFrom], [orderStatus]) " +
-                           $"VALUES ('{orderId}','{_empId}', GETDATE(), {totalOrder}, '{comboBox1.SelectedValue}', 'ສິ່ງຊື້ແລ້ວ')");
+                           $"VALUES ('{orderId}','{_empId}', GETDATE(), {totalOrder}, '{comboBox1.SelectedValue}', 'ສັ່ງຊື້ແລ້ວ')");
 
             foreach (DataGridViewRow row in dataGridView2.Rows)
             {

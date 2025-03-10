@@ -17,7 +17,8 @@ namespace Construction_System
         private string _idSup;
         private bool _isOrderPage;
         private bool _isDataGrid2 = false;
-        public OrEditQty(Order order, MOrderEdit mOrder, string idSup, bool isOrderPage, bool isDataGrid1)
+        private string _orderId;
+        public OrEditQty(Order order, MOrderEdit mOrder, string idSup, bool isOrderPage, bool isDataGrid1, string orderId)
         {
             InitializeComponent();
             this.order = order;
@@ -26,6 +27,7 @@ namespace Construction_System
             textBox2.Select();
             _isOrderPage = isOrderPage;
             _idSup = idSup;
+            _orderId = orderId;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -54,45 +56,61 @@ namespace Construction_System
 
                 if (label1.Text.Contains("ສັ່ງຊື້ສິນຄ້າ"))
                 {
-                    foreach (DataGridViewRow row in order.dataGridView2.Rows)
+                    if (_isOrderPage)
                     {
-                        if (row.Cells["id2"].Value.ToString() == lblId.Text)
+                        foreach (DataGridViewRow row in order.dataGridView2.Rows)
                         {
-                            int currentQty = Convert.ToInt32(row.Cells["Column24"].Value);
-                            order.updateQty(_isDataGrid2 ? inputQty : inputQty + currentQty, lblId.Text);
-                            isCollapsed = false;
-                            break;
+                            if (row.Cells["id2"].Value.ToString() == lblId.Text)
+                            {
+                                int currentQty = Convert.ToInt32(row.Cells["Column24"].Value);
+                                order.updateQty(_isDataGrid2 ? inputQty : inputQty + currentQty, lblId.Text);
+                                isCollapsed = false;
+                                break;
+                            }
+                        }
+
+                        if (isCollapsed)
+                        {
+                            order.dataGridView2.Rows.Add(Construction_System.Properties.Resources.bin,
+                                                         Construction_System.Properties.Resources.pencil,
+                                                         textBox1.Text, inputQty, lblUnit.Text, lblId.Text, _idSup);
+                        }
+                    }
+                    else
+                    {
+                       foreach (DataGridViewRow row in mOrder.dataGridView2.Rows)
+                        {
+                            if (row.Cells["id2"].Value.ToString() == lblId.Text)
+                            {
+                                int currentQty = Convert.ToInt32(row.Cells["Column24"].Value);
+                                mOrder.updateQty(_isDataGrid2 ? inputQty : inputQty + currentQty, lblId.Text);
+                                isCollapsed = false;
+                                break;
+                            }
+                        }
+                        if (isCollapsed)
+                        {
+                            //mOrder.dataGridView2.Rows.Add(Construction_System.Properties.Resources.bin,
+                            //                             Construction_System.Properties.Resources.pencil,
+                            //                             textBox1.Text, inputQty, lblUnit.Text, lblId.Text, _idSup, _orderId);
+                            var data = new List<string>
+                            {
+                                Construction_System.Properties.Resources.bin.ToString(),
+                                Construction_System.Properties.Resources.pencil.ToString(),
+                                textBox1.Text,
+                                inputQty.ToString(),
+                                lblUnit.Text,
+                                lblId.Text,
+                                _idSup,
+                                _orderId
+                            };
+                            mOrder.AddProductToDataGridView(data);
                         }
                     }
 
-                    if (isCollapsed)
-                    {
-                        order.dataGridView2.Rows.Add(Construction_System.Properties.Resources.bin,
-                                                     Construction_System.Properties.Resources.pencil,
-                                                     textBox1.Text, inputQty, lblUnit.Text, lblId.Text, _idSup);
-                    }
+                    MyMessageBox.ShowMessage("ເພີ່ມຂໍ້ມູນສຳເລັດແລ້ວ", "", "ສຳເລັດ", MessageBoxButtons.OK, MessageBoxIcon.None);
+                }
 
-                    MyMessageBox.ShowMessage("ເພີ່ມຂໍ້ມູນສຳເລັດແລ້ວ", "", "ສຳເລັດ", MessageBoxButtons.OK, MessageBoxIcon.None);
-                }
-                else if (label1.Text.Contains("ແກ້ໄຂຈຳນວນສັ່ງຊື້ສິນຄ້າ") && _isOrderPage)
-                {
-                    //Console.WriteLine("label text", lblId.Text);
-                    ////Console.WriteLine("data in grid", row.Cells["id2"].Value.ToString());
-                    order.updateQty(inputQty, lblId.Text);
-                    MyMessageBox.ShowMessage("ແກ້ໄຂຂໍ້ມູນສຳເລັດແລ້ວ", "", "ສຳເລັດ", MessageBoxButtons.OK, MessageBoxIcon.None);
-                }
-                else if (label1.Text.Contains("ຈຳນວນສັ່ງຊື້ສິນຄ້າ"))
-                {
-                    mOrder.dataGridView2.Rows.Add(Construction_System.Properties.Resources.bin,
-                                                  Construction_System.Properties.Resources.pencil,
-                                                  textBox1.Text, inputQty, lblUnit.Text, lblId.Text);
-                    MyMessageBox.ShowMessage("ເພີ່ມຂໍ້ມູນສຳເລັດແລ້ວ", "", "ສຳເລັດ", MessageBoxButtons.OK, MessageBoxIcon.None);
-                }
-                else if (label1.Text.Contains("ແກ້ໄຂຈຳນວນສັ່ງຊື້ສິນຄ້າ") && !_isOrderPage)
-                {
-                    mOrder.updateQtyMOr(inputQty);
-                    MyMessageBox.ShowMessage("ແກ້ໄຂຂໍ້ມູນສຳເລັດແລ້ວ", "", "ສຳເລັດ", MessageBoxButtons.OK, MessageBoxIcon.None);
-                }
                 else
                 {
                     MyMessageBox.ShowMessage("ຂໍອະໄພ, ລະບົບຂັດຂ້ອງ!", "", "ຜິດພາດ", MessageBoxButtons.OK, MessageBoxIcon.Error);

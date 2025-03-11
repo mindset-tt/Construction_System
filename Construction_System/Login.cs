@@ -38,9 +38,16 @@ namespace Construction_System
             if (dr.Read())
             {
                 MyMessageBox.ShowMessage("ເຂົ້າສູ່ລະບົບສຳເລັດ!", "", "ຍິນດີຕ້ອນຮັບ", MessageBoxButtons.OK, MessageBoxIcon.None);
-                form1.label2.Text = dr["empRole"].ToString();
+                form1.label2.Text = dr["empName"].ToString();
                 form1.EMPID = dr["empId"].ToString();
                 form1.EMPPAss = dr["empPass"].ToString();
+                if (dr["empRole"].ToString() == "User")
+                {
+                    form1.btnOrder.Visible = false;
+                    form1.btnImport.Visible = false;
+                    form1.btnReport.Visible = false;
+                    form1.btnMaData.Visible = false;
+                }
                 form1.Show();
                 txtbUesername.Text = "";
                 txtbPassword.Text = "";

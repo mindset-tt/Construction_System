@@ -12,6 +12,7 @@ namespace Construction_System
             InitializeComponent();
             timer1.Start();
             hideSubMenu();
+            openChildForm(new Sale(EMPID));
         }
 
         private void hideSubMenu()
@@ -85,7 +86,7 @@ namespace Construction_System
         {
             if (MyMessageBox.ShowMessage("ທ່ານຕ້ອງການອອກຈາກລະບົບແທ້ ຫຼື ບໍ່?", "", "ອອກຈາກລະບົບ", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                Application.Exit();
+                Application.Restart();
             }
         }
 
@@ -114,6 +115,7 @@ namespace Construction_System
             else
             {
                 WindowState = FormWindowState.Normal;
+                //this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             }
         }
 
@@ -200,6 +202,11 @@ namespace Construction_System
         private void btnReIm_Click(object sender, EventArgs e)
         {
             openChildForm(new RepImport(EMPID));
+        }
+
+        private void Main_Load(object sender, EventArgs e)
+        {
+            WindowState = FormWindowState.Maximized;
         }
     }
 }

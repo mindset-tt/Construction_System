@@ -1,5 +1,6 @@
 ﻿using CrystalDecisions.CrystalReports.Engine;
 using System;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -62,13 +63,13 @@ namespace Construction_System
                 else
                 {
                     var filter = string.IsNullOrEmpty(textBox1.Text) && (comboBox1.SelectedValue.ToString() != "-1")
-                            ? $"WHERE sp.supplierId LIKE '%{comboBox1.SelectedValue}%' AND p.cancel = 'yes' "
+                            ? $"WHERE sp.supplierId LIKE '%{comboBox1.SelectedValue}%' AND p.cancel = 'no' "
                             : string.IsNullOrEmpty(textBox1.Text) || comboBox1.Text == "ກະລຸນາເລືອກ"
                             ? "WHERE p.cancel = 'none'"
                             : $"WHERE (p.prodID LIKE '%{textBox1.Text}%' OR p.prodName LIKE '%{textBox1.Text}%' " +
                             $"OR p.prodQty LIKE '%{textBox1.Text}%' OR p.prodPrice LIKE '%{textBox1.Text}%' " +
                             $"OR p.typeId LIKE '%{textBox1.Text}%' OR p.unitId LIKE '%{textBox1.Text}%') AND " +
-                            $"sp.supplierId LIKE '%{comboBox1.SelectedValue}%' AND p.cancel = 'yes' ";
+                            $"sp.supplierId LIKE '%{comboBox1.SelectedValue}%' AND p.cancel = 'no' ";
                     LoadProducts(filter);
                 }
             }
@@ -286,19 +287,43 @@ namespace Construction_System
                                $"VALUES ('{orderId}', '{productId}', {row.Cells["Column24"].Value})");
             }
             ShowMessage("ສິ່ງຊື້ສຳເລັດແລ້ວ", "ສຳເລັດ");
-            
-            dataGridView2.Rows.Clear();
+
             //dataGridView2.DataSource = null;
-            label2.Text = "0   ອັນ";
             //clear the combobox
-            comboBox1.SelectedIndex = 0;
             //LoadProducts();
+            orderBillc(orderId);
+            label2.Text = "0   ອັນ";
+            comboBox1.SelectedIndex = 0;
+            dataGridView2.Rows.Clear();
+            //dataGridView1.Rows.Clear();
+        }
+
+        private void orderBillc(string id)
+        {
+            SqlConnection con = new SqlConnection();
+            con.ConnectionString = ConfigurationManager.ConnectionStrings["Construction_System.Properties.Settings.POSSALEConnectionString"].ConnectionString;
+            String sql;
+            con.Open();
+            sql = "SELECT dbo.orderDetail.orderId, dbo.[order].whoOrder, dbo.[order].orderFrom, dbo.[order].totalOrder, " +
+                "dbo.orderDetail.productId, dbo.orderDetail.orderQty, dbo.product.prodName, dbo.unit.unitName " +
+                "FROM dbo.[order] INNER JOIN dbo.orderDetail ON dbo.[order].orderId = dbo.orderDetail.orderId " +
+                "INNER JOIN dbo.product ON dbo.orderDetail.productId = dbo.product.prodID INNER JOIN " +
+                "dbo.unit ON dbo.product.unitId = dbo.unit.unitId " +
+                $"WHERE (dbo.orderDetail.orderId = {id})";
+            SqlDataAdapter dscmd = new SqlDataAdapter(sql, con);
+            DataSet a = new DataSet();
+            dscmd.Fill(a);
+            con.Close();
+
             FM_Bill fM_Bill = new FM_Bill();
             OrderBill orderBill = new OrderBill();
-            orderBill.SetParameterValue("orderId", orderId);
+            orderBill.SetDataSource(a);
+            orderBill.SetParameterValue("OderID", id);
+            fM_Bill.crystalReportViewer1.Refresh();
             fM_Bill.crystalReportViewer1.ReportSource = orderBill;
             fM_Bill.ShowDialog();
-            //dataGridView1.Rows.Clear();
+
+
         }
     }
 }

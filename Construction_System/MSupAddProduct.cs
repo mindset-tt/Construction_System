@@ -24,13 +24,13 @@ namespace Construction_System
         string query = "";
         List<DataGridViewRow> rowsToRemove = new List<DataGridViewRow>();
         HashSet<string> idSet = new HashSet<string>();
-        private void LoadProducts(string filter = "WHERE p.[cancel] = 'yes'")
+        private void LoadProducts(string filter = "WHERE p.[cancel] = 'no'")
         {
             query = $"SELECT p.[prodID], p.[prodName], t.[typeName], u.[unitName] FROM " +
                 "[POSSALE].[dbo].[product] p " +
                 "INNER JOIN [POSSALE].[dbo].[type] t ON p.typeId = t.typeId " +
                 "INNER JOIN [POSSALE].[dbo].[unit] u ON p.unitId = u.unitId " +
-                filter;
+                filter + "ORDER BY p.[prodName] ASC";
             _config.LoadData(query, dataGridView1);
             productSupplier();
             foreach (DataGridViewRow row in dataGridView2.Rows)
@@ -53,6 +53,7 @@ namespace Construction_System
             }
 
             rowsToRemove.Clear();
+            textBox1.Text = "";
         }
 
 
@@ -64,22 +65,23 @@ namespace Construction_System
              "INNER JOIN [POSSALE].[dbo].[supplier] s ON s.supplierId = sp.supplierId " +
              "INNER JOIN [POSSALE].[dbo].[type] t ON p.typeId = t.typeId " +
              "INNER JOIN [POSSALE].[dbo].[unit] u ON p.unitId = u.unitId " +
-             $"WHERE p.[cancel] = 'yes' and sp.[supplierId] = '{msupplier.supplierIdAddPro}' " +
-             "GROUP BY p.[prodID], CAST(p.[prodName] AS NVARCHAR(MAX)), p.[prodQty], p.[prodPrice], t.[typeName], u.[unitName]";
+             $"WHERE p.[cancel] = 'no' and sp.[supplierId] = '{msupplier.supplierIdAddPro}' " +
+             "GROUP BY p.[prodID], CAST(p.[prodName] AS NVARCHAR(MAX)), t.[typeName], u.[unitName] " +
+             "ORDER BY p.[prodName] ASC";
             _config.LoadData(query, dataGridView2);
         }
 
         private void MSupAddProduct_Load(object sender, EventArgs e)
         {
             LoadProducts();
-           
+            label2.Text = "ຮ້ານ: " + msupplier.spName;
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             try
             {
-                (dataGridView1.DataSource as DataTable).DefaultView.RowFilter = string.Format("prodName LIKE '%{0}%' or unit LIKE '%{0}%' " +
+                (dataGridView1.DataSource as DataTable).DefaultView.RowFilter = string.Format("prodName LIKE '%{0}%' " +
                     "or typeName LIKE '%{0}%' or unitName LIKE '%{0}%'", textBox1.Text);
             }
             catch (Exception ex)

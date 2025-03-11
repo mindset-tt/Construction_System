@@ -574,13 +574,13 @@
             // 
             // label2
             // 
-            this.label2.Font = new System.Drawing.Font("Noto Sans Lao", 10F);
+            this.label2.Font = new System.Drawing.Font("Noto Sans Lao", 10F, System.Drawing.FontStyle.Bold);
             this.label2.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.label2.Location = new System.Drawing.Point(216, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(227, 35);
+            this.label2.Size = new System.Drawing.Size(578, 35);
             this.label2.TabIndex = 4;
-            this.label2.Text = "Username";
+            this.label2.Text = "empName";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label1
@@ -668,6 +668,7 @@
             this.MinimumSize = new System.Drawing.Size(1000, 600);
             this.Name = "Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Load += new System.EventHandler(this.Main_Load);
             this.panelReport.ResumeLayout(false);
             this.panelData.ResumeLayout(false);
             this.panelSideMenu.ResumeLayout(false);

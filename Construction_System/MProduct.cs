@@ -42,7 +42,7 @@ namespace Construction_System
         private readonly config _config = new config();
         string query = "";
 
-        private void LoadProducts(string filter = "WHERE p.[cancel] = 'yes' ")
+        private void LoadProducts(string filter = "WHERE p.[cancel] = 'no' ")
         {
             query = $"SELECT p.[prodID],p.[prodName], p.[prodQty], u.[unitName], t.[typeName], p.[prodPrice], p.[prodSellPrice]" +
                 "FROM [POSSALE].[dbo].[product] p " +
@@ -111,14 +111,14 @@ namespace Construction_System
                 dr.Read();
 
                 // If order id is null, set it to OD0001
-                var prodID = dr.HasRows ? $"P{int.Parse(dr["prodID"].ToString().Substring(2)) + 1:D3}" : "P0001";
+                var prodID = dr.HasRows ? $"P{int.Parse(dr["prodID"].ToString().Substring(1)) + 1:D5}" : "P00001";
                 dr.Close();
                 _config.closeConnection();
 
                 _config.setData("INSERT INTO [POSSALE].[dbo].[product] ([prodID], [prodName], [prodQty], " +
                     "[unitId], [typeId],[prodPrice],[prodSellPrice], [cancel]) " +
                     $"VALUES ('{prodID}','{textBox2.Text}','{textBox3.Text}', '{comboBox1.SelectedValue}', '{comboBox2.SelectedValue}', " +
-                    $"'{textBox4.Text}', '{textBox5.Text}', 'yes')");
+                    $"'{textBox4.Text}', '{textBox5.Text}', 'no')");
                 _config.setData(query);
                 MyMessageBox.ShowMessage("ເພິ່ມຂໍ້ມູນສຳເລັດແລ້ວ", "", "ສຳເລັດ", MessageBoxButtons.OK, MessageBoxIcon.None);
                 LoadProducts();
@@ -160,7 +160,7 @@ namespace Construction_System
             e.RowIndex >= 0 && dataGridView1.Columns[e.ColumnIndex].HeaderCell.Value.ToString() == "ລົບ")
             {
                 //TODO - Button Clicked - Execute Code Here
-                query = $"UPDATE [POSSALE].[dbo].[product] SET [cancel] = 'no'" +
+                query = $"UPDATE [POSSALE].[dbo].[product] SET [cancel] = 'yes'" +
                                 $" WHERE [prodID] = '{dataGridView1.CurrentRow.Cells["id1"].Value}'";
                 _config.setData(query);
                 LoadProducts();

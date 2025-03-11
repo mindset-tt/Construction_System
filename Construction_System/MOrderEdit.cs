@@ -40,7 +40,7 @@ namespace Construction_System
             "INNER JOIN [POSSALE].[dbo].[supplier] s ON s.supplierId = sp.supplierId " +
             "INNER JOIN [POSSALE].[dbo].[type] t ON p.typeId = t.typeId " +
             "INNER JOIN [POSSALE].[dbo].[unit] u ON p.unitId = u.unitId " +
-            $"WHERE sp.supplierId = '{_supplierId}' AND p.cancel = 'yes' " +
+            $"WHERE sp.supplierId = '{_supplierId}' AND p.cancel = 'no' " +
             "GROUP BY p.[prodID], CAST(p.[prodName] AS NVARCHAR(MAX)), p.[prodQty], p.[prodPrice], t.[typeName], u.[unitName]";
             _config.LoadData(query, dataGridView1);
 

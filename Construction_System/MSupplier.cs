@@ -189,10 +189,11 @@ namespace Construction_System
         }
 
         public string supplierIdAddPro;
-
+        public string spName;
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             Checkcellclick = true;
+            spName = dataGridView1.CurrentRow.Cells["Column2"].Value.ToString();
             supplierIdAddPro = dataGridView1.CurrentRow.Cells["id1"].Value.ToString();
             textBox2.Text = dataGridView1.CurrentRow.Cells["Column2"].Value.ToString();
             textBox3.Text = dataGridView1.CurrentRow.Cells["Column3"].Value.ToString();

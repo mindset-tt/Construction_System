@@ -3,6 +3,7 @@ using System;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -300,24 +301,30 @@ namespace Construction_System
 
         private void orderBillc(string id)
         {
-            SqlConnection con = new SqlConnection();
-            con.ConnectionString = ConfigurationManager.ConnectionStrings["Construction_System.Properties.Settings.POSSALEConnectionString"].ConnectionString;
-            String sql;
-            con.Open();
-            sql = "SELECT dbo.orderDetail.orderId, dbo.[order].whoOrder, dbo.[order].orderFrom, dbo.[order].totalOrder, " +
+            //SqlConnection con = new SqlConnection();
+            //con.ConnectionString = ConfigurationManager.ConnectionStrings["Construction_System.Properties.Settings.POSSALEConnectionString"].ConnectionString;
+            //String sql;
+            //con.Open();
+            string query = "SELECT dbo.orderDetail.orderId, dbo.[order].whoOrder, dbo.[order].orderFrom, dbo.[order].totalOrder, " +
                 "dbo.orderDetail.productId, dbo.orderDetail.orderQty, dbo.product.prodName, dbo.unit.unitName " +
                 "FROM dbo.[order] INNER JOIN dbo.orderDetail ON dbo.[order].orderId = dbo.orderDetail.orderId " +
                 "INNER JOIN dbo.product ON dbo.orderDetail.productId = dbo.product.prodID INNER JOIN " +
                 "dbo.unit ON dbo.product.unitId = dbo.unit.unitId " +
                 $"WHERE (dbo.orderDetail.orderId = {id})";
-            SqlDataAdapter dscmd = new SqlDataAdapter(sql, con);
-            DataSet a = new DataSet();
-            dscmd.Fill(a);
-            con.Close();
+            //SqlDataAdapter dscmd = new SqlDataAdapter(sql, con);
+            //DataSet a = new DataSet();
+            //dscmd.Fill(a);
+            //con.Close();
+
+            _config.openConnection();
+            SqlDataAdapter adapter = new SqlDataAdapter(query, _config.con);
+            DataTable dt = new DataTable();
+            adapter.Fill(dt);
+            _config.closeConnection();
 
             FM_Bill fM_Bill = new FM_Bill();
             OrderBill orderBill = new OrderBill();
-            orderBill.SetDataSource(a);
+            orderBill.SetDataSource(dt);
             orderBill.SetParameterValue("OderID", id);
             fM_Bill.crystalReportViewer1.Refresh();
             fM_Bill.crystalReportViewer1.ReportSource = orderBill;

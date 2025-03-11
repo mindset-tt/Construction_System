@@ -310,7 +310,7 @@ namespace Construction_System
                 "FROM dbo.[order] INNER JOIN dbo.orderDetail ON dbo.[order].orderId = dbo.orderDetail.orderId " +
                 "INNER JOIN dbo.product ON dbo.orderDetail.productId = dbo.product.prodID INNER JOIN " +
                 "dbo.unit ON dbo.product.unitId = dbo.unit.unitId " +
-                $"WHERE (dbo.orderDetail.orderId = {id})";
+                $"WHERE (dbo.orderDetail.orderId = '{id}')";
             //SqlDataAdapter dscmd = new SqlDataAdapter(sql, con);
             //DataSet a = new DataSet();
             //dscmd.Fill(a);
@@ -325,7 +325,7 @@ namespace Construction_System
             FM_Bill fM_Bill = new FM_Bill();
             OrderBill orderBill = new OrderBill();
             orderBill.SetDataSource(dt);
-            orderBill.SetParameterValue("OderID", id);
+            orderBill.SetParameterValue("OrderID", id);
             fM_Bill.crystalReportViewer1.Refresh();
             fM_Bill.crystalReportViewer1.ReportSource = orderBill;
             fM_Bill.ShowDialog();

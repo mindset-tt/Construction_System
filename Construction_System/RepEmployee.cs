@@ -28,41 +28,48 @@ namespace Construction_System
         private void button1_Click(object sender, EventArgs e)
         {
             ReportEmployee reportEmployee = new ReportEmployee();
-            crystalReportViewer1.Refresh();
-            config.openConnection();
-            SqlDataReader dr = config.getData("select * from employee where empStatus = 'active'");
-            while (dr.Read())
+
+            switch (comboBox2.Text)
             {
-                reportEmployee.SetParameterValue("empName", dr["empName"].ToString());
-                reportEmployee.SetParameterValue("empID", dr["empID"].ToString());
+                case "ທັງໝົດ":
+
+                    reportEmployee.SetParameterValue("emp1", "Admin");
+                    reportEmployee.SetParameterValue("emp2", "User");
+                    crystalReportViewer1.Refresh();
+                    crystalReportViewer1.ReportSource = reportEmployee;
+                    break;
+
+                case "Admin":
+
+                    reportEmployee.SetParameterValue("emp1", "Admin");
+                    reportEmployee.SetParameterValue("emp2", "Admin");
+                    crystalReportViewer1.Refresh();
+                    crystalReportViewer1.ReportSource = reportEmployee;
+                    break;
+
+                case "User":
+
+                    reportEmployee.SetParameterValue("emp1", "User");
+                    reportEmployee.SetParameterValue("emp2", "User");
+                    crystalReportViewer1.Refresh();
+                    crystalReportViewer1.ReportSource = reportEmployee;
+                    break;
+
+                default:
+                    MyMessageBox.ShowMessage("ຂໍອະໄພ, ລະບົບຂັດຂ້ອງ!", "", "ຜິດພາດ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
             }
-            //foreach (DataRow record in dr.)
-
-            crystalReportViewer1.ReportSource = reportEmployee;
-
-            //IEnumerable<IDataRecord> GetFromReader(IDataReader reader)
-            //{
-            //    while (reader.Read()) yield return reader;
-            //}
-
-            //foreach (IDataRecord record in GetFromReader(dr))
-            //{
-            //    reportEmployee.SetParameterValue("empID", record["empID"].ToString());
-            //    crystalReportViewer1.ReportSource = reportEmployee;
-            //}
-
-
-            //else
-            //{
-            //    //MyMessageBox.ShowMessage("ຂໍອະໄພ, ຊື່ຜູ້ໃຊ້ ຫຼື ລະຫັດຜ່ານ ບໍ່ຖຶກຕ້ອງ!", "", "ຜິດພາດ", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //    MyMessageBox.ShowMessage("ຂໍອະໄພ, ລະບົບຂັດຂ້ອງ!", "", "ຜິດພາດ", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //}
-            config.closeConnection();
+            crystalReportViewer1.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None;
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            this.crystalReportViewer1.PrintReport();
+        }
 
+        private void RepEmployee_Load(object sender, EventArgs e)
+        {
+            comboBox2.Text = "ທັງໝົດ";
         }
     }
 }

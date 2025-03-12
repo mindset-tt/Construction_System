@@ -200,6 +200,7 @@
             this.MinimumSize = new System.Drawing.Size(784, 565);
             this.Name = "RepEmployee";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Load += new System.EventHandler(this.RepEmployee_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

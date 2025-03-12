@@ -87,14 +87,16 @@ namespace Construction_System
 
         private void dataGridView2_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
-            if (dataGridView2.Columns["Column24"] != null)
-            {
-                dataGridView2.Columns["Column24"].DefaultCellStyle.Format = "#,###";
-            }
-            if (dataGridView2.Columns["Column26"] != null)
-            {
-                dataGridView2.Columns["Column26"].DefaultCellStyle.Format = "#,###";
-            }
+            //if (dataGridView2.Columns["Column24"] != null)
+            //{
+            //    dataGridView2.Columns["Column24"].DefaultCellStyle.Format = "#,###";
+            //}
+            //if (dataGridView2.Columns["Column26"] != null)
+            //{
+            //    dataGridView2.Columns["Column26"].DefaultCellStyle.Format = "#,###";
+            //}
+            dataGridView2.Columns["Column24"].DefaultCellStyle.Format = "#,###";
+            dataGridView2.Columns["Column26"].DefaultCellStyle.Format = "#,###";
             SumQty();
             dataGridView2.ClearSelection();
         }
@@ -252,22 +254,40 @@ namespace Construction_System
 
                 ShowMessage("ການນຳເຂົ້າສິນຄ້າສຳເລັດ", "ສຳເລັດ");
 
-                //clear the datagridview
-                this.dataGridView2.DataSource = null;
-                this.dataGridView2.Rows.Clear();
-                label2.Text = "0   ອັນ";
 
-                FM_Bill bill = new FM_Bill();
-                ImportBill importBill = new ImportBill();
-                importBill.SetParameterValue("importId", importID);
-                bill.crystalReportViewer1.ReportSource = importBill;
-                bill.ShowDialog();
+                //Printing bill 
+                ImportBillc(importID);
+
+                //clear the datagridview
+                //this.dataGridView2.DataSource = null;
                 LoadProducts();
+                //dataGridView2.DataSource = "";
+                //dataGridView2.Rows.Clear();
+                //dataGridView2.CancelEdit();
+                //dataGridView2.Columns.Clear();
+                //dataGridView2.DataSource = null;
+                //dataGridView2.Rows.Clear();
+                //int clearRow = 0;
+                //foreach (DataGridViewRow row in dataGridView2.Rows)
+                //{
+                //    dataGridView2.Rows.RemoveAt(clearRow);
+                //}
+                label2.Text = "0   ອັນ";
             }
             catch (Exception ex)
             {
                 ShowMessage($"ເກີດຂໍ້ຜີດພາດ {ex}", "ຂໍ້ຜິດພາດ");
             }
+        }
+
+        private void ImportBillc(string id)
+        {
+            FM_Bill fM_Bill = new FM_Bill();
+            ImportBill importBill = new ImportBill();
+            importBill.SetParameterValue("importId", id);
+            fM_Bill.crystalReportViewer1.Refresh();
+            fM_Bill.crystalReportViewer1.ReportSource = importBill;
+            fM_Bill.ShowDialog();
         }
     }
 }

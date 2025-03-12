@@ -90,7 +90,7 @@ namespace Construction_System {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_ImportID {
+        public CrystalDecisions.Shared.IParameterField Parameter_importID {
             get {
                 return this.DataDefinition.ParameterFields[0];
             }

@@ -171,7 +171,7 @@ namespace Construction_System
             {
                 if (dataGridView2.RowCount == 0)
                 {
-                    MyMessageBox.ShowMessage("ທ່ານຍັງບໍ່ໄດ້ເພີ່ມສິນຄ້າໃນການສິ່ງຊື້", "", "ເກີດຂໍ້ຜີດພາດ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MyMessageBox.ShowMessage("ທ່ານຍັງບໍ່ໄດ້ເພີ່ມສິນຄ້າໃນການຂາຍ", "", "ເກີດຂໍ້ຜີດພາດ", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
@@ -214,26 +214,28 @@ namespace Construction_System
                 query = $"UPDATE [POSSALE].[dbo].[sell] SET totalSell = {getQty} WHERE sellId = '{sellId}'";
                 _config.setData(query);
 
-                MyMessageBox.ShowMessage("ການສັ່ງຊື້ສິນຄ້າສຳເລັດ", "", "ສຳເລັດ", MessageBoxButtons.OK, MessageBoxIcon.None);
+                MyMessageBox.ShowMessage("ການຂາຍສິນຄ້າສຳເລັດ", "", "ສຳເລັດ", MessageBoxButtons.OK, MessageBoxIcon.None);
 
+                saleBillc(sellId);
                 dataGridView2.Rows.Clear();
                 label2.Text = "0 ກີບ";
                 LoadProducts();
-
-                FM_Bill fM_Bill = new FM_Bill();
-                SaleBill saleBill = new SaleBill();
-                saleBill.SetParameterValue("sellId", sellId);
-                fM_Bill.crystalReportViewer1.ReportSource = saleBill;
-                fM_Bill.ShowDialog();
 
             }
             catch (Exception ex)
             {
                 MyMessageBox.ShowMessage("ເກີດຂໍ້ຜີດພາດ " + ex + " ", "", "ເກີດຂໍ້ຜີດພາດ", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
 
-            //FM_Bill fM_Bill = new FM_Bill();
-            //fM_Bill.ShowDialog();
+        private void saleBillc(string id)
+        {
+            FM_Bill fM_Bill = new FM_Bill();
+            SaleBill orderBill = new SaleBill();
+            orderBill.SetParameterValue("Sellid", id);
+            fM_Bill.crystalReportViewer1.Refresh();
+            fM_Bill.crystalReportViewer1.ReportSource = orderBill;
+            fM_Bill.ShowDialog();
         }
 
         private void dataGridView1_CellContentClick_1(object sender, DataGridViewCellEventArgs e)

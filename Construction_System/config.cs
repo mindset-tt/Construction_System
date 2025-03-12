@@ -226,7 +226,7 @@ class config
                 cmd.Transaction.Rollback();
             }
         }
-        catch (Exception ex)
+        catch
         {
             //ShowMessage($"Error setting data: {ex.Message}", "Error");
             MyMessageBox.ShowMessage($"ຂໍອະໄພ,ຊື່ຜູ້ໃຊ້ນີ້ມີຢູ່ແລ້ວ ບໍ່ສາມາດບັນທຶກຂໍ້ມູນໄດ້", "", "ເກີດຂໍ້ຜີດພາດ", MessageBoxButtons.OK, MessageBoxIcon.Error);

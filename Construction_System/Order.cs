@@ -39,7 +39,7 @@ namespace Construction_System
 
         private void LoadProducts(string filter = "")
         {
-            var query = "SELECT p.[prodID], CAST(p.[prodName] AS NVARCHAR(MAX)) as [prodName], p.[prodQty], p.[prodPrice], t.[typeName], u.[unitName], " +
+            var query = "SELECT p.[prodID], CAST(p.[prodName] AS NVARCHAR(MAX)) as [prodName], p.[prodQty], p.[prodPrice], u.[unitName], t.[typeName], " +
             "STRING_AGG(sp.[supplierId], ',') AS [supplierId] " +
             "FROM [POSSALE].[dbo].[supplierDetail] sp " +
             "INNER JOIN [POSSALE].[dbo].[product] p ON sp.prodId = p.prodID " +
@@ -301,36 +301,12 @@ namespace Construction_System
 
         private void orderBillc(string id)
         {
-            //SqlConnection con = new SqlConnection();
-            //con.ConnectionString = ConfigurationManager.ConnectionStrings["Construction_System.Properties.Settings.POSSALEConnectionString"].ConnectionString;
-            //String sql;
-            //con.Open();
-            string query = "SELECT dbo.orderDetail.orderId, dbo.[order].whoOrder, dbo.[order].orderFrom, dbo.[order].totalOrder, " +
-                "dbo.orderDetail.productId, dbo.orderDetail.orderQty, dbo.product.prodName, dbo.unit.unitName " +
-                "FROM dbo.[order] INNER JOIN dbo.orderDetail ON dbo.[order].orderId = dbo.orderDetail.orderId " +
-                "INNER JOIN dbo.product ON dbo.orderDetail.productId = dbo.product.prodID INNER JOIN " +
-                "dbo.unit ON dbo.product.unitId = dbo.unit.unitId " +
-                $"WHERE (dbo.orderDetail.orderId = '{id}')";
-            //SqlDataAdapter dscmd = new SqlDataAdapter(sql, con);
-            //DataSet a = new DataSet();
-            //dscmd.Fill(a);
-            //con.Close();
-
-            _config.openConnection();
-            SqlDataAdapter adapter = new SqlDataAdapter(query, _config.con);
-            DataTable dt = new DataTable();
-            adapter.Fill(dt);
-            _config.closeConnection();
-
             FM_Bill fM_Bill = new FM_Bill();
             OrderBill orderBill = new OrderBill();
-            orderBill.SetDataSource(dt);
             orderBill.SetParameterValue("OrderID", id);
             fM_Bill.crystalReportViewer1.Refresh();
             fM_Bill.crystalReportViewer1.ReportSource = orderBill;
             fM_Bill.ShowDialog();
-
-
         }
     }
 }

@@ -96,11 +96,25 @@ namespace Construction_System
             MEmpEdit mEmpEdit = new MEmpEdit(this);
             try
             {
-                mEmpEdit.label1.Text = "ແກ້ໄຂຂໍ້ມູນພະນັກງານ";
-                mEmpEdit.label1.Image = Construction_System.Properties.Resources.pencil;
-                mEmpEdit.label1.Size = new System.Drawing.Size(154, 26);
-                mEmpEdit.button1.Text = "ແກ້ໄຂ";
-                mEmpEdit.ShowDialog();
+                int leght = textBox6.Text.Length;
+                if (textBox2.Text == "" || textBox3.Text == "" || textBox4.Text == "" || textBox5.Text == "" || textBox6.Text == ""
+                     || comboBox1.Text == "ກະລຸນາເລືອກ *" || comboBox2.Text == "ກະລຸນາເລືອກ *")
+                {
+                    MyMessageBox.ShowMessage("ຂໍອະໄພ, ກະລຸນາປ້ອນຂໍ້ມູນໃຫ້ຄົບຖ້ວນ", "", "ຜິດພາດ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                }
+                else if (leght < 8)
+                {
+                    MyMessageBox.ShowMessage("ຂໍອະໄພ, ກະລຸນາປ້ອນລະຫັດຜ່ານຢ່າງໜ່ອຍ 8 ຕົວ", "", "ຜິດພາດ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    mEmpEdit.label1.Text = "ແກ້ໄຂຂໍ້ມູນພະນັກງານ";
+                    mEmpEdit.label1.Image = Construction_System.Properties.Resources.pencil;
+                    mEmpEdit.label1.Size = new System.Drawing.Size(154, 26);
+                    mEmpEdit.button1.Text = "ແກ້ໄຂ";
+                    mEmpEdit.ShowDialog();
+                }
             }
             catch (Exception ex)
             {
@@ -114,11 +128,16 @@ namespace Construction_System
             MEmpEdit mEmpEdit = new MEmpEdit(this);
             try
             {
+                int leght = textBox6.Text.Length;
                 if (textBox2.Text == "" || textBox3.Text == "" || textBox4.Text == "" || textBox5.Text == "" || textBox6.Text == ""
                      || comboBox1.Text == "ກະລຸນາເລືອກ *" || comboBox2.Text == "ກະລຸນາເລືອກ *")
                 {
                     MyMessageBox.ShowMessage("ຂໍອະໄພ, ກະລຸນາປ້ອນຂໍ້ມູນໃຫ້ຄົບຖ້ວນ", "", "ຜິດພາດ", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
+                }
+                else if (leght < 8)
+                {
+                    MyMessageBox.ShowMessage("ຂໍອະໄພ, ກະລຸນາປ້ອນລະຫັດຜ່ານຢ່າງໜ່ອຍ 8 ຕົວ", "", "ຜິດພາດ", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {

@@ -38,6 +38,14 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.Column1 = new System.Windows.Forms.DataGridViewImageColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel2 = new System.Windows.Forms.Panel();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
@@ -62,14 +70,6 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
             this.dataGridViewImageColumn2 = new System.Windows.Forms.DataGridViewImageColumn();
-            this.Column1 = new System.Windows.Forms.DataGridViewImageColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel5.SuspendLayout();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -225,6 +225,89 @@
             this.dataGridView1.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dataGridView1_DataBindingComplete);
             this.dataGridView1.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dataGridView1_RowPostPaint);
             // 
+            // Column1
+            // 
+            this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Column1.FillWeight = 35F;
+            this.Column1.HeaderText = "ລົບ";
+            this.Column1.Image = global::Construction_System.Properties.Resources.bin;
+            this.Column1.MinimumWidth = 35;
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            this.Column1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Column1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Column1.Width = 35;
+            // 
+            // Column3
+            // 
+            this.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column3.DataPropertyName = "empName";
+            this.Column3.FillWeight = 70F;
+            this.Column3.HeaderText = "ຊື່ພະນັກງານ";
+            this.Column3.MinimumWidth = 50;
+            this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
+            // 
+            // Column4
+            // 
+            this.Column4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column4.DataPropertyName = "empGender";
+            this.Column4.FillWeight = 30F;
+            this.Column4.HeaderText = "ເພດ";
+            this.Column4.MinimumWidth = 30;
+            this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
+            // 
+            // Column5
+            // 
+            this.Column5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column5.DataPropertyName = "empTel";
+            this.Column5.FillWeight = 50F;
+            this.Column5.HeaderText = "ເບີໂທ";
+            this.Column5.MinimumWidth = 50;
+            this.Column5.Name = "Column5";
+            this.Column5.ReadOnly = true;
+            // 
+            // Column6
+            // 
+            this.Column6.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column6.DataPropertyName = "empAdress";
+            this.Column6.FillWeight = 40F;
+            this.Column6.HeaderText = "ທີ່ຢູ່";
+            this.Column6.MinimumWidth = 40;
+            this.Column6.Name = "Column6";
+            this.Column6.ReadOnly = true;
+            // 
+            // Column7
+            // 
+            this.Column7.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column7.DataPropertyName = "empRole";
+            this.Column7.FillWeight = 50F;
+            this.Column7.HeaderText = "ສະຖານະ";
+            this.Column7.MinimumWidth = 50;
+            this.Column7.Name = "Column7";
+            this.Column7.ReadOnly = true;
+            // 
+            // Column8
+            // 
+            this.Column8.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column8.DataPropertyName = "empId";
+            this.Column8.FillWeight = 50F;
+            this.Column8.HeaderText = "ຊື່ຜູ້ໃຊ້";
+            this.Column8.MinimumWidth = 50;
+            this.Column8.Name = "Column8";
+            this.Column8.ReadOnly = true;
+            // 
+            // Column9
+            // 
+            this.Column9.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column9.DataPropertyName = "empPass";
+            this.Column9.FillWeight = 60F;
+            this.Column9.HeaderText = "ລະຫັດຜ່ານ";
+            this.Column9.MinimumWidth = 60;
+            this.Column9.Name = "Column9";
+            this.Column9.ReadOnly = true;
+            // 
             // panel2
             // 
             this.panel2.Controls.Add(this.checkBox1);
@@ -336,6 +419,7 @@
             // textBox5
             // 
             this.textBox5.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.textBox5.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.textBox5.Font = new System.Drawing.Font("Noto Sans Lao", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox5.Location = new System.Drawing.Point(23, 355);
             this.textBox5.Name = "textBox5";
@@ -540,89 +624,6 @@
             this.dataGridViewImageColumn2.Image = global::Construction_System.Properties.Resources.ecommerce;
             this.dataGridViewImageColumn2.MinimumWidth = 60;
             this.dataGridViewImageColumn2.Name = "dataGridViewImageColumn2";
-            // 
-            // Column1
-            // 
-            this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.Column1.FillWeight = 35F;
-            this.Column1.HeaderText = "ລົບ";
-            this.Column1.Image = global::Construction_System.Properties.Resources.bin;
-            this.Column1.MinimumWidth = 35;
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            this.Column1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.Column1.Width = 35;
-            // 
-            // Column3
-            // 
-            this.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column3.DataPropertyName = "empName";
-            this.Column3.FillWeight = 70F;
-            this.Column3.HeaderText = "ຊື່ພະນັກງານ";
-            this.Column3.MinimumWidth = 50;
-            this.Column3.Name = "Column3";
-            this.Column3.ReadOnly = true;
-            // 
-            // Column4
-            // 
-            this.Column4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column4.DataPropertyName = "empGender";
-            this.Column4.FillWeight = 30F;
-            this.Column4.HeaderText = "ເພດ";
-            this.Column4.MinimumWidth = 30;
-            this.Column4.Name = "Column4";
-            this.Column4.ReadOnly = true;
-            // 
-            // Column5
-            // 
-            this.Column5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column5.DataPropertyName = "empTel";
-            this.Column5.FillWeight = 50F;
-            this.Column5.HeaderText = "ເບີໂທ";
-            this.Column5.MinimumWidth = 50;
-            this.Column5.Name = "Column5";
-            this.Column5.ReadOnly = true;
-            // 
-            // Column6
-            // 
-            this.Column6.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column6.DataPropertyName = "empAdress";
-            this.Column6.FillWeight = 40F;
-            this.Column6.HeaderText = "ທີ່ຢູ່";
-            this.Column6.MinimumWidth = 40;
-            this.Column6.Name = "Column6";
-            this.Column6.ReadOnly = true;
-            // 
-            // Column7
-            // 
-            this.Column7.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column7.DataPropertyName = "empRole";
-            this.Column7.FillWeight = 50F;
-            this.Column7.HeaderText = "ສະຖານະ";
-            this.Column7.MinimumWidth = 50;
-            this.Column7.Name = "Column7";
-            this.Column7.ReadOnly = true;
-            // 
-            // Column8
-            // 
-            this.Column8.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column8.DataPropertyName = "empId";
-            this.Column8.FillWeight = 50F;
-            this.Column8.HeaderText = "ຊື່ຜູ້ໃຊ້";
-            this.Column8.MinimumWidth = 50;
-            this.Column8.Name = "Column8";
-            this.Column8.ReadOnly = true;
-            // 
-            // Column9
-            // 
-            this.Column9.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column9.DataPropertyName = "empPass";
-            this.Column9.FillWeight = 60F;
-            this.Column9.HeaderText = "ລະຫັດຜ່ານ";
-            this.Column9.MinimumWidth = 60;
-            this.Column9.Name = "Column9";
-            this.Column9.ReadOnly = true;
             // 
             // MEmployee
             // 

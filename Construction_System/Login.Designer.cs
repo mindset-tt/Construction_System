@@ -147,6 +147,7 @@
             // txtbUesername
             // 
             this.txtbUesername.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.txtbUesername.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtbUesername.Font = new System.Drawing.Font("Noto Sans Lao", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtbUesername.Location = new System.Drawing.Point(70, 298);
             this.txtbUesername.Name = "txtbUesername";

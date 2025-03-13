@@ -46,7 +46,7 @@ namespace Construction_System
                 crystalReportViewer1.Refresh();
                 crystalReportViewer1.ReportSource = Report;
             }
-            crystalReportViewer1.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None;
+            //crystalReportViewer1.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None;
         }
 
         private void button2_Click(object sender, EventArgs e)

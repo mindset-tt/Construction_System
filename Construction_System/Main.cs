@@ -7,6 +7,7 @@ namespace Construction_System
     {
         public string EMPID = "";
         public string EMPPAss = "";
+        public string EMPNAME = "";
         public Main()
         {
             InitializeComponent();
@@ -186,12 +187,12 @@ namespace Construction_System
 
         private void btnReInc_Click(object sender, EventArgs e)
         {
-            openChildForm(new RepIncome(EMPID));
+            openChildForm(new RepIncome(EMPNAME));
         }
 
         private void btnReWaInc_Click(object sender, EventArgs e)
         {
-            openChildForm(new RepWincome(EMPID));
+            openChildForm(new RepWincome(EMPNAME));
         }
 
         private void btnReOrder_Click(object sender, EventArgs e)
@@ -207,6 +208,7 @@ namespace Construction_System
         private void Main_Load(object sender, EventArgs e)
         {
             WindowState = FormWindowState.Maximized;
+            label2.Text = EMPNAME;
         }
     }
 }

@@ -252,6 +252,18 @@
       <DependentUpon>ReportEmployee.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="ReportImport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportImport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportIncome.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportIncome.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ReportOrder.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -268,6 +280,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ReportSale.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportWincome.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportWincome.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="RepProduct.cs">
@@ -406,6 +424,14 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReportEmployee.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="ReportImport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReportImport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportIncome.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReportIncome.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="ReportOrder.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReportOrder.cs</LastGenOutput>
@@ -417,6 +443,10 @@
     <EmbeddedResource Include="ReportSale.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReportSale.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportWincome.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReportWincome.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="RepProduct.resx">
       <DependentUpon>RepProduct.cs</DependentUpon>

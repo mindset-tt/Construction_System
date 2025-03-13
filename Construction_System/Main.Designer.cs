@@ -85,7 +85,7 @@
             this.btnReIm.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
             this.btnReIm.Size = new System.Drawing.Size(199, 40);
             this.btnReIm.TabIndex = 6;
-            this.btnReIm.Text = "ຂໍ້ມູນນຳຂົ້າສິນຄ້າ";
+            this.btnReIm.Text = "ຂໍ້ມູນນຳເຂົ້າສິນຄ້າ";
             this.btnReIm.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnReIm.UseVisualStyleBackColor = true;
             this.btnReIm.Click += new System.EventHandler(this.btnReIm_Click);

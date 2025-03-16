@@ -57,6 +57,7 @@ namespace Construction_System
                 {
                     //TODO - Button Clicked - Execute Code Here
                     dataGridView1.Rows.RemoveAt(dataGridView1.Rows[e.RowIndex].Index);
+                    _config.setData($"DELETE FROM [POSSALE].[dbo].[order] WHERE orderId = '{dataGridView1.CurrentRow.Cells["Column3"].Value.ToString()}'");
                     sumQty();
                     MyMessageBox.ShowMessage("ຍົກເລິກໃບບິນສຳເລັດແລ້ວ", "", "ສຳເລັດ", MessageBoxButtons.OK, MessageBoxIcon.None);
                 }

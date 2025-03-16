@@ -39,7 +39,7 @@ namespace Construction_System
 
         private void LoadProducts(string filter = "")
         {
-            var query = "SELECT p.[prodID], CAST(p.[prodName] AS NVARCHAR(MAX)) as [prodName], p.[prodQty], p.[prodPrice], u.[unitName], t.[typeName], " +
+            var query = "SELECT p.[prodID], CAST(p.[prodName] AS NVARCHAR(MAX)) as [prodName], p.[prodQty], p.[prodPrice], t.[typeName], u.[unitName], " +
             "STRING_AGG(sp.[supplierId], ',') AS [supplierId] " +
             "FROM [POSSALE].[dbo].[supplierDetail] sp " +
             "INNER JOIN [POSSALE].[dbo].[product] p ON sp.prodId = p.prodID " +
@@ -292,21 +292,16 @@ namespace Construction_System
             //dataGridView2.DataSource = null;
             //clear the combobox
             //LoadProducts();
-            orderBillc(orderId);
+            FM_Bill fM_Bill = new FM_Bill();
+            OrderBill orderBill = new OrderBill();
+            orderBill.SetParameterValue("OrderID", orderId);
+            fM_Bill.crystalReportViewer1.Refresh();
+            fM_Bill.crystalReportViewer1.ReportSource = orderBill;
+            fM_Bill.ShowDialog();
             label2.Text = "0   ອັນ";
             comboBox1.SelectedIndex = 0;
             dataGridView2.Rows.Clear();
             //dataGridView1.Rows.Clear();
-        }
-
-        private void orderBillc(string id)
-        {
-            FM_Bill fM_Bill = new FM_Bill();
-            OrderBill orderBill = new OrderBill();
-            orderBill.SetParameterValue("OrderID", id);
-            fM_Bill.crystalReportViewer1.Refresh();
-            fM_Bill.crystalReportViewer1.ReportSource = orderBill;
-            fM_Bill.ShowDialog();
         }
     }
 }

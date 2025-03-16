@@ -13,7 +13,7 @@ namespace Construction_System
             InitializeComponent();
             timer1.Start();
             hideSubMenu();
-            openChildForm(new Sale(EMPID));
+            //openChildForm(new Sale(EMPID));
         }
 
         private void hideSubMenu()

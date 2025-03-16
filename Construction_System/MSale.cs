@@ -13,6 +13,7 @@ namespace Construction_System
     public partial class MSale : Form
     {
         private string _empId;
+        private readonly config _config = new config();
         public MSale(string empId)
         {
             InitializeComponent();
@@ -60,18 +61,8 @@ namespace Construction_System
 
         private void dataSaleBill()
         {
-            DataSet data1 = new DataSet("Contruction_System");
-            DataTable table1 = new DataTable("Order1");
-            table1.Columns.Add("idSale", typeof(int));
-            table1.Columns.Add("empName");
-            table1.Columns.Add("datetime");
-            table1.Columns.Add("qty", typeof(int));
-            table1.Columns.Add("price", typeof(int));
-            table1.Rows.Add(245, "ນ້ອຍ", "20/02/2025", 15, 2500000);
-            table1.Rows.Add(545, "ນ້ອຍ", "19/02/2025", 14, 5600000);
-            table1.Rows.Add(554, "ລີຊາ", "21/02/2025", 12, 8000000);
-            data1.Tables.Add(table1);
-            dataGridView1.DataSource = table1;
+            var query = "SELECT [sellId] ,[whoSell] ,[sellDate] ,[totalSell] ,[totalPriceSell] FROM [dbo].[sell] where sellStatus = 'ສຳເລັດ'";
+            _config.LoadData(query, dataGridView1);
         }
 
         private void MSale_Load(object sender, EventArgs e)
@@ -96,7 +87,7 @@ namespace Construction_System
         {
             try
             {
-                MSaleEdit editSaleBill = new MSaleEdit(this);
+                MSaleEdit editSaleBill = new MSaleEdit(this, dataGridView1.Rows[e.RowIndex].Cells["Column3"].Value.ToString(), dataGridView1.Rows[e.RowIndex].Cells["Column4"].Value.ToString());
                 var senderGrid = (DataGridView)sender;
 
                 if (senderGrid.Columns[e.ColumnIndex] is DataGridViewImageColumn &&
@@ -104,6 +95,8 @@ namespace Construction_System
                 {
                     //TODO - Button Clicked - Execute Code Here
                     dataGridView1.Rows.RemoveAt(dataGridView1.Rows[e.RowIndex].Index);
+                    var query = $"UPDATE [dbo].[sell] SET sellStatus = 'ຍົກເລິກ' WHERE sellId = '{dataGridView1.Rows[e.RowIndex].Cells["Column3"].Value.ToString()}'";
+                    _config.setData(query);
                     sumQty();
                     MyMessageBox.ShowMessage("ຍົກເລິກໃບບິນສຳເລັດແລ້ວ", "", "ສຳເລັດ", MessageBoxButtons.OK, MessageBoxIcon.None);
                 }

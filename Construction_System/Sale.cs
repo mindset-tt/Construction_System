@@ -27,7 +27,7 @@ namespace Construction_System
             LoadProducts();
         }
 
-        private void LoadProducts(string filter = "WHERE p.[cancel] = 'no' ")
+        private void LoadProducts(string filter = "")
         {
             query = $"SELECT p.[prodID],p.[prodName], p.[prodQty], p.[prodPrice], t.[typeName], u.[unitName]" +
                 "FROM " +
@@ -133,8 +133,8 @@ namespace Construction_System
             {
                 //(dataGridView1.DataSource as DataTable).DefaultView.RowFilter = string.Format("name LIKE '%{0}%' or unit LIKE '%{0}%' or type LIKE '%{0}%'", textBox1.Text);
                 var filter = string.IsNullOrEmpty(textBox1.Text)
-                            ? "WHERE cancel = no"
-                            : $"WHERE (p.prodID LIKE '%{textBox1.Text}%' OR p.prodName LIKE '%{textBox1.Text}%' OR p.prodQty LIKE '%{textBox1.Text}%' OR p.prodPrice LIKE '%{textBox1.Text}%' OR p.typeId LIKE '%{textBox1.Text}%' OR p.` LIKE '%{textBox1.Text}%') AND cancel = 'no'";
+                            ? "WHERE cancel = 'yes' and p.prodQty > 0"
+                            : $"WHERE (p.prodID LIKE '%{textBox1.Text}%' OR p.prodName LIKE '%{textBox1.Text}%' OR p.prodQty LIKE '%{textBox1.Text}%' OR p.prodPrice LIKE '%{textBox1.Text}%' OR p.typeId LIKE '%{textBox1.Text}%' OR p.` LIKE '%{textBox1.Text}%') AND (cancel = 'yes' and p.prodQty > 0)";
                 LoadProducts(filter);
             }
             catch (Exception ex)

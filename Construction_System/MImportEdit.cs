@@ -13,11 +13,18 @@ namespace Construction_System
     public partial class MImportEdit : Form
     {
         MImport mImport;
-        public MImportEdit(MImport mImport)
+        private readonly config _config = new config();
+        private string _empId;
+        private string _order;
+        private string _importId;
+        public MImportEdit(MImport mImport, string order, string empId, string importId)
         {
             InitializeComponent();
             this.mImport = mImport;
             label3.Text = "0" + " ກີບ";
+            _empId = empId;
+            _order = order;
+            _importId = importId;
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -49,34 +56,74 @@ namespace Construction_System
             }
         }
 
-        private void productImport2()
+        //private void productImport2()
+        //{
+        //    DataSet data1 = new DataSet("Contruction_System");
+        //    DataTable table1 = new DataTable("Sale1");
+        //    table1.Columns.Add("id", typeof(int));
+        //    table1.Columns.Add("name");
+        //    table1.Columns.Add("qty", typeof(int));
+        //    table1.Columns.Add("unit");
+        //    table1.Columns.Add("type");
+        //    table1.Rows.Add(1, "ຕະປູແປດ", 1, "ໂລ", "ເຫຼັກ");
+        //    table1.Rows.Add(2, "ຕະປູຫ້າ", 2, "ໂລ", "ເຫຼັກ");
+        //    table1.Rows.Add(3, "ຕະປູຫົກ", 3, "ໂລ", "ເຫຼັກ");
+        //    table1.Rows.Add(4, "ກະເບື່ອງ", 10, "ແຜ່ນ", "ຫຼັງຄາ");
+        //    table1.Rows.Add(5, "ຫຼົບກະເບື່ອງ", 4, "ແຜ່ນ", "ຫຼັງຄາ");
+        //    table1.Rows.Add(6, "ຊັງກະສີແຜ່ນລຽບ", 12, "ແຜ່ນ", "ຫຼັງຄາ");
+        //    table1.Rows.Add(7, "ຊັງກະສີແຜ່ນລ່ອງ", 20, "ແຜ່ນ", "ຫຼັງຄາ");
+        //    table1.Rows.Add(8, "ສາຍໄຟ 2.5", 3, "ກໍ່", "ໄຟຟ້າ");
+        //    table1.Rows.Add(9, "ຄ້ອນຕີໃຫຍ່", 1, "ອັນ", "ເຄື່ອງມື");
+        //    table1.Rows.Add(10, "ຄ້ອນຕີນ້ອຍ", 2, "ອັນ", "ເຄື່ອງມື");
+        //    table1.Rows.Add(11, "ຄ້ອນປອນ", 1, "ອັນ", "ເຄື່ອງມື");
+        //    table1.Rows.Add(12, "ຕູ້ຈອດຫຼັກ", 1, "ເຄື່ອງ", "ໄຟຟ້າ");
+        //    table1.Rows.Add(52, "ໄຟບີຕັດເຫຼັກ", 2, "ເຄື່ອງ", "ໄຟຟ້າ");
+        //    table1.Rows.Add(63, "ໝືນຕັດເຫຼັກ", 1, "ເຄື່ອງ", "ໄຟຟ້າ");
+        //    table1.Rows.Add(72, "ສະຫວ່ານໄຟຟ້າ", 2, "ເຄື່ອງ", "ໄຟຟ້າ");
+        //    table1.Rows.Add(85, "ສະຫວ່ານແບັກເຕີລີ້", 2, "ເຄື່ອງ", "ໄຟຟ້າ");
+        //    data1.Tables.Add(table1);
+        //    dataGridView1.DataSource = table1;
+        //}
+
+        private void LoadOrderDetailId(bool isFristTime)
         {
-            DataSet data1 = new DataSet("Contruction_System");
-            DataTable table1 = new DataTable("Sale1");
-            table1.Columns.Add("id", typeof(int));
-            table1.Columns.Add("name");
-            table1.Columns.Add("qty", typeof(int));
-            table1.Columns.Add("unit");
-            table1.Columns.Add("type");
-            table1.Rows.Add(1, "ຕະປູແປດ", 1, "ໂລ", "ເຫຼັກ");
-            table1.Rows.Add(2, "ຕະປູຫ້າ", 2, "ໂລ", "ເຫຼັກ");
-            table1.Rows.Add(3, "ຕະປູຫົກ", 3, "ໂລ", "ເຫຼັກ");
-            table1.Rows.Add(4, "ກະເບື່ອງ", 10, "ແຜ່ນ", "ຫຼັງຄາ");
-            table1.Rows.Add(5, "ຫຼົບກະເບື່ອງ", 4, "ແຜ່ນ", "ຫຼັງຄາ");
-            table1.Rows.Add(6, "ຊັງກະສີແຜ່ນລຽບ", 12, "ແຜ່ນ", "ຫຼັງຄາ");
-            table1.Rows.Add(7, "ຊັງກະສີແຜ່ນລ່ອງ", 20, "ແຜ່ນ", "ຫຼັງຄາ");
-            table1.Rows.Add(8, "ສາຍໄຟ 2.5", 3, "ກໍ່", "ໄຟຟ້າ");
-            table1.Rows.Add(9, "ຄ້ອນຕີໃຫຍ່", 1, "ອັນ", "ເຄື່ອງມື");
-            table1.Rows.Add(10, "ຄ້ອນຕີນ້ອຍ", 2, "ອັນ", "ເຄື່ອງມື");
-            table1.Rows.Add(11, "ຄ້ອນປອນ", 1, "ອັນ", "ເຄື່ອງມື");
-            table1.Rows.Add(12, "ຕູ້ຈອດຫຼັກ", 1, "ເຄື່ອງ", "ໄຟຟ້າ");
-            table1.Rows.Add(52, "ໄຟບີຕັດເຫຼັກ", 2, "ເຄື່ອງ", "ໄຟຟ້າ");
-            table1.Rows.Add(63, "ໝືນຕັດເຫຼັກ", 1, "ເຄື່ອງ", "ໄຟຟ້າ");
-            table1.Rows.Add(72, "ສະຫວ່ານໄຟຟ້າ", 2, "ເຄື່ອງ", "ໄຟຟ້າ");
-            table1.Rows.Add(85, "ສະຫວ່ານແບັກເຕີລີ້", 2, "ເຄື່ອງ", "ໄຟຟ້າ");
-            data1.Tables.Add(table1);
-            dataGridView1.DataSource = table1;
+            var query = $"SELECT p.[prodId], p.[prodName], o.[orderQty], o.[orderQty] as [orderQtys], o.[orderQty] as [orderQtyss], u.[unitName], " + $"p.[prodPrice] as [prodPriceOrder], t.[typeName] " + $"FROM [POSSALE].[dbo].[product] p " + $"INNER JOIN [POSSALE].[dbo].[orderDetail] o ON p.prodId = o.productId " + $"INNER JOIN [POSSALE].[dbo].[unit] u ON p.unitId = u.unitId INNER JOIN [POSSALE].[dbo].[type] t ON p.typeId = t.typeId "
+                + $"WHERE o.orderId = '{_order}'";
+            _config.LoadData(query, dataGridView1);
+
+            if (!isFristTime)
+            {
+                //check the product that already import from order
+                for (int i = 0; i < dataGridView1.RowCount; i++)
+                {
+                    for (int j = 0; j < dataGridView2.RowCount; j++)
+                    {
+                        if (dataGridView1.Rows[i].Cells["id1"].Value.ToString() == dataGridView2.Rows[j].Cells["id2"].Value.ToString())
+                        {
+                            //check the qty that already import from order if it's more than the qty that order just show the qty that not import yet
+                            if (int.Parse(dataGridView1.Rows[i].Cells["Column13"].Value.ToString()) == int.Parse(dataGridView2.Rows[j].Cells["Column24"].Value.ToString()))
+                            {
+                                //remove the product that already import from order
+                                dataGridView1.Rows.RemoveAt(i);
+                            }
+                            else
+                            {
+                                dataGridView1.Rows[i].Cells["Column13"].Value = int.Parse(dataGridView1.Rows[i].Cells["Column13"].Value.ToString()) - int.Parse(dataGridView2.Rows[j].Cells["Column24"].Value.ToString());
+                            }
+                        }
+                    }
+                }
+            }
         }
+
+        private void LoadImportDetailId()
+        {
+            var query = $"SELECT p.[prodId], p.[prodName], i.[importQty], i.[difFromOrder] as [importQtys], i.[importQty] as [importQtyss], u.[unitName], " + $"(p.[prodPrice] * i.[importQty]) as [totalPrice], p.[prodPrice] " + $"FROM [POSSALE].[dbo].[product] p " + $"INNER JOIN [POSSALE].[dbo].[importDetail] i ON p.prodId = i.product " + $"INNER JOIN [POSSALE].[dbo].[unit] u ON p.unitId = u.unitId "
+                + $"WHERE i.importId = '{_importId}'";
+            _config.LoadData(query, dataGridView2);
+        }
+
+
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
@@ -94,7 +141,30 @@ namespace Construction_System
 
         private void MImportEdit_Load(object sender, EventArgs e)
         {
-            productImport2();
+            //productImport2();
+            LoadOrderDetailId(true);
+            LoadImportDetailId();
+
+            //check the product that already import from order
+            for (int i = 0; i < dataGridView1.RowCount; i++)
+            {
+                for (int j = 0; j < dataGridView2.RowCount; j++)
+                {
+                    if (dataGridView1.Rows[i].Cells["id1"].Value.ToString() == dataGridView2.Rows[j].Cells["id2"].Value.ToString())
+                    {
+                        //check the qty that already import from order if it's more than the qty that order just show the qty that not import yet
+                        if (int.Parse(dataGridView1.Rows[i].Cells["Column13"].Value.ToString()) == int.Parse(dataGridView2.Rows[j].Cells["Column24"].Value.ToString()))
+                        {
+                            //remove the product that already import from order
+                            dataGridView1.Rows.RemoveAt(i);
+                        }
+                        else
+                        {
+                            dataGridView1.Rows[i].Cells["Column13"].Value = int.Parse(dataGridView1.Rows[i].Cells["Column13"].Value.ToString()) - int.Parse(dataGridView2.Rows[j].Cells["Column24"].Value.ToString());
+                        }
+                    }
+                }
+            }
         }
 
         private void dataGridView1_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
@@ -112,7 +182,21 @@ namespace Construction_System
         {
             try
             {
-                ImEditQty editQty = new ImEditQty(null, this, null, null, null);
+                int qty = 0;
+                if (dataGridView2.Rows.Count != 0)
+                {
+                    for (int i = 0; i < dataGridView2.RowCount; i++)
+                    {
+                        if (dataGridView1.Rows[e.RowIndex].Cells["id1"].Value.ToString() == dataGridView2.Rows[i].Cells["id2"].Value.ToString())
+                        {
+                            qty = int.Parse(dataGridView2.Rows[i].Cells["Column24"].Value.ToString());
+                        }
+                    }
+                }
+
+                qty = int.Parse(dataGridView1.Rows[e.RowIndex].Cells["Column13"].Value.ToString()) - qty;
+
+                ImEditQty editQty = new ImEditQty(null, this, dataGridView2.Rows[e.RowIndex].Cells["prodPriceOrder"].Value.ToString(), dataGridView2.Rows[e.RowIndex].Cells["difFromOrder"].Value.ToString(), dataGridView2.Rows[e.RowIndex].Cells["orderQtyss"].Value.ToString());
                 var senderGrid1 = (DataGridView)sender;
                 if (senderGrid1.Columns[e.ColumnIndex] is DataGridViewImageColumn &&
                     e.RowIndex >= 0)
@@ -125,7 +209,6 @@ namespace Construction_System
                     editQty.button1.Text = "ເພີ່ມ";
                     editQty.textBox1.Text = dataGridView1.Rows[e.RowIndex].Cells["Column12"].Value.ToString();
                     editQty.lblUnit.Text = dataGridView1.Rows[e.RowIndex].Cells["Column14"].Value.ToString();
-                    //editQty.lblPrice.Text = dataGridView1.Rows[e.RowIndex].Cells["Column16"].Value.ToString();
                     editQty.lblId.Text = dataGridView1.Rows[e.RowIndex].Cells["id1"].Value.ToString();
                     editQty.ShowDialog();
                     dataGridView1.ClearSelection();
@@ -158,16 +241,43 @@ namespace Construction_System
         {
             try
             {
-                ImEditQty editQty = new ImEditQty(null, this, null, null, null);
+                ImEditQty editQty = new ImEditQty(null, this, dataGridView2.Rows[e.RowIndex].Cells["prodPrice"].Value.ToString(), dataGridView2.Rows[e.RowIndex].Cells["importQtys"].Value.ToString(), dataGridView2.Rows[e.RowIndex].Cells["importQtys"].Value.ToString());
                 var senderGrid = (DataGridView)sender;
 
                 if (senderGrid.Columns[e.ColumnIndex] is DataGridViewImageColumn &&
                 e.RowIndex >= 0 && dataGridView2.Columns[e.ColumnIndex].HeaderCell.Value.ToString() == "ລົບ")
                 {
+                    //get the delete qty from gridview2
+                    int deleteQty = int.Parse(dataGridView2.Rows[e.RowIndex].Cells["Column24"].Value.ToString());
+
                     //ແນະນຳໃຫ້ update ຈຳນວນ ແລະ ລາຄາຜ່ານ Database
                     //TODO - Button Clicked - Execute Code Here
                     dataGridView2.Rows.RemoveAt(dataGridView2.Rows[e.RowIndex].Index);
                     sumQty();
+
+                    // make the product that already import from order show again if it's remove
+                    if (dataGridView1.Rows.Count == 0)
+                    {
+                        LoadOrderDetailId(false);
+                    }
+                    else
+                    {
+
+                        for (int i = 0; i < dataGridView1.RowCount; i++)
+                        {
+                            if (dataGridView2.Rows.Count == 0)
+                            {
+                                LoadOrderDetailId(false);
+                                break;
+                            }
+
+                            if (dataGridView1.Rows[i].Cells["id1"].Value.ToString() == dataGridView2.Rows[e.RowIndex].Cells["id2"].Value.ToString())
+                            {
+                                dataGridView1.Rows[i].Cells["Column13"].Value = int.Parse(dataGridView1.Rows[i].Cells["Column13"].Value.ToString()) + deleteQty;
+                            }
+                        }
+                    }
+                    
                 }
 
                 if (senderGrid.Columns[e.ColumnIndex] is DataGridViewImageColumn &&
@@ -181,7 +291,7 @@ namespace Construction_System
                     editQty.textBox1.Text = dataGridView2.Rows[e.RowIndex].Cells["Column23"].Value.ToString();
                     editQty.textBox2.Text = dataGridView2.Rows[e.RowIndex].Cells["Column24"].Value.ToString();
                     editQty.textBox3.Text = dataGridView2.Rows[e.RowIndex].Cells["Column26"].Value.ToString();
-                    //editQty.lblId.Text = dataGridView2.Rows[e.RowIndex].Cells["id2"].Value.ToString();
+                    editQty.lblId.Text = dataGridView2.Rows[e.RowIndex].Cells["id2"].Value.ToString();
                     editQty.ShowDialog();
 
 
@@ -209,8 +319,44 @@ namespace Construction_System
 
         private void button1_Click(object sender, EventArgs e)
         {
-            FM_Bill fM_Bill = new FM_Bill();
-            fM_Bill.ShowDialog();
+            //FM_Bill fM_Bill = new FM_Bill();
+            //fM_Bill.ShowDialog();
+
+            // update the import qty and price to database
+            try
+            {
+                // delete the import detail that already import from order
+                var query = $"DELETE FROM [POSSALE].[dbo].[importDetail] WHERE importId = '{_importId}'";
+                _config.setData(query);
+
+                foreach (DataGridViewRow row in dataGridView2.Rows)
+                {
+                    // insert the import detail that already import from order
+                    var query1 = $"INSERT INTO [POSSALE].[dbo].[importDetail] ([importId], [product], [importQty], [difFromOrder]) " +
+                        $"VALUES ('{_importId}', '{row.Cells["id2"].Value}', '{row.Cells["Column24"].Value}', '{row.Cells["importQtys"].Value}')";
+                    _config.setData(query1);
+                }
+
+                // update the import total price to database
+                var query2 = $"UPDATE [POSSALE].[dbo].[import] SET [totalImport] = (SELECT SUM(importQty * (SELECT prodPrice FROM [POSSALE].[dbo].[product] WHERE prodId = product)) FROM [POSSALE].[dbo].[importDetail] WHERE importId = '{_importId}') WHERE importId = '{_importId}'";
+                _config.setData(query2);
+
+                // update the order status to 'ອະນຸມັດ' if the import total price is equal to the order total price
+                var query3 = $"UPDATE [POSSALE].[dbo].[order] SET [orderStatus] = 'ອະນຸມັດ' WHERE orderId = '{_order}' AND totalOrder = (SELECT totalImport FROM [POSSALE].[dbo].[import] WHERE importId = '{_importId}')";
+                _config.setData(query3);
+
+                MyMessageBox.ShowMessage("ບັນທຶກການນຳເຂົ້າສິນຄ້າສຳເລັດແລ້ວ", "", "ສຳເລັດ", MessageBoxButtons.OK, MessageBoxIcon.None);
+                FM_Bill fM_Bill = new FM_Bill();
+                ImportBill importBill = new ImportBill();
+                importBill.SetParameterValue("importId", _importId);
+                fM_Bill.crystalReportViewer1.ReportSource = importBill;
+                fM_Bill.ShowDialog();
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MyMessageBox.ShowMessage("ເກີດຂໍ້ຜີດພາດ " + ex + " ", "", "ເກີດຂໍ້ຜີດພາດ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

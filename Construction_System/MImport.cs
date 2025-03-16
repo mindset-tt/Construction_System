@@ -13,29 +13,38 @@ namespace Construction_System
     public partial class MImport : Form
     {
         private string _empId;
+        private readonly config _config = new config();
         public MImport(string empId)
         {
             InitializeComponent();
             _empId = empId;
         }
 
-        private void dataImportBill()
+        //private void dataImportBill()
+        //{
+        //    DataSet data1 = new DataSet("Contruction_System");
+        //    DataTable table1 = new DataTable("Order1");
+        //    table1.Columns.Add("idSale", typeof(int));
+        //    table1.Columns.Add("empName");
+        //    table1.Columns.Add("datetime");
+        //    table1.Columns.Add("supName");
+        //    table1.Columns.Add("qty", typeof(int));
+        //    table1.Rows.Add(25, "ນ້ອຍ", "20/02/2025", "ເອສຊີຈີ (SCG)", 15);
+        //    table1.Rows.Add(45, "ນ້ອຍ", "19/02/2025", "ຊີເອສຊີ (CSC)", 14);
+        //    table1.Rows.Add(54, "ລີຊາ", "21/02/2025", "ສຸວັນນີ", 12);
+        //    table1.Rows.Add(67, "ນ້ອຍ", "19/02/2025", "ຊີເອສຊີ (CSC)", 18);
+        //    table1.Rows.Add(68, "ນ້ອຍ", "19/02/2025", "ຊີເອສຊີ (CSC)", 140);
+        //    data1.Tables.Add(table1);
+        //    dataGridView1.DataSource = table1;
+        //}
+
+        private void LoadData()
         {
-            DataSet data1 = new DataSet("Contruction_System");
-            DataTable table1 = new DataTable("Order1");
-            table1.Columns.Add("idSale", typeof(int));
-            table1.Columns.Add("empName");
-            table1.Columns.Add("datetime");
-            table1.Columns.Add("supName");
-            table1.Columns.Add("qty", typeof(int));
-            table1.Rows.Add(25, "ນ້ອຍ", "20/02/2025", "ເອສຊີຈີ (SCG)", 15);
-            table1.Rows.Add(45, "ນ້ອຍ", "19/02/2025", "ຊີເອສຊີ (CSC)", 14);
-            table1.Rows.Add(54, "ລີຊາ", "21/02/2025", "ສຸວັນນີ", 12);
-            table1.Rows.Add(67, "ນ້ອຍ", "19/02/2025", "ຊີເອສຊີ (CSC)", 18);
-            table1.Rows.Add(68, "ນ້ອຍ", "19/02/2025", "ຊີເອສຊີ (CSC)", 140);
-            data1.Tables.Add(table1);
-            dataGridView1.DataSource = table1;
+            var query = "SELECT TOP (1000) [importId] ,[whoImport] ,[importDate] ,[totalImport] ,[importFromOrder] ,sp.[supplierName] FROM [POSSALE].[dbo].[import] i inner join [POSSALE].[dbo].[order] o on i.[importFromOrder] = o.orderId left join [POSSALE].[dbo].[supplier] sp on o.orderFrom = sp.supplierId where importStatus = 'ອະນຸມັດ'";
+            _config.LoadData(query, dataGridView1);
         }
+
+
 
         private void sumQty()
         {
@@ -44,12 +53,6 @@ namespace Construction_System
                 if (dataGridView1.Rows.Count != 0)
                 {
                     label4.Text = "ລວມລາຍການທັງໝົດ:  " + dataGridView1.RowCount.ToString("#,###") + "  ລາຍການ";
-                    //int totalQty = 0;
-                    //for (int i = 0; i < dataGridView1.RowCount; i++)
-                    //{
-                    //    totalQty += Convert.ToInt32(dataGridView1.Rows[i].Cells["Column24"].Value.ToString());
-                    //}
-                    //label2.Text = totalQty.ToString("#,###") + "   ອັນ";
                 }
                 else
                 {
@@ -64,7 +67,7 @@ namespace Construction_System
 
         private void MImport_Load(object sender, EventArgs e)
         {
-            dataImportBill();
+            LoadData();
             sumQty();
         }
 
@@ -87,7 +90,7 @@ namespace Construction_System
         {
             try
             {
-                MImportEdit editOrderBill = new MImportEdit(this);
+                MImportEdit editOrderBill = new MImportEdit(this, dataGridView1.Rows[e.RowIndex].Cells["importFromOrder"].Value.ToString(), dataGridView1.Rows[e.RowIndex].Cells["Column4"].Value.ToString(), dataGridView1.Rows[e.RowIndex].Cells["Column3"].Value.ToString());
                 var senderGrid = (DataGridView)sender;
 
                 if (senderGrid.Columns[e.ColumnIndex] is DataGridViewImageColumn &&
@@ -95,6 +98,7 @@ namespace Construction_System
                 {
                     //TODO - Button Clicked - Execute Code Here
                     dataGridView1.Rows.RemoveAt(dataGridView1.Rows[e.RowIndex].Index);
+                    _config.setData("UPDATE [POSSALE].[dbo].[import] SET [importStatus] = 'ຍົກເລິກ' WHERE importId = '" + dataGridView1.Rows[e.RowIndex].Cells["Column1"].Value.ToString() + "'");
                     sumQty();
                     MyMessageBox.ShowMessage("ຍົກເລິກໃບບິນສຳເລັດແລ້ວ", "", "ສຳເລັດ", MessageBoxButtons.OK, MessageBoxIcon.None);
                 }

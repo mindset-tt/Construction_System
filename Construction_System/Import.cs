@@ -50,7 +50,7 @@ namespace Construction_System
                 if (dataGridView2.Columns.Contains("Column26"))
                 {
                     var totalPrice = dataGridView2.Rows.Cast<DataGridViewRow>()
-                        .Sum(row => Convert.ToInt32(row.Cells["Column26"].Value));
+                        .Sum(row => Convert.ToInt64(row.Cells["Column26"].Value));
                     label2.Text = $"{totalPrice:#,###} ກີບ";
                 }
                 else
@@ -215,12 +215,11 @@ namespace Construction_System
                 query = "SELECT TOP 1 [importId] FROM [POSSALE].[dbo].[import] ORDER BY [importId] DESC";
                 var dr = _config.getData(query);
                 dr.Read();
-
-                var importID = dr.HasRows ? $"IM{int.Parse(dr["importId"].ToString().Substring(2)) + 1:D4}" : "IM0001";
+                var importID = dr.HasRows ? $"IMP{int.Parse(dr["importId"].ToString().Substring(3)) + 1:D4}" : "IMP0001";
                 dr.Close();
                 _config.closeConnection();
 
-                var totalOrder = int.Parse(label2.Text.Split(' ')[0].Replace(",", ""));
+                var totalOrder = long.Parse(label2.Text.Split(' ')[0].Replace(",", ""));
 
                 query = $"INSERT INTO [POSSALE].[dbo].[import] ([importId], [whoImport], [importDate], [totalImport], [importFromOrder], [importStatus], [totalPriceImport]) " +
                         $"VALUES ('{importID}', '{_empId}', GETDATE(), {dataGridView2.RowCount}, '{dataGridView1.CurrentRow.Cells["id1"].Value}', 'ອະນຸມັດ', {totalOrder})";
@@ -264,19 +263,17 @@ namespace Construction_System
                 ImportBillc(importID);
 
                 //clear the datagridview
-                //this.dataGridView2.DataSource = null;
+                //dataGridView2.Rows.Clear();
+                query = $"SELECT p.[prodId], p.[prodName], o.[orderQty], o.[orderQty] as [orderQtys], o.[orderQty] as [orderQtyss], u.[unitName], " +
+                                $"(p.[prodPrice] * o.[orderQty]) as [totalPrice], p.[prodPrice] " +
+                                $"FROM [POSSALE].[dbo].[product] p " +
+                                $"INNER JOIN [POSSALE].[dbo].[orderDetail] o ON p.prodId = o.productId " +
+                                $"INNER JOIN [POSSALE].[dbo].[unit] u ON p.unitId = u.unitId " +
+                                $"WHERE o.orderId = 'MASDJA'";
+                _config.LoadData(query, dataGridView2);
                 LoadProducts();
-                //dataGridView2.DataSource = "";
-                //dataGridView2.Rows.Clear();
-                //dataGridView2.CancelEdit();
-                //dataGridView2.Columns.Clear();
-                //dataGridView2.DataSource = null;
-                //dataGridView2.Rows.Clear();
-                //int clearRow = 0;
-                //foreach (DataGridViewRow row in dataGridView2.Rows)
-                //{
-                //    dataGridView2.Rows.RemoveAt(clearRow);
-                //}
+
+
                 label2.Text = "0   ອັນ";
             }
             catch (Exception ex)

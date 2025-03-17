@@ -104,7 +104,8 @@ namespace Construction_System
                 }
                 else if (label1.Text.Contains("ແກ້ໄຂຈຳນວນຂາຍສິນຄ້າ"))
                 {
-                    mSale.updateQtyMS(inputQty, (Convert.ToInt32(lblPrice.Text)/Convert.ToInt32(lblQtyEdit.Text)) * inputQty);
+                    //mSale.updateQtyMS(inputQty, (Convert.ToInt32(lblPrice.Text)/Convert.ToInt32(lblQtyEdit.Text)) * inputQty);
+                    mSale.updateQty(inputQty, (Convert.ToInt32(lblPrice.Text) / Convert.ToInt32(lblQtyEdit.Text)) * inputQty, lblId.Text);
                     MyMessageBox.ShowMessage("ແກ້ໄຂຂໍ້ມູນສຳເລັດແລ້ວ", "", "ສຳເລັດ", MessageBoxButtons.OK, MessageBoxIcon.None);
                 }
                 else

@@ -116,6 +116,7 @@ namespace Construction_System
         {
             dataGridView1.ClearSelection();
             dataGridView1.Columns["Column6"].DefaultCellStyle.Format = "#,###";
+            dataGridView1.Columns["Column5"].DefaultCellStyle.Format = "dd/MM/yyyy hh:mm:ss tt";
             sumQty();
         }
 

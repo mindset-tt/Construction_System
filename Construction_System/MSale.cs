@@ -49,7 +49,7 @@ namespace Construction_System
         {
             try
             {
-                (dataGridView1.DataSource as DataTable).DefaultView.RowFilter = string.Format("empName LIKE '%{0}%' or datetime LIKE '%{0}%'", textBox1.Text);
+                (dataGridView1.DataSource as DataTable).DefaultView.RowFilter = string.Format("sellId LIKE '%{0}%' or whoSell LIKE '%{0}%'", textBox1.Text);
                 sumQty();
             }
             catch (Exception ex)
@@ -81,6 +81,7 @@ namespace Construction_System
             dataGridView1.ClearSelection();
             dataGridView1.Columns["Column6"].DefaultCellStyle.Format = "#,###";
             dataGridView1.Columns["Column7"].DefaultCellStyle.Format = "#,###";
+            dataGridView1.Columns["Column5"].DefaultCellStyle.Format = "dd/MM/yyyy hh:mm:ss tt";
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)

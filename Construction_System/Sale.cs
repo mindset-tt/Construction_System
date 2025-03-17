@@ -231,10 +231,10 @@ namespace Construction_System
         private void saleBillc(string id)
         {
             FM_Bill fM_Bill = new FM_Bill();
-            SaleBill orderBill = new SaleBill();
-            orderBill.SetParameterValue("Sellid", id);
+            SaleBill saleBill = new SaleBill();
+            saleBill.SetParameterValue("Sellid", id);
             fM_Bill.crystalReportViewer1.Refresh();
-            fM_Bill.crystalReportViewer1.ReportSource = orderBill;
+            fM_Bill.crystalReportViewer1.ReportSource = saleBill;
             fM_Bill.ShowDialog();
         }
 

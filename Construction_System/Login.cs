@@ -34,7 +34,8 @@ namespace Construction_System
             //try
             //{
             config.openConnection();
-            SqlDataReader dr = config.getData("select * from employee where empId = '" + txtbUesername.Text + "' and empPass = '" + txtbPassword.Text + "'");
+            SqlDataReader dr = config.getData("SELECT * FROM [POSSALE].[dbo].[employee] " +
+                $"where [empStatus] = 'active' AND ([empId] = '{txtbUesername.Text}' and [empPass] = '{txtbPassword.Text}')");
             if (dr.Read())
             {
                 MyMessageBox.ShowMessage("ເຂົ້າສູ່ລະບົບສຳເລັດ!", "", "ຍິນດີຕ້ອນຮັບ", MessageBoxButtons.OK, MessageBoxIcon.None);
@@ -45,8 +46,8 @@ namespace Construction_System
 
                 if (dr["empRole"].ToString() == "User")
                 {
-                    form1.btnOrder.Visible = false;
-                    form1.btnImport.Visible = false;
+                    //form1.btnOrder.Visible = false;
+                    //form1.btnImport.Visible = false;
                     form1.btnReport.Visible = false;
                     form1.btnMaData.Visible = false;
                 }

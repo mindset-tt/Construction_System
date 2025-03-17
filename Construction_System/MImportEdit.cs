@@ -56,35 +56,6 @@ namespace Construction_System
             }
         }
 
-        //private void productImport2()
-        //{
-        //    DataSet data1 = new DataSet("Contruction_System");
-        //    DataTable table1 = new DataTable("Sale1");
-        //    table1.Columns.Add("id", typeof(int));
-        //    table1.Columns.Add("name");
-        //    table1.Columns.Add("qty", typeof(int));
-        //    table1.Columns.Add("unit");
-        //    table1.Columns.Add("type");
-        //    table1.Rows.Add(1, "ຕະປູແປດ", 1, "ໂລ", "ເຫຼັກ");
-        //    table1.Rows.Add(2, "ຕະປູຫ້າ", 2, "ໂລ", "ເຫຼັກ");
-        //    table1.Rows.Add(3, "ຕະປູຫົກ", 3, "ໂລ", "ເຫຼັກ");
-        //    table1.Rows.Add(4, "ກະເບື່ອງ", 10, "ແຜ່ນ", "ຫຼັງຄາ");
-        //    table1.Rows.Add(5, "ຫຼົບກະເບື່ອງ", 4, "ແຜ່ນ", "ຫຼັງຄາ");
-        //    table1.Rows.Add(6, "ຊັງກະສີແຜ່ນລຽບ", 12, "ແຜ່ນ", "ຫຼັງຄາ");
-        //    table1.Rows.Add(7, "ຊັງກະສີແຜ່ນລ່ອງ", 20, "ແຜ່ນ", "ຫຼັງຄາ");
-        //    table1.Rows.Add(8, "ສາຍໄຟ 2.5", 3, "ກໍ່", "ໄຟຟ້າ");
-        //    table1.Rows.Add(9, "ຄ້ອນຕີໃຫຍ່", 1, "ອັນ", "ເຄື່ອງມື");
-        //    table1.Rows.Add(10, "ຄ້ອນຕີນ້ອຍ", 2, "ອັນ", "ເຄື່ອງມື");
-        //    table1.Rows.Add(11, "ຄ້ອນປອນ", 1, "ອັນ", "ເຄື່ອງມື");
-        //    table1.Rows.Add(12, "ຕູ້ຈອດຫຼັກ", 1, "ເຄື່ອງ", "ໄຟຟ້າ");
-        //    table1.Rows.Add(52, "ໄຟບີຕັດເຫຼັກ", 2, "ເຄື່ອງ", "ໄຟຟ້າ");
-        //    table1.Rows.Add(63, "ໝືນຕັດເຫຼັກ", 1, "ເຄື່ອງ", "ໄຟຟ້າ");
-        //    table1.Rows.Add(72, "ສະຫວ່ານໄຟຟ້າ", 2, "ເຄື່ອງ", "ໄຟຟ້າ");
-        //    table1.Rows.Add(85, "ສະຫວ່ານແບັກເຕີລີ້", 2, "ເຄື່ອງ", "ໄຟຟ້າ");
-        //    data1.Tables.Add(table1);
-        //    dataGridView1.DataSource = table1;
-        //}
-
         private void LoadOrderDetailId(bool isFristTime)
         {
             var query = $"SELECT p.[prodId], p.[prodName], o.[orderQty], o.[orderQty] as [orderQtys], o.[orderQty] as [orderQtyss], u.[unitName], " + $"p.[prodPrice] as [prodPriceOrder], t.[typeName] " + $"FROM [POSSALE].[dbo].[product] p " + $"INNER JOIN [POSSALE].[dbo].[orderDetail] o ON p.prodId = o.productId " + $"INNER JOIN [POSSALE].[dbo].[unit] u ON p.unitId = u.unitId INNER JOIN [POSSALE].[dbo].[type] t ON p.typeId = t.typeId "
@@ -338,11 +309,14 @@ namespace Construction_System
                 }
 
                 // update the import total price to database
-                var query2 = $"UPDATE [POSSALE].[dbo].[import] SET [totalImport] = (SELECT SUM(importQty * (SELECT prodPrice FROM [POSSALE].[dbo].[product] WHERE prodId = product)) FROM [POSSALE].[dbo].[importDetail] WHERE importId = '{_importId}') WHERE importId = '{_importId}'";
+                var query2 = $"UPDATE [POSSALE].[dbo].[import] SET " +
+                    $"[totalImport] = (SELECT SUM(importQty * (SELECT prodPrice FROM [POSSALE].[dbo].[product] WHERE prodId = product)) " +
+                    $"FROM [POSSALE].[dbo].[importDetail] WHERE importId = '{_importId}') WHERE importId = '{_importId}'";
                 _config.setData(query2);
 
                 // update the order status to 'ອະນຸມັດ' if the import total price is equal to the order total price
-                var query3 = $"UPDATE [POSSALE].[dbo].[order] SET [orderStatus] = 'ອະນຸມັດ' WHERE orderId = '{_order}' AND totalOrder = (SELECT totalImport FROM [POSSALE].[dbo].[import] WHERE importId = '{_importId}')";
+                var query3 = $"UPDATE [POSSALE].[dbo].[order] SET [orderStatus] = 'ອະນຸມັດ' " +
+                    $"WHERE orderId = '{_order}' AND totalOrder = (SELECT totalImport FROM [POSSALE].[dbo].[import] WHERE importId = '{_importId}')";
                 _config.setData(query3);
 
                 MyMessageBox.ShowMessage("ບັນທຶກການນຳເຂົ້າສິນຄ້າສຳເລັດແລ້ວ", "", "ສຳເລັດ", MessageBoxButtons.OK, MessageBoxIcon.None);

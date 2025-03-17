@@ -24,13 +24,13 @@ namespace Construction_System
 
         private void pictureBox2_Click(object sender, EventArgs e)
         {
-            _import.updateQty(Convert.ToInt32(textBox2.Text), Convert.ToInt32(textBox3.Text), int.Parse(_originalQty) - Convert.ToInt32(textBox2.Text), lblId.Text);
+            //_import.updateQty(Convert.ToInt32(textBox2.Text), Convert.ToInt32(textBox3.Text), int.Parse(_originalQty) - Convert.ToInt32(textBox2.Text), lblId.Text);
             this.Close();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            _import.updateQty(Convert.ToInt32(textBox2.Text), Convert.ToInt32(textBox3.Text), int.Parse(_originalQty) - Convert.ToInt32(textBox2.Text), lblId.Text);
+            //_import.updateQty(Convert.ToInt32(textBox2.Text), Convert.ToInt32(textBox3.Text), int.Parse(_originalQty) - Convert.ToInt32(textBox2.Text), lblId.Text);
             this.Close();
         }
 

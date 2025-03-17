@@ -21,7 +21,7 @@ namespace Construction_System
             this.ActiveControl = txtbUesername;
             txtbUesername.Focus();
 
-            txtbUesername.Text = "YAI";
+            txtbUesername.Text = "Yai";
             txtbPassword.Text = "12345678";
         }
 

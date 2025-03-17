@@ -78,6 +78,7 @@ namespace Construction_System
         private void dataGridView1_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
             dataGridView1.Columns["Column14"].DefaultCellStyle.Format = "#,###";
+            dataGridView1.Columns["Column13"].DefaultCellStyle.Format = "dd/MM/yyyy hh:mm:ss tt";
         }
 
         private void dataGridView2_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
@@ -123,16 +124,20 @@ namespace Construction_System
         {
             try
             {
-
-                var query = $"SELECT p.[prodId], p.[prodName], o.[orderQty], o.[orderQty] as [orderQtys], o.[orderQty] as [orderQtyss], u.[unitName], " +
-                            $"(p.[prodPrice] * o.[orderQty]) as [totalPrice], p.[prodPrice] " +
-                            $"FROM [POSSALE].[dbo].[product] p " +
-                            $"INNER JOIN [POSSALE].[dbo].[orderDetail] o ON p.prodId = o.productId " +
-                            $"INNER JOIN [POSSALE].[dbo].[unit] u ON p.unitId = u.unitId " +
-                            $"WHERE o.orderId = '{dataGridView1.Rows[e.RowIndex].Cells["id1"].Value}'";
-                _config.LoadData(query, dataGridView2);
-                SumQty();
-                ShowMessage("ເພີ່ມຂໍ້ມູນສຳເລັດແລ້ວ", "ສຳເລັດ");
+                var senderGrid = (DataGridView)sender;
+                if (senderGrid.Columns[e.ColumnIndex] is DataGridViewImageColumn &&
+                e.RowIndex >= 0 && dataGridView1.Columns[e.ColumnIndex].HeaderCell.Value.ToString() == "ເພີ່ມ")
+                {
+                    var query = $"SELECT p.[prodId], p.[prodName], o.[orderQty], o.[orderQty] as [orderQtys], o.[orderQty] as [orderQtyss], u.[unitName], " +
+                                $"(p.[prodPrice] * o.[orderQty]) as [totalPrice], p.[prodPrice] " +
+                                $"FROM [POSSALE].[dbo].[product] p " +
+                                $"INNER JOIN [POSSALE].[dbo].[orderDetail] o ON p.prodId = o.productId " +
+                                $"INNER JOIN [POSSALE].[dbo].[unit] u ON p.unitId = u.unitId " +
+                                $"WHERE o.orderId = '{dataGridView1.Rows[e.RowIndex].Cells["id1"].Value}'";
+                    _config.LoadData(query, dataGridView2);
+                    SumQty();
+                    ShowMessage("ເພີ່ມຂໍ້ມູນສຳເລັດແລ້ວ", "ສຳເລັດ");
+                }
             }
             catch (Exception ex)
             {
@@ -218,7 +223,7 @@ namespace Construction_System
                 var totalOrder = int.Parse(label2.Text.Split(' ')[0].Replace(",", ""));
 
                 query = $"INSERT INTO [POSSALE].[dbo].[import] ([importId], [whoImport], [importDate], [totalImport], [importFromOrder], [importStatus], [totalPriceImport]) " +
-                        $"VALUES ('{importID}', '{_empId}', '{DateTime.Now:yyyy-MM-dd}', {dataGridView2.RowCount}, '{dataGridView1.CurrentRow.Cells["id1"].Value}', 'ອະນຸມັດ', {totalOrder})";
+                        $"VALUES ('{importID}', '{_empId}', GETDATE(), {dataGridView2.RowCount}, '{dataGridView1.CurrentRow.Cells["id1"].Value}', 'ອະນຸມັດ', {totalOrder})";
                 _config.setData(query);
                 int getQty = 0;
                 foreach (DataGridViewRow row in dataGridView2.Rows)

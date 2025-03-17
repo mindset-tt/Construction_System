@@ -30,13 +30,13 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MImportEdit));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -47,6 +47,15 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel8 = new System.Windows.Forms.Panel();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.Column11 = new System.Windows.Forms.DataGridViewImageColumn();
+            this.Column12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.id1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.orderQtys = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.orderQtyss = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.prodPriceOrder = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel7 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
@@ -68,15 +77,6 @@
             this.importQtys = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.importQtyss = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.prodPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column11 = new System.Windows.Forms.DataGridViewImageColumn();
-            this.Column12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.id1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.orderQtys = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.orderQtyss = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.prodPriceOrder = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel3.SuspendLayout();
             this.panel5.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -250,6 +250,99 @@
             this.dataGridView1.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dataGridView1_DataBindingComplete);
             this.dataGridView1.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dataGridView1_RowPostPaint);
             // 
+            // Column11
+            // 
+            this.Column11.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Column11.FillWeight = 35F;
+            this.Column11.HeaderText = "ເພີ່ມ";
+            this.Column11.Image = ((System.Drawing.Image)(resources.GetObject("Column11.Image")));
+            this.Column11.MinimumWidth = 35;
+            this.Column11.Name = "Column11";
+            this.Column11.ReadOnly = true;
+            this.Column11.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Column11.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Column11.Width = 35;
+            // 
+            // Column12
+            // 
+            this.Column12.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column12.DataPropertyName = "prodName";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.Column12.DefaultCellStyle = dataGridViewCellStyle2;
+            this.Column12.FillWeight = 120F;
+            this.Column12.HeaderText = "ລາຍການ";
+            this.Column12.MinimumWidth = 100;
+            this.Column12.Name = "Column12";
+            this.Column12.ReadOnly = true;
+            // 
+            // Column13
+            // 
+            this.Column13.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column13.DataPropertyName = "orderQty";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.Column13.DefaultCellStyle = dataGridViewCellStyle3;
+            this.Column13.FillWeight = 55F;
+            this.Column13.HeaderText = "ຈຳນວນ";
+            this.Column13.MinimumWidth = 55;
+            this.Column13.Name = "Column13";
+            this.Column13.ReadOnly = true;
+            // 
+            // Column14
+            // 
+            this.Column14.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column14.DataPropertyName = "unitName";
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.Column14.DefaultCellStyle = dataGridViewCellStyle4;
+            this.Column14.FillWeight = 65F;
+            this.Column14.HeaderText = "ຫົວໜ່ວຍ";
+            this.Column14.MinimumWidth = 65;
+            this.Column14.Name = "Column14";
+            this.Column14.ReadOnly = true;
+            // 
+            // Column15
+            // 
+            this.Column15.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column15.DataPropertyName = "typeName";
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.Column15.DefaultCellStyle = dataGridViewCellStyle5;
+            this.Column15.FillWeight = 55F;
+            this.Column15.HeaderText = "ປະເພດ";
+            this.Column15.MinimumWidth = 55;
+            this.Column15.Name = "Column15";
+            this.Column15.ReadOnly = true;
+            // 
+            // id1
+            // 
+            this.id1.DataPropertyName = "prodId";
+            this.id1.HeaderText = "id";
+            this.id1.Name = "id1";
+            this.id1.ReadOnly = true;
+            this.id1.Visible = false;
+            // 
+            // orderQtys
+            // 
+            this.orderQtys.DataPropertyName = "orderQtys";
+            this.orderQtys.HeaderText = "orderQtys";
+            this.orderQtys.Name = "orderQtys";
+            this.orderQtys.ReadOnly = true;
+            this.orderQtys.Visible = false;
+            // 
+            // orderQtyss
+            // 
+            this.orderQtyss.DataPropertyName = "orderQtyss";
+            this.orderQtyss.HeaderText = "orderQtyss";
+            this.orderQtyss.Name = "orderQtyss";
+            this.orderQtyss.ReadOnly = true;
+            this.orderQtyss.Visible = false;
+            // 
+            // prodPriceOrder
+            // 
+            this.prodPriceOrder.DataPropertyName = "prodPriceOrder";
+            this.prodPriceOrder.HeaderText = "prodPriceOrder";
+            this.prodPriceOrder.Name = "prodPriceOrder";
+            this.prodPriceOrder.ReadOnly = true;
+            this.prodPriceOrder.Visible = false;
+            // 
             // panel7
             // 
             this.panel7.Controls.Add(this.label2);
@@ -332,9 +425,8 @@
             this.panel9.Controls.Add(this.button1);
             this.panel9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel9.Location = new System.Drawing.Point(3, 325);
-            this.panel9.Margin = new System.Windows.Forms.Padding(3, 3, 0, 0);
             this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(378, 97);
+            this.panel9.Size = new System.Drawing.Size(375, 94);
             this.panel9.TabIndex = 61;
             // 
             // label3
@@ -342,7 +434,7 @@
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.Font = new System.Drawing.Font("Noto Sans Lao", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.Silver;
-            this.label3.Location = new System.Drawing.Point(162, 0);
+            this.label3.Location = new System.Drawing.Point(159, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(210, 41);
             this.label3.TabIndex = 20;
@@ -368,9 +460,9 @@
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Noto Sans Lao", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.Color.LightGray;
-            this.button1.Location = new System.Drawing.Point(0, 47);
+            this.button1.Location = new System.Drawing.Point(0, 44);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(378, 50);
+            this.button1.Size = new System.Drawing.Size(375, 50);
             this.button1.TabIndex = 18;
             this.button1.Text = "ບັນທຶກ";
             this.button1.UseVisualStyleBackColor = false;
@@ -530,99 +622,6 @@
             this.prodPrice.Name = "prodPrice";
             this.prodPrice.ReadOnly = true;
             this.prodPrice.Visible = false;
-            // 
-            // Column11
-            // 
-            this.Column11.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.Column11.FillWeight = 35F;
-            this.Column11.HeaderText = "ເພີ່ມ";
-            this.Column11.Image = ((System.Drawing.Image)(resources.GetObject("Column11.Image")));
-            this.Column11.MinimumWidth = 35;
-            this.Column11.Name = "Column11";
-            this.Column11.ReadOnly = true;
-            this.Column11.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column11.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.Column11.Width = 35;
-            // 
-            // Column12
-            // 
-            this.Column12.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column12.DataPropertyName = "prodName";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.Column12.DefaultCellStyle = dataGridViewCellStyle2;
-            this.Column12.FillWeight = 120F;
-            this.Column12.HeaderText = "ລາຍການ";
-            this.Column12.MinimumWidth = 100;
-            this.Column12.Name = "Column12";
-            this.Column12.ReadOnly = true;
-            // 
-            // Column13
-            // 
-            this.Column13.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column13.DataPropertyName = "orderQty";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.Column13.DefaultCellStyle = dataGridViewCellStyle3;
-            this.Column13.FillWeight = 55F;
-            this.Column13.HeaderText = "ຈຳນວນ";
-            this.Column13.MinimumWidth = 55;
-            this.Column13.Name = "Column13";
-            this.Column13.ReadOnly = true;
-            // 
-            // Column14
-            // 
-            this.Column14.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column14.DataPropertyName = "unitName";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.Column14.DefaultCellStyle = dataGridViewCellStyle4;
-            this.Column14.FillWeight = 65F;
-            this.Column14.HeaderText = "ຫົວໜ່ວຍ";
-            this.Column14.MinimumWidth = 65;
-            this.Column14.Name = "Column14";
-            this.Column14.ReadOnly = true;
-            // 
-            // Column15
-            // 
-            this.Column15.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column15.DataPropertyName = "typeName";
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.Column15.DefaultCellStyle = dataGridViewCellStyle5;
-            this.Column15.FillWeight = 55F;
-            this.Column15.HeaderText = "ປະເພດ";
-            this.Column15.MinimumWidth = 55;
-            this.Column15.Name = "Column15";
-            this.Column15.ReadOnly = true;
-            // 
-            // id1
-            // 
-            this.id1.DataPropertyName = "prodId";
-            this.id1.HeaderText = "id";
-            this.id1.Name = "id1";
-            this.id1.ReadOnly = true;
-            this.id1.Visible = false;
-            // 
-            // orderQtys
-            // 
-            this.orderQtys.DataPropertyName = "orderQtys";
-            this.orderQtys.HeaderText = "orderQtys";
-            this.orderQtys.Name = "orderQtys";
-            this.orderQtys.ReadOnly = true;
-            this.orderQtys.Visible = false;
-            // 
-            // orderQtyss
-            // 
-            this.orderQtyss.DataPropertyName = "orderQtyss";
-            this.orderQtyss.HeaderText = "orderQtyss";
-            this.orderQtyss.Name = "orderQtyss";
-            this.orderQtyss.ReadOnly = true;
-            this.orderQtyss.Visible = false;
-            // 
-            // prodPriceOrder
-            // 
-            this.prodPriceOrder.DataPropertyName = "prodPriceOrder";
-            this.prodPriceOrder.HeaderText = "prodPriceOrder";
-            this.prodPriceOrder.Name = "prodPriceOrder";
-            this.prodPriceOrder.ReadOnly = true;
-            this.prodPriceOrder.Visible = false;
             // 
             // MImportEdit
             // 

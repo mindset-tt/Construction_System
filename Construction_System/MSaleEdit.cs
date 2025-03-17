@@ -189,13 +189,13 @@ namespace Construction_System
             dataGridView2.ClearSelection();
         }
 
-        //public void updateQtyMS(int qty, int price)
-        //{
-        //    DataGridViewRow rowUp = new DataGridViewRow();
-        //    rowUp = dataGridView2.Rows[selectRowSale];
-        //    rowUp.Cells["Column24"].Value = qty;
-        //    rowUp.Cells["Column26"].Value = price;
-        //}
+        public void updateQtyMS(int qty, int price)
+        {
+            DataGridViewRow rowUp = new DataGridViewRow();
+            rowUp = dataGridView2.Rows[selectRowSale];
+            rowUp.Cells["Column24"].Value = qty;
+            rowUp.Cells["Column26"].Value = price;
+        }
 
         public int selectRowSale;
 

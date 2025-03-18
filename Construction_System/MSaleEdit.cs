@@ -216,7 +216,7 @@ namespace Construction_System
                     getQty += sellQty;
                 }
 
-                long totalSellPrice = long.Parse(label2.Text.Split(' ')[0].Replace(",", ""));
+                long totalSellPrice = long.Parse(label3.Text.Split(' ')[0].Replace(",", ""));
                 _config.setData($"UPDATE [POSSALE].[dbo].[sell] SET totalSell = {getQty}, totalPriceSell = {totalSellPrice} WHERE sellId = '{_sellId}'");
 
                 MyMessageBox.ShowMessage("ບັນທຶກຂາຍສິນຄ້າສຳເລັດແລ້ວ", "", "ສຳເລັດ", MessageBoxButtons.OK, MessageBoxIcon.None);

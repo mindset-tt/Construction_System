@@ -253,7 +253,7 @@ namespace Construction_System
             try
             {
                 //dataProduct();
-                (dataGridView1.DataSource as DataTable).DefaultView.RowFilter = string.Format("unitName LIKE '%{0}%' or productId LIKE '%{0}%' or prodName LIKE '%{0}%'", textBox1.Text);
+                (dataGridView1.DataSource as DataTable).DefaultView.RowFilter = string.Format("unitName LIKE '%{0}%' or prodID LIKE '%{0}%' or prodName LIKE '%{0}%'", textBox1.Text);
 
             }
             catch (Exception ex)

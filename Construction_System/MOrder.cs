@@ -33,7 +33,7 @@ namespace Construction_System
             {
                 filter = "";
             }
-            var query = $"SELECT o.[orderId], e.[empName], o.[orderDate], o.[totalOrder], s.[supplierName], s.[supplierId] " +
+            var query = $"SELECT o.[orderId], o.[whoOrder], o.[orderDate], o.[totalOrder], s.[supplierName], s.[supplierId] " +
                         $"FROM [POSSALE].[dbo].[order] o " +
                         $"INNER JOIN [POSSALE].[dbo].[supplier] s ON o.orderFrom = s.supplierId " +
                         $"INNER JOIN [POSSALE].[dbo].[employee] e ON o.whoOrder = e.empId WHERE o.[orderStatus] = 'ສັ່ງຊື້ແລ້ວ' {filter}";

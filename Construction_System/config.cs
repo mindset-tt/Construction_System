@@ -85,12 +85,12 @@ class config
             cmd = new SqlCommand(sql, con);
             long result = cmd.ExecuteNonQuery(); // Execute the command once and store the result
 
-            // Check if the query is successful or not, if not, show a message box with the error message and rollback the transaction
-            if (result == 0)
-            {
-                ShowMessage("ບໍ່ສາມາດບັນທຶກຂໍ້ມູນໄດ້", "ຂໍ້ມູນບໍ່ຖືກບັນທຶກ");
-                //cmd.Transaction.Rollback();
-            }
+            //// Check if the query is successful or not, if not, show a message box with the error message and rollback the transaction
+            //if (result == 0)
+            //{
+            //    ShowMessage("ບໍ່ສາມາດບັນທຶກຂໍ້ມູນໄດ້", "ຂໍ້ມູນບໍ່ຖືກບັນທຶກ");
+            //    //cmd.Transaction.Rollback();
+            //}
         }
         catch (Exception ex)
         {

@@ -259,9 +259,16 @@ namespace Construction_System
                     _config.setData(query);
                 }
 
-                _config.setData($"UPDATE [POSSALE].[dbo].[import] SET [totalImport] = " +
-                                $"(SELECT SUM(importQty * (SELECT prodPrice FROM [POSSALE].[dbo].[product] WHERE prodId = product)) " +
-                                $"FROM [POSSALE].[dbo].[importDetail] WHERE importId = '{_importId}') WHERE importId = '{_importId}'");
+                _config.setData($"UPDATE i " +
+                $"SET i.totalImport = ( " +
+                $"    SELECT SUM(d.importQty * p.prodPrice) " +
+                $"    FROM [POSSALE].[dbo].[importDetail] d " +
+                $"    INNER JOIN [POSSALE].[dbo].[product] p ON p.prodId = d.product " +
+                $"    WHERE d.importId = i.importId " +
+                $") " +
+                $"FROM [POSSALE].[dbo].[import] i " +
+                $"WHERE i.importId = '{_importId}';");
+
 
                 foreach (DataGridViewRow row in dataGridView2.Rows)
                 {

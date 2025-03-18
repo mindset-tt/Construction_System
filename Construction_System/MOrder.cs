@@ -94,10 +94,10 @@ namespace Construction_System
                 if (dataGridView1.Rows.Count != 0)
                 {
                     label4.Text = "ລວມລາຍການທັງໝົດ:  " + dataGridView1.RowCount.ToString("#,###") + "  ລາຍການ";
-                    //int totalQty = 0;
+                    //long totalQty = 0;
                     //for (int i = 0; i < dataGridView1.RowCount; i++)
                     //{
-                    //    totalQty += Convert.ToInt32(dataGridView1.Rows[i].Cells["Column24"].Value.ToString());
+                    //    totalQty += Convert.ToInt64(dataGridView1.Rows[i].Cells["Column24"].Value.ToString());
                     //}
                     //label2.Text = totalQty.ToString("#,###") + "   ອັນ";
                 }
@@ -124,8 +124,9 @@ namespace Construction_System
         {
             try
             {
-                var filter = $"WHERE e.[empName] LIKE '%{textBox1.Text}%' OR s.[supplierName] LIKE '%{textBox1.Text}%' OR o.[orderDate] LIKE '%{textBox1.Text}%' OR o.[totalOrder] LIKE '%{textBox1.Text}%'";
-                LoadOrders(filter);
+                //var filter = $"WHERE e.[empName] LIKE '%{textBox1.Text}%' OR s.[supplierName] LIKE '%{textBox1.Text}%' OR o.[orderDate] LIKE '%{textBox1.Text}%' OR o.[totalOrder] LIKE '%{textBox1.Text}%'";
+                //LoadOrders(filter);
+                (dataGridView1.DataSource as DataTable).DefaultView.RowFilter = string.Format("empName LIKE '%{0}%' or supplierName LIKE '%{0}%'", textBox1.Text);
                 sumQty();
             }
             catch (Exception ex)

@@ -117,7 +117,7 @@ namespace Construction_System
             try
             {
                 var totalQty = dataGridView2.Rows.Cast<DataGridViewRow>()
-                    .Sum(row => Convert.ToInt32(row.Cells["Column24"].Value));
+                    .Sum(row => Convert.ToInt64(row.Cells["Column24"].Value));
                 label2.Text = $"{totalQty:#,###}   ອັນ";
             }
             catch (Exception ex)
@@ -207,7 +207,7 @@ namespace Construction_System
             }
         }
 
-        public void updateQty(int qty, string proId)
+        public void updateQty(long qty, string proId)
         {
             //dataGridView2.Rows[selectRowOr].Cells["Column24"].Value = qty;
             foreach (DataGridViewRow row in dataGridView2.Rows)
@@ -219,7 +219,7 @@ namespace Construction_System
             }
         }
 
-        public int selectRowOr;
+        public long selectRowOr;
         private void dataGridView2_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             selectRowOr = e.RowIndex;
@@ -256,12 +256,12 @@ namespace Construction_System
             dr.Read();
 
             // If order id is null, set it to OD0001
-            var orderId = dr.HasRows ? $"OD{int.Parse(dr["orderId"].ToString().Substring(2)) + 1:D4}" : "OD0001";
+            var orderId = dr.HasRows ? $"OD{long.Parse(dr["orderId"].ToString().Substring(2)) + 1:D4}" : "OD0001";
             dr.Close();
             _config.closeConnection();
 
             // Get only number on label2
-            var totalOrder = int.Parse(label2.Text.Split(' ')[0].Replace(",", ""));
+            var totalOrder = long.Parse(label2.Text.Split(' ')[0].Replace(",", ""));
             _config.setData("INSERT INTO [POSSALE].[dbo].[order] ([orderId], [whoOrder], [orderDate], [totalOrder], [orderFrom], [orderStatus]) " +
                            $"VALUES ('{orderId}','{_empId}', GETDATE(), {totalOrder}, '{comboBox1.SelectedValue}', 'ສັ່ງຊື້ແລ້ວ')");
 
@@ -273,7 +273,7 @@ namespace Construction_System
                 // With the following code:
                 _config.openConnection();
                 var cmd = new SqlCommand(checkProductQuery, _config.con);
-                var productExists = (int)cmd.ExecuteScalar() > 0;
+                var productExists = (long)cmd.ExecuteScalar() > 0;
 
                 if (!productExists)
                 {

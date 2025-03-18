@@ -39,8 +39,6 @@ namespace Construction_System
         {
             this.Close();
         }
-
-        bool isCollapsed;
         private void button1_Click(object sender, EventArgs e)
         {
             try
@@ -51,7 +49,7 @@ namespace Construction_System
                     return;
                 }
 
-                int inputQty = Convert.ToInt32(textBox2.Text);
+                long inputQty = Convert.ToInt64(textBox2.Text);
                 bool isCollapsed = true;
 
                 if (label1.Text.Contains("ສັ່ງຊື້ສິນຄ້າ"))
@@ -62,7 +60,7 @@ namespace Construction_System
                         {
                             if (row.Cells["id2"].Value.ToString() == lblId.Text)
                             {
-                                int currentQty = Convert.ToInt32(row.Cells["Column24"].Value);
+                                long currentQty = Convert.ToInt64(row.Cells["Column24"].Value);
                                 order.updateQty(_isDataGrid2 ? inputQty : inputQty + currentQty, lblId.Text);
                                 isCollapsed = false;
                                 break;
@@ -82,7 +80,7 @@ namespace Construction_System
                         {
                             if (row.Cells["id2"].Value.ToString() == lblId.Text)
                             {
-                                int currentQty = Convert.ToInt32(row.Cells["Column24"].Value);
+                                long currentQty = Convert.ToInt64(row.Cells["Column24"].Value);
                                 mOrder.updateQty(_isDataGrid2 ? inputQty : inputQty + currentQty, lblId.Text);
                                 isCollapsed = false;
                                 break;

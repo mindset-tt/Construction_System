@@ -20,7 +20,6 @@ namespace Construction_System
         }
 
         private readonly config _config = new config();
-        string[] _removeProduct = null;
         string query = "";
         List<DataGridViewRow> rowsToRemove = new List<DataGridViewRow>();
         HashSet<string> idSet = new HashSet<string>();

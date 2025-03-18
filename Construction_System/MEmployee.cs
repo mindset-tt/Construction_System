@@ -96,7 +96,7 @@ namespace Construction_System
             MEmpEdit mEmpEdit = new MEmpEdit(this);
             try
             {
-                int leght = textBox6.Text.Length;
+                long leght = textBox6.Text.Length;
                 if (textBox2.Text == "" || textBox3.Text == "" || textBox4.Text == "" || textBox5.Text == "" || textBox6.Text == ""
                      || comboBox1.Text == "ກະລຸນາເລືອກ *" || comboBox2.Text == "ກະລຸນາເລືອກ *")
                 {
@@ -128,7 +128,7 @@ namespace Construction_System
             MEmpEdit mEmpEdit = new MEmpEdit(this);
             try
             {
-                int leght = textBox6.Text.Length;
+                long leght = textBox6.Text.Length;
                 if (textBox2.Text == "" || textBox3.Text == "" || textBox4.Text == "" || textBox5.Text == "" || textBox6.Text == ""
                      || comboBox1.Text == "ກະລຸນາເລືອກ *" || comboBox2.Text == "ກະລຸນາເລືອກ *")
                 {

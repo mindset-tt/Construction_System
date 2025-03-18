@@ -9,9 +9,6 @@ namespace Construction_System
     {
         private readonly config _config = new config();
         private readonly string _empId;
-        private string _editQty;
-        private string _totalPrice;
-        private string _dif;
         private string _originalOrder;
 
         public Import(string empId)
@@ -145,7 +142,7 @@ namespace Construction_System
             }
         }
 
-        public void updateQty(int qty, int price, int dif, string proId)
+        public void updateQty(long qty, long price, long dif, string proId)
         {
             //dataGridView2.Rows[selectRowOr].Cells["Column24"].Value = qty;
             foreach (DataGridViewRow row in dataGridView2.Rows)
@@ -154,12 +151,12 @@ namespace Construction_System
                 {
                     row.Cells["Column24"].Value = qty;
                     row.Cells["Column26"].Value = price;
-                    row.Cells["difFromOrder"].Value = qty - int.Parse(_originalOrder);
+                    row.Cells["difFromOrder"].Value = qty - long.Parse(_originalOrder);
                 }
             }
         }
 
-        public int selectRowIm;
+        public long selectRowIm;
         private void dataGridView2_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             selectRowIm = e.RowIndex;
@@ -215,7 +212,7 @@ namespace Construction_System
                 query = "SELECT TOP 1 [importId] FROM [POSSALE].[dbo].[import] ORDER BY [importId] DESC";
                 var dr = _config.getData(query);
                 dr.Read();
-                var importID = dr.HasRows ? $"IMP{int.Parse(dr["importId"].ToString().Substring(3)) + 1:D4}" : "IMP0001";
+                var importID = dr.HasRows ? $"IMP{long.Parse(dr["importId"].ToString().Substring(3)) + 1:D4}" : "IMP0001";
                 dr.Close();
                 _config.closeConnection();
 
@@ -224,11 +221,11 @@ namespace Construction_System
                 query = $"INSERT INTO [POSSALE].[dbo].[import] ([importId], [whoImport], [importDate], [totalImport], [importFromOrder], [importStatus], [totalPriceImport]) " +
                         $"VALUES ('{importID}', '{_empId}', GETDATE(), {dataGridView2.RowCount}, '{dataGridView1.CurrentRow.Cells["id1"].Value}', 'ອະນຸມັດ', {totalOrder})";
                 _config.setData(query);
-                int getQty = 0;
+                long getQty = 0;
                 foreach (DataGridViewRow row in dataGridView2.Rows)
                 {
-                    int CalculateDif() => int.Parse(row.Cells["difFromOrder"].Value.ToString()) - int.Parse(row.Cells["Column24"].Value.ToString());
-                    int dif = CalculateDif() != 0 ? int.Parse(row.Cells["difFromOrder"].Value.ToString()) : CalculateDif();
+                    long CalculateDif() => long.Parse(row.Cells["difFromOrder"].Value.ToString()) - long.Parse(row.Cells["Column24"].Value.ToString());
+                    long dif = CalculateDif() != 0 ? long.Parse(row.Cells["difFromOrder"].Value.ToString()) : CalculateDif();
                     
                     query = $"INSERT INTO [POSSALE].[dbo].[importDetail] ([importId], [product], [importQty], [price], [totalPrice], [difFromOrder]) " +
                                   $"VALUES ('{importID}', '{row.Cells["id2"].Value}', {row.Cells["Column24"].Value}, {row.Cells["price"].Value}, {row.Cells["Column26"].Value}, {dif})";
@@ -238,14 +235,14 @@ namespace Construction_System
                     query = $"SELECT [prodQty] FROM [POSSALE].[dbo].[product] WHERE [prodId] = '{row.Cells["id2"].Value}'";
                     dr = _config.getData(query);
                     dr.Read();
-                    var currentStock = int.Parse(dr["prodQty"].ToString());
+                    var currentStock = long.Parse(dr["prodQty"].ToString());
                     dr.Close();
                     _config.closeConnection();
 
                     // update the stock of the product
-                    query = $"UPDATE [POSSALE].[dbo].[product] SET [prodQty] = {currentStock + int.Parse(row.Cells["Column24"].Value.ToString())} WHERE [prodId] = '{row.Cells["id2"].Value}'";
+                    query = $"UPDATE [POSSALE].[dbo].[product] SET [prodQty] = {currentStock + long.Parse(row.Cells["Column24"].Value.ToString())} WHERE [prodId] = '{row.Cells["id2"].Value}'";
                     _config.setData(query);
-                    getQty += int.Parse(row.Cells["Column24"].Value.ToString());
+                    getQty += long.Parse(row.Cells["Column24"].Value.ToString());
 
                 }
                 //update totalImport in import table
@@ -259,7 +256,7 @@ namespace Construction_System
                 ShowMessage("ການນຳເຂົ້າສິນຄ້າສຳເລັດ", "ສຳເລັດ");
 
 
-                //Printing bill 
+                //Prlonging bill 
                 ImportBillc(importID);
 
                 //clear the datagridview

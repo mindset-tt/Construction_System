@@ -9,7 +9,6 @@ class config
 {
     public SqlConnection con = new SqlConnection();
     SqlCommand cmd = new SqlCommand();
-    SqlDataReader dr;
 
     public config()
     {
@@ -84,13 +83,13 @@ class config
         {
             openConnection();
             cmd = new SqlCommand(sql, con);
-            int result = cmd.ExecuteNonQuery(); // Execute the command once and store the result
+            long result = cmd.ExecuteNonQuery(); // Execute the command once and store the result
 
             // Check if the query is successful or not, if not, show a message box with the error message and rollback the transaction
             if (result == 0)
             {
                 ShowMessage("ບໍ່ສາມາດບັນທຶກຂໍ້ມູນໄດ້", "ຂໍ້ມູນບໍ່ຖືກບັນທຶກ");
-                cmd.Transaction.Rollback();
+                //cmd.Transaction.Rollback();
             }
         }
         catch (Exception ex)
@@ -106,8 +105,8 @@ class config
 
     public void LoadData(string query, ComboBox comboBox, string valueMember, string displayMember, string defaultText = null)
     {
-        try
-        {
+        //try
+        //{
             openConnection();
             SqlDataAdapter adapter = new SqlDataAdapter(query, con);
             DataTable dt = new DataTable();
@@ -123,27 +122,48 @@ class config
             comboBox.ValueMember = valueMember;
             comboBox.DisplayMember = displayMember;
             comboBox.SelectedIndex = 0;
-        }
-        catch (Exception ex)
-        {
-            //ShowMessage($"Error loading data: {ex.Message}", "Error");
-            MyMessageBox.ShowMessage($"Error loading data: {ex}", "", "ເກີດຂໍ້ຜີດພາດ", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-        finally
-        {
-            closeConnection();
-        }
+        closeConnection();
+        //}
+        //catch (Exception ex)
+        //{
+        //    //ShowMessage($"Error loading data: {ex.Message}", "Error");
+        //    MyMessageBox.ShowMessage($"Error loading data: {ex}", "", "ເກີດຂໍ້ຜີດພາດ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //}
+        //finally
+        //{
+        //    closeConnection();
+        //}
     }
 
     public void LoadData(string query, DataGridView dataGridView)
     {
-        try
-        {
+        //try
+        //{
             openConnection();
             SqlDataAdapter adapter = new SqlDataAdapter(query, con);
             DataTable dt = new DataTable();
             adapter.Fill(dt);
             dataGridView.DataSource = dt;
+        closeConnection();
+        //}
+        //catch (Exception ex)
+        //{
+        //    //ShowMessage($"Error loading data: {ex.Message}", "Error");
+        //    MyMessageBox.ShowMessage($"Error loading data: {ex}", "", "ເກີດຂໍ້ຜີດພາດ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //}
+        //finally
+        //{
+        //    closeConnection();
+        //}
+    }
+
+    public void LoadDataToDataTable(string query, DataTable dt)
+    {
+        try
+        {
+            openConnection();
+            SqlDataAdapter adapter = new SqlDataAdapter(query, con);
+            adapter.Fill(dt);
         }
         catch (Exception ex)
         {
@@ -164,7 +184,7 @@ class config
         {
             openConnection();
             cmd = new SqlCommand(sql, con);
-            int result = cmd.ExecuteNonQuery(); // Execute the command once and store the result
+            long result = cmd.ExecuteNonQuery(); // Execute the command once and store the result
 
             // Check if the query is successful or not, if not, show a message box with the error message and rollback the transaction
             if (result == 0)
@@ -190,7 +210,7 @@ class config
         {
             openConnection();
             cmd = new SqlCommand(sql, con);
-            int result = cmd.ExecuteNonQuery(); // Execute the command once and store the result
+            long result = cmd.ExecuteNonQuery(); // Execute the command once and store the result
             MyMessageBox.ShowMessage("ເພິ່ມຂໍ້ມູນສຳເລັດແລ້ວ", "", "ສຳເລັດ", MessageBoxButtons.OK, MessageBoxIcon.None);
             // Check if the query is successful or not, if not, show a message box with the error message and rollback the transaction
             if (result == 0)
@@ -216,7 +236,7 @@ class config
         {
             openConnection();
             cmd = new SqlCommand(sql, con);
-            int result = cmd.ExecuteNonQuery(); // Execute the command once and store the result
+            long result = cmd.ExecuteNonQuery(); // Execute the command once and store the result
             MyMessageBox.ShowMessage("ແກ້ໄຂຂໍ້ມູນສຳເລັດແລ້ວ", "", "ສຳເລັດ", MessageBoxButtons.OK, MessageBoxIcon.None);
 
             // Check if the query is successful or not, if not, show a message box with the error message and rollback the transaction

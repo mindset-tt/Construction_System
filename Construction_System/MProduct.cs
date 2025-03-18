@@ -111,7 +111,7 @@ namespace Construction_System
                 dr.Read();
 
                 // If order id is null, set it to OD0001
-                var prodID = dr.HasRows ? $"P{int.Parse(dr["prodID"].ToString().Substring(1)) + 1:D5}" : "P00001";
+                var prodID = dr.HasRows ? $"P{long.Parse(dr["prodID"].ToString().Substring(1)) + 1:D5}" : "P00001";
                 dr.Close();
                 _config.closeConnection();
 

@@ -27,10 +27,10 @@ namespace Construction_System
                 if (dataGridView1.Rows.Count != 0)
                 {
                     label4.Text = "ລວມລາຍການທັງໝົດ:  " + dataGridView1.RowCount.ToString("#,###") + "  ລາຍການ";
-                    //int totalQty = 0;
+                    //long totalQty = 0;
                     //for (int i = 0; i < dataGridView1.RowCount; i++)
                     //{
-                    //    totalQty += Convert.ToInt32(dataGridView1.Rows[i].Cells["Column24"].Value.ToString());
+                    //    totalQty += Convert.ToInt64(dataGridView1.Rows[i].Cells["Column24"].Value.ToString());
                     //}
                     //label2.Text = totalQty.ToString("#,###") + "   ອັນ";
                 }

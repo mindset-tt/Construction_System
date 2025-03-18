@@ -150,7 +150,7 @@ namespace Construction_System
                 dr.Read();
 
                 // If order id is null, set it to OD0001
-                var supplierId = dr.HasRows ? $"SP{int.Parse(dr["supplierId"].ToString().Substring(2)) + 1:D3}" : "SP001";
+                var supplierId = dr.HasRows ? $"SP{long.Parse(dr["supplierId"].ToString().Substring(2)) + 1:D3}" : "SP001";
                 dr.Close();
                 _config.closeConnection();
 

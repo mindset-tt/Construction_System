@@ -80,7 +80,7 @@ namespace Construction_System
                 MyMessageBox.ShowMessage("ເກີດຂໍ້ຜີດພາດ " + ex + " ", "", "ເກີດຂໍ້ຜີດພາດ", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        public void updateQty(int qty, int price, string id)
+        public void updateQty(long qty, long price, string id)
         {
             //DataGridViewRow rowUp = new DataGridViewRow();
             //rowUp = dataGridView2.Rows[selectRowSale];
@@ -97,7 +97,7 @@ namespace Construction_System
 
         }
 
-        public int selectRowSale;
+        public long selectRowSale;
         private void dataGridView2_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             selectRowSale = e.RowIndex;
@@ -109,10 +109,10 @@ namespace Construction_System
             {
                 if (dataGridView2.Rows.Count >= -1)
                 {
-                    int totalPrice = 0;
+                    long totalPrice = 0;
                     for (int i = 0; i < dataGridView2.RowCount; i++)
                     {
-                        totalPrice += Convert.ToInt32(dataGridView2.Rows[i].Cells["Column26"].Value.ToString());
+                        totalPrice += Convert.ToInt64(dataGridView2.Rows[i].Cells["Column26"].Value.ToString());
                     }
                     label2.Text = totalPrice.ToString("#,###") + " ກີບ";
                 }
@@ -180,34 +180,34 @@ namespace Construction_System
                 var dr = _config.getData(query);
                 dr.Read();
                 // If sell id is null, set it to SE0001
-                var sellId = dr.HasRows ? $"SE{int.Parse(dr["sellId"].ToString().Substring(2)) + 1:D4}" : "SE0001";
+                var sellId = dr.HasRows ? $"SE{long.Parse(dr["sellId"].ToString().Substring(2)) + 1:D4}" : "SE0001";
                 dr.Close();
                 _config.closeConnection();
 
-                var totalPrice = int.Parse(label2.Text.Split(' ')[0].Replace(",", ""));
+                var totalPrice = long.Parse(label2.Text.Split(' ')[0].Replace(",", ""));
 
                 query = $"INSERT INTO [POSSALE].[dbo].[sell] ([sellId], [whoSell], [sellDate], [totalSell], [totalPriceSell], [sellStatus], [reason]) " +
                     $"VALUES ('{sellId}', '{_empId}', GETDATE(), {dataGridView2.RowCount}, {totalPrice}, 'ສຳເລັດ', '')";
                 _config.setData(query);
-                int getQty = 0;
+                long getQty = 0;
 
                 foreach (DataGridViewRow row in dataGridView2.Rows)
                 {
                     query = $"SELECT prodQty FROM [POSSALE].[dbo].[product] WHERE prodID = '{row.Cells["id2"].Value}'";
                     var dr1 = _config.getData(query);
                     dr1.Read();
-                    int qtyFromProduct = int.Parse(dr1["prodQty"].ToString());
+                    long qtyFromProduct = long.Parse(dr1["prodQty"].ToString());
                     dr1.Close();
                     _config.closeConnection();
 
                     query = $"INSERT INTO [POSSALE].[dbo].[sellDetail] ([sellId], [product], [price], [sellQty], [totalPrice]) " +
-                        $"VALUES ('{sellId}', '{row.Cells["id2"].Value}', {int.Parse(row.Cells["Column26"].Value.ToString()) / int.Parse(row.Cells["Column24"].Value.ToString())}, {row.Cells["Column24"].Value}, {int.Parse(row.Cells["Column26"].Value.ToString())})";
+                        $"VALUES ('{sellId}', '{row.Cells["id2"].Value}', {long.Parse(row.Cells["Column26"].Value.ToString()) / long.Parse(row.Cells["Column24"].Value.ToString())}, {row.Cells["Column24"].Value}, {long.Parse(row.Cells["Column26"].Value.ToString())})";
                     _config.setData(query);
 
-                    query = $"UPDATE [POSSALE].[dbo].[product] SET prodQty = {qtyFromProduct - int.Parse(row.Cells["Column24"].Value.ToString())} WHERE prodID = '{row.Cells["id2"].Value}'";
+                    query = $"UPDATE [POSSALE].[dbo].[product] SET prodQty = {qtyFromProduct - long.Parse(row.Cells["Column24"].Value.ToString())} WHERE prodID = '{row.Cells["id2"].Value}'";
                     _config.setData(query);
 
-                    getQty += int.Parse(row.Cells["Column24"].Value.ToString());
+                    getQty += long.Parse(row.Cells["Column24"].Value.ToString());
                 }
 
                 //update total sell in sell table

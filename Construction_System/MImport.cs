@@ -24,11 +24,11 @@ namespace Construction_System
         //{
         //    DataSet data1 = new DataSet("Contruction_System");
         //    DataTable table1 = new DataTable("Order1");
-        //    table1.Columns.Add("idSale", typeof(int));
+        //    table1.Columns.Add("idSale", typeof(long));
         //    table1.Columns.Add("empName");
         //    table1.Columns.Add("datetime");
         //    table1.Columns.Add("supName");
-        //    table1.Columns.Add("qty", typeof(int));
+        //    table1.Columns.Add("qty", typeof(long));
         //    table1.Rows.Add(25, "ນ້ອຍ", "20/02/2025", "ເອສຊີຈີ (SCG)", 15);
         //    table1.Rows.Add(45, "ນ້ອຍ", "19/02/2025", "ຊີເອສຊີ (CSC)", 14);
         //    table1.Rows.Add(54, "ລີຊາ", "21/02/2025", "ສຸວັນນີ", 12);
@@ -75,8 +75,8 @@ namespace Construction_System
         {
             try
             {
-                (dataGridView1.DataSource as DataTable).DefaultView.RowFilter = string.Format("empName LIKE '%{0}%' " +
-                    "or datetime LIKE '%{0}%' or supName LIKE '%{0}%'", textBox1.Text);
+                (dataGridView1.DataSource as DataTable).DefaultView.RowFilter = string.Format("whoImport LIKE '%{0}%' " +
+                    "or importId LIKE '%{0}%' or supplierName LIKE '%{0}%'", textBox1.Text);
                 sumQty();
             }
             catch (Exception ex)

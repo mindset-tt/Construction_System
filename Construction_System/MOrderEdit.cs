@@ -75,7 +75,7 @@ namespace Construction_System
             this.Close();
         }
 
-        public void updateQty(int qty, string proId)
+        public void updateQty(long qty, string proId)
         {
             //dataGridView2.Rows[selectRowOr].Cells["Column24"].Value = qty;
             foreach (DataGridViewRow row in dataGridView2.Rows)
@@ -93,10 +93,10 @@ namespace Construction_System
             {
                 if (dataGridView2.Rows.Count >= -1)
                 {
-                    int totalQty = 0;
+                    long totalQty = 0;
                     foreach (DataGridViewRow row in dataGridView2.Rows)
                     {
-                        totalQty += Convert.ToInt32(row.Cells["Column24"].Value);
+                        totalQty += Convert.ToInt64(row.Cells["Column24"].Value);
                     }
                     label3.Text = totalQty.ToString("#,###") + "   ອັນ";
                 }
@@ -242,7 +242,7 @@ namespace Construction_System
             }
         }
 
-        public int selectRowOr;
+        public long selectRowOr;
         private void dataGridView2_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             selectRowOr = e.RowIndex;
@@ -253,7 +253,7 @@ namespace Construction_System
             try
             {
                 //dataProduct();
-                (dataGridView1.DataSource as DataTable).DefaultView.RowFilter = string.Format("name LIKE '{%0%}' or unit LIKE '%{0}%' or type LIKE '%{0}%'", textBox1.Text);
+                (dataGridView1.DataSource as DataTable).DefaultView.RowFilter = string.Format("unitName LIKE '%{0}%' or productId LIKE '%{0}%' or prodName LIKE '%{0}%'", textBox1.Text);
 
             }
             catch (Exception ex)

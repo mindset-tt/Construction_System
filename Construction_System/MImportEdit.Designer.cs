@@ -667,7 +667,6 @@
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Panel panel8;
-        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel panel6;
@@ -698,5 +697,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn orderQtys;
         private System.Windows.Forms.DataGridViewTextBoxColumn orderQtyss;
         private System.Windows.Forms.DataGridViewTextBoxColumn prodPriceOrder;
+        public System.Windows.Forms.DataGridView dataGridView1;
     }
 }

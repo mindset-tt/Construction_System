@@ -241,7 +241,7 @@
             // Column4
             // 
             this.Column4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column4.DataPropertyName = "empName";
+            this.Column4.DataPropertyName = "whoImport";
             this.Column4.HeaderText = "ພະນັກງານ";
             this.Column4.MinimumWidth = 50;
             this.Column4.Name = "Column4";

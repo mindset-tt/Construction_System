@@ -127,6 +127,7 @@ namespace Construction_System
                             {
                                 getQty = Convert.ToInt64(row.Cells["Column24"].Value);
                                 row.Cells["Column24"].Value = Convert.ToInt64(textBox2.Text); // importQty
+                                row.Cells["Column26"].Value = Convert.ToInt64(textBox2.Text) * Convert.ToInt64(lblPrice.Text); // totalPrice
                                 rowFound = true;
                                 break;
                             }

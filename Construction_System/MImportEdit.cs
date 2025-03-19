@@ -104,7 +104,7 @@ namespace Construction_System
         {
             try
             {
-                (dataGridView1.DataSource as DataTable).DefaultView.RowFilter = $"name LIKE '%{textBox1.Text}%' OR unit LIKE '%{textBox1.Text}%' OR type LIKE '%{textBox1.Text}%'";
+                (dataGridView1.DataSource as DataTable).DefaultView.RowFilter = $"prodName LIKE '%{textBox1.Text}%' OR unitName LIKE '%{textBox1.Text}%'";
         }
             catch (Exception ex)
             {
@@ -277,8 +277,8 @@ namespace Construction_System
                     _config.setData(query);
                 }
 
-                _config.setData($"UPDATE [POSSALE].[dbo].[order] SET [orderStatus] = 'ອະນຸມັດ' " +
-                                $"WHERE orderId = '{_order}' AND totalOrder = (SELECT totalImport FROM [POSSALE].[dbo].[import] WHERE importId = '{_importId}')");
+                //_config.setData($"UPDATE [POSSALE].[dbo].[order] SET [orderStatus] = 'ອະນຸມັດ' " +
+                //                $"WHERE orderId = '{_order}' AND totalOrder = (SELECT totalImport FROM [POSSALE].[dbo].[import] WHERE importId = '{_importId}')");
 
                 MyMessageBox.ShowMessage("ບັນທຶກການນຳເຂົ້າສິນຄ້າສຳເລັດແລ້ວ", "", "ສຳເລັດ", MessageBoxButtons.OK, MessageBoxIcon.None);
                 FM_Bill fM_Bill = new FM_Bill();

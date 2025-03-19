@@ -294,6 +294,7 @@ namespace Construction_System
             //LoadProducts();
             FM_Bill fM_Bill = new FM_Bill();
             OrderBill orderBill = new OrderBill();
+            orderBill.Refresh();
             orderBill.SetParameterValue("OrderID", orderId);
             fM_Bill.crystalReportViewer1.Refresh();
             fM_Bill.crystalReportViewer1.ReportSource = orderBill;

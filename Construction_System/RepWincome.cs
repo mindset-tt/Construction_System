@@ -22,6 +22,7 @@ namespace Construction_System
         private void button1_Click(object sender, EventArgs e)
         {
             ReportWincome Report = new ReportWincome();
+            Report.Refresh();
             Report.SetParameterValue("StartDate", dateTimePicker1.Text);
             Report.SetParameterValue("EndDate", dateTimePicker2.Text);
             Report.SetParameterValue("EmpName", _EMPNAME);

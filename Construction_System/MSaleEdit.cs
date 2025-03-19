@@ -222,10 +222,11 @@ namespace Construction_System
                 MyMessageBox.ShowMessage("ບັນທຶກຂາຍສິນຄ້າສຳເລັດແລ້ວ", "", "ສຳເລັດ", MessageBoxButtons.OK, MessageBoxIcon.None);
 
                 FM_Bill fM_Bill = new FM_Bill();
-                SaleBill orderBill = new SaleBill();
-                orderBill.SetParameterValue("Sellid", _sellId);
-                fM_Bill.crystalReportViewer1.ReportSource = orderBill;
+                SaleBill saleBill = new SaleBill();
+                saleBill.Refresh();
+                saleBill.SetParameterValue("Sellid", _sellId);
                 fM_Bill.crystalReportViewer1.Refresh();
+                fM_Bill.crystalReportViewer1.ReportSource = saleBill;
                 fM_Bill.ShowDialog();
                 Close();
             }

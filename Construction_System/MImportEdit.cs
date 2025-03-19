@@ -148,7 +148,7 @@ namespace Construction_System
                     editQty.textBox2.Text = dataGridView1.Rows[e.RowIndex].Cells["Column13"].Value.ToString();
                     editQty.lblUnit.Text = dataGridView1.Rows[e.RowIndex].Cells["Column14"].Value.ToString();
                     editQty.lblId.Text = dataGridView1.Rows[e.RowIndex].Cells["id1"].Value.ToString();
-                    editQty.label5.Text = _order;
+                    //editQty.label5.Text = _order;
                     editQty.ShowDialog();
                     dataGridView1.ClearSelection();
                 }
@@ -283,6 +283,7 @@ namespace Construction_System
                 MyMessageBox.ShowMessage("ບັນທຶກການນຳເຂົ້າສິນຄ້າສຳເລັດແລ້ວ", "", "ສຳເລັດ", MessageBoxButtons.OK, MessageBoxIcon.None);
                 FM_Bill fM_Bill = new FM_Bill();
                 ImportBill importBill = new ImportBill();
+                importBill.Refresh();
                 importBill.SetParameterValue("importId", _importId);
                 fM_Bill.crystalReportViewer1.ReportSource = importBill;
                 fM_Bill.ShowDialog();

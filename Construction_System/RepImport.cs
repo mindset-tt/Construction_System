@@ -22,6 +22,7 @@ namespace Construction_System
         private void button1_Click(object sender, EventArgs e)
         {
             ReportImport Report = new ReportImport();
+            Report.Refresh();
             if (comboBox2.Text == "ທັງໝົດ")
             {
                 Report.SetParameterValue("StartDate", dateTimePicker1.Text);

@@ -27,32 +27,33 @@ namespace Construction_System
 
         private void button1_Click(object sender, EventArgs e)
         {
-            ReportEmployee reportEmployee = new ReportEmployee();
+            ReportEmployee report = new ReportEmployee();
+            report.Refresh();
 
             switch (comboBox2.Text)
             {
                 case "ທັງໝົດ":
 
-                    reportEmployee.SetParameterValue("emp1", "Admin");
-                    reportEmployee.SetParameterValue("emp2", "User");
+                    report.SetParameterValue("emp1", "Admin");
+                    report.SetParameterValue("emp2", "User");
                     crystalReportViewer1.Refresh();
-                    crystalReportViewer1.ReportSource = reportEmployee;
+                    crystalReportViewer1.ReportSource = report;
                     break;
 
                 case "Admin":
 
-                    reportEmployee.SetParameterValue("emp1", "Admin");
-                    reportEmployee.SetParameterValue("emp2", "Admin");
+                    report.SetParameterValue("emp1", "Admin");
+                    report.SetParameterValue("emp2", "Admin");
                     crystalReportViewer1.Refresh();
-                    crystalReportViewer1.ReportSource = reportEmployee;
+                    crystalReportViewer1.ReportSource = report;
                     break;
 
                 case "User":
 
-                    reportEmployee.SetParameterValue("emp1", "User");
-                    reportEmployee.SetParameterValue("emp2", "User");
+                    report.SetParameterValue("emp1", "User");
+                    report.SetParameterValue("emp2", "User");
                     crystalReportViewer1.Refresh();
-                    crystalReportViewer1.ReportSource = reportEmployee;
+                    crystalReportViewer1.ReportSource = report;
                     break;
 
                 default:

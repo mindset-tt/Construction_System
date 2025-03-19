@@ -283,6 +283,7 @@ namespace Construction_System
         {
             FM_Bill fM_Bill = new FM_Bill();
             ImportBill importBill = new ImportBill();
+            importBill.Refresh();
             importBill.SetParameterValue("importId", id);
             fM_Bill.crystalReportViewer1.Refresh();
             fM_Bill.crystalReportViewer1.ReportSource = importBill;

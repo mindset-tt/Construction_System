@@ -232,6 +232,7 @@ namespace Construction_System
         {
             FM_Bill fM_Bill = new FM_Bill();
             SaleBill saleBill = new SaleBill();
+            saleBill.Refresh();
             saleBill.SetParameterValue("Sellid", id);
             fM_Bill.crystalReportViewer1.Refresh();
             fM_Bill.crystalReportViewer1.ReportSource = saleBill;

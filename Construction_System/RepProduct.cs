@@ -23,6 +23,7 @@ namespace Construction_System
         private void button1_Click(object sender, EventArgs e)
         {
             ReportProduct Report = new ReportProduct();
+            Report.Refresh();
             if (comboBox2.Text == "ທັງໝົດ")
             {
                 Report.SetParameterValue("SupID", "%");

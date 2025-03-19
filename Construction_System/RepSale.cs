@@ -22,6 +22,7 @@ namespace Construction_System
         private void button1_Click(object sender, EventArgs e)
         {
             ReportSale Report = new ReportSale();
+            Report.Refresh();
             if (comboBox2.Text == "ທັງໝົດ")
             {
                 Report.SetParameterValue("empName", comboBox2.Text);

@@ -290,6 +290,7 @@ namespace Construction_System
 
                 FM_Bill fM_Bill = new FM_Bill();
                 OrderBill orderBill = new OrderBill();
+                orderBill.Refresh();
                 orderBill.SetParameterValue("orderId", _order);
                 fM_Bill.crystalReportViewer1.ReportSource = orderBill;
                 fM_Bill.ShowDialog();

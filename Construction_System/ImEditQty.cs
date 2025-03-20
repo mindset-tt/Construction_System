@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Windows.Forms;
+using static Construction_System.POSSALEDataSet;
 
 namespace Construction_System
 {
@@ -111,15 +112,16 @@ namespace Construction_System
                         {
                             long orderQty = long.Parse(orderRow.Cells["Column13"].Value.ToString().Replace(",", ""));
 
-                            if (totalImportedQty >= orderQty)
+                            if (totalImportedQty >= Convert.ToInt64(_originalQty))
                             {
                                 // ✅ Fully imported, remove from order grid
-                                _mImport.dataGridView1.Rows.RemoveAt(i);
+                                //_mImport.dataGridView1.Rows.RemoveAt(i);
+                                orderRow.Cells["Column13"].Value = 0;
                             }
                             else
                             {
                                 // ✅ Update remaining order qty
-                                orderRow.Cells["Column13"].Value = orderQty - totalImportedQty;
+                                orderRow.Cells["Column13"].Value = Convert.ToInt64(_originalQty) - long.Parse(textBox2.Text);
                             }
                             break; // ✅ Done
                         }
@@ -158,14 +160,16 @@ namespace Construction_System
                 if (row.IsNewRow) continue; // ✅ Skip the last empty new row
 
                 string prodId = row.Cells["id2"].Value?.ToString().Trim() ?? string.Empty;
+                long qty = long.Parse(row.Cells["Column24"].Value?.ToString().Trim());
                 string currentLblId = lblId.Text.Trim();
 
                 Console.WriteLine($"[DEBUG] prodId: '{prodId}' | lblId: '{currentLblId}'");
 
                 if (!string.IsNullOrEmpty(prodId) && prodId == currentLblId)
                 {
-                    row.Cells["Column24"].Value = Convert.ToInt64(textBox2.Text); // importQty column
-                    row.Cells["Column26"].Value = Convert.ToInt64(textBox3.Text); // totalPrice column
+                    row.Cells["Column24"].Value = Convert.ToInt64(textBox2.Text) + qty; // importQty column
+                    row.Cells["Column26"].Value = (Convert.ToInt64(textBox2.Text) + qty) * Convert.ToInt64(_price); // totalPrice column
+                    row.Cells["importQtyss"].Value = Convert.ToInt64(_originalQty);
                     rowFound = true;
                     break; // ✅ Found, stop loop
                 }
@@ -179,7 +183,7 @@ namespace Construction_System
                 newRow["prodId"] = lblId.Text;
                 newRow["prodName"] = textBox1.Text;
                 newRow["importQty"] = Convert.ToInt64(textBox2.Text);
-                newRow["importQtys"] = Convert.ToInt64(_originalQty) - Convert.ToInt64(textBox2.Text);
+                newRow["importQtys"] = Convert.ToInt64(_originalQty);
                 newRow["importQtyss"] = Convert.ToInt64(_originalQty);
                 newRow["unitName"] = lblUnit.Text;
                 newRow["totalPrice"] = Convert.ToInt64(textBox3.Text);
@@ -211,14 +215,16 @@ namespace Construction_System
                 {
                     long orderQty = long.Parse(orderRow.Cells["Column13"].Value.ToString().Replace(",", ""));
 
-                    if (totalImportedQty >= orderQty)
+                    if (totalImportedQty >= Convert.ToInt64(_originalQty))
                     {
-                        _mImport.dataGridView1.Rows.RemoveAt(i);
+                        //_mImport.dataGridView1.Rows.RemoveAt(i);
+                        orderRow.Cells["Column13"].Value = 0;
                         break;
                     }
                     else
                     {
-                        orderRow.Cells["Column13"].Value = orderQty - totalImportedQty;
+                        orderRow.Cells["Column13"].Value = Convert.ToInt64(_originalQty) - totalImportedQty;
+                        
                         break;
                     }
                 }

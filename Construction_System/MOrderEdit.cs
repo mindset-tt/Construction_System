@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CrystalDecisions.CrystalReports.Engine;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -271,18 +272,26 @@ namespace Construction_System
             try
             {
                 var query = "";
+                var totalOrder = label3.Text.Split(' ')[0].Replace(",", "");
+                if (totalOrder == "" || totalOrder == "0")
+                {
 
+                    MyMessageBox.ShowMessage("ທ່ານຍັງບໍ່ໄດ້ເພີ່ມສິນຄ້າໃນການສິ່ງຊື້", "", "ຂໍ້ຜິດພາດ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
                 //delete all order detail first
                 query = $"DELETE FROM [POSSALE].[dbo].[orderDetail] WHERE [orderId] = '{_order}'";
                 _config.setData(query);
+                
 
                 foreach (DataGridViewRow row in dataGridView2.Rows)
                 {
-                    query = $"INSERT INTO [POSSALE].[dbo].[orderDetail] ([orderId], [productId], [orderQty]) " +
+                if (row.IsNewRow) continue;
+                query = $"INSERT INTO [POSSALE].[dbo].[orderDetail] ([orderId], [productId], [orderQty]) " +
                         $"VALUES ('{_order}', '{row.Cells["id2"].Value}', {row.Cells["Column24"].Value})";
                     _config.setData(query);
                 }
-                var totalOrder = label3.Text.Replace("   ອັນ", "");
+                
                 query = $"UPDATE [POSSALE].[dbo].[order] SET [totalOrder] = {totalOrder} WHERE [orderId] = '{_order}'";
                 _config.setData(query);
 
@@ -294,6 +303,8 @@ namespace Construction_System
                 orderBill.SetParameterValue("orderId", _order);
                 fM_Bill.crystalReportViewer1.ReportSource = orderBill;
                 fM_Bill.ShowDialog();
+
+                mOrder.LoadOrders("");
                 this.Close();
             }
             catch (Exception ex)

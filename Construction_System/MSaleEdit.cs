@@ -1,5 +1,6 @@
 ﻿using CrystalDecisions.CrystalReports.Engine;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
 
@@ -14,6 +15,9 @@ namespace Construction_System
         private string query;
         public int selectRowSale;
         public int selectRowIm;
+        public DataRow[] deleteRows;
+        List<string> addDataList = new List<string>();
+        List<string> addDataQty = new List<string>();
         public MSaleEdit(MSale msale, string sellId, string empId)
         {
             InitializeComponent();
@@ -21,6 +25,17 @@ namespace Construction_System
             _empId = empId;
             _sellId = sellId;
             label3.Text = "0 ກີບ";
+        }
+
+        // Example method to delete a row and store it
+        public void DeleteRowAndStore(int rowIndex)
+        {
+            if (dataGridView1.DataSource is DataTable dt && rowIndex >= 0)
+            {
+                // Store deleted row before removing
+                deleteRows = new DataRow[] { dt.Rows[rowIndex] };
+                dt.Rows.RemoveAt(rowIndex);
+            }
         }
 
         private void MSaleEdit_Load(object sender, EventArgs e)
@@ -159,7 +174,7 @@ namespace Construction_System
                         editQty.textBox1.Text = dataGridView2.Rows[e.RowIndex].Cells["Column23"].Value.ToString();
                         editQty.textBox2.Text = dataGridView2.Rows[e.RowIndex].Cells["Column24"].Value.ToString();
                         editQty.lblQtyEdit.Text = dataGridView2.Rows[e.RowIndex].Cells["Column24"].Value.ToString();
-                        editQty.lblPrice.Text = dataGridView2.Rows[e.RowIndex].Cells["Column26"].Value.ToString();
+                        editQty.lblPrice.Text = (long.Parse(dataGridView2.Rows[e.RowIndex].Cells["Column26"].Value.ToString()) / long.Parse(dataGridView2.Rows[e.RowIndex].Cells["Column24"].Value.ToString())).ToString();
                         editQty.lblId.Text = dataGridView2.Rows[e.RowIndex].Cells["id2"].Value.ToString();
                         editQty.ShowDialog();
                     }
@@ -187,6 +202,41 @@ namespace Construction_System
         {
             try
             {
+                var item = label3.Text.Split(' ')[0].Replace(",", "");
+                if (item == "" || item == "0")
+                { 
+                    var query = $"SELECT p.[prodID], p.[prodName], s.[sellQty], (s.[sellQty] + p.[prodQty]) as [sellQtyss], " +
+                       $"u.[unitName], (p.[prodPrice] * s.[sellQty]) as [totalPrice], p.[prodPrice] " +
+                       $"FROM [POSSALE].[dbo].[product] p " +
+                       $"INNER JOIN [POSSALE].[dbo].[sellDetail] s ON p.prodID = s.product " +
+                       $"INNER JOIN [POSSALE].[dbo].[unit] u ON p.unitId = u.unitId " +
+                       $"WHERE s.sellId = '{_sellId}'";
+                    var dr1 = _config.getData(query);
+                    //dr1.Read();
+                    while (dr1.Read())
+                    {
+                        addDataList.Add(dr1["prodID"].ToString());
+                        addDataQty.Add(dr1["sellQty"].ToString());
+                    }
+                    dr1.Close();
+
+                    string[] addData = addDataList.ToArray();  // Convert List to string[]
+                    string[] addQty = addDataQty.ToArray();  // Convert List to string[]
+
+                    for (int i = 0; i < addData.Length; i++)
+                    {
+                        _config.setData($"UPDATE [POSSALE].[dbo].[product] SET prodQty = prodQty + {addQty[i]} WHERE prodID = '{addData[i]}'");
+                    }
+
+                    _config.setData($"DELETE FROM [POSSALE].[dbo].[sellDetail] WHERE sellId = '{_sellId}'");
+                    MyMessageBox.ShowMessage("ຍົກເລິກການຂາຍສິນຄ້າສຳເລັດແລ້ວ", "", "ສຳເລັດ", MessageBoxButtons.OK, MessageBoxIcon.None);
+                    Close();
+                    return;
+                }
+
+               
+
+
                 _config.setData($"DELETE FROM [POSSALE].[dbo].[sellDetail] WHERE sellId = '{_sellId}'");
                 long getQty = 0;
 
@@ -207,7 +257,7 @@ namespace Construction_System
                     {
                         if (prodRow.Cells["id1"].Value.ToString() == productId)
                         {
-                            qtyFromProduct = long.Parse(prodRow.Cells["Column13"].Value.ToString());
+                            qtyFromProduct = long.Parse(prodRow.Cells["Column13"].Value.ToString()) + sellQty;
                             break;
                         }
                     }

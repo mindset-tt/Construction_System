@@ -250,12 +250,19 @@ namespace Construction_System
         {
             try
             {
+                var item = label3.Text.Split(' ')[0].Replace(",", "");
+                if (item == "" || item == "0")
+                {
+                    MyMessageBox.ShowMessage("ກະລຸນາເພີ່ມຈຳນວນນຳເຂົ້າສິນຄ້າກ່ອນ", "", "ກວດສອບ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
                 _config.setData($"DELETE FROM [POSSALE].[dbo].[importDetail] WHERE importId = '{_importId}'");
 
                 foreach (DataGridViewRow row in dataGridView2.Rows)
                 {
-                    string query = $"INSERT INTO [POSSALE].[dbo].[importDetail] ([importId], [product], [importQty], [difFromOrder]) " +
-                                   $"VALUES ('{_importId}', '{row.Cells["id2"].Value}', '{row.Cells["Column24"].Value}', '{row.Cells["importQtys"].Value}')";
+                    string query = $"INSERT INTO [POSSALE].[dbo].[importDetail] ([importId], [product], [importQty], [difFromOrder], [price], [totalPrice]) " +
+                                   $"VALUES ('{_importId}', '{row.Cells["id2"].Value}', '{row.Cells["Column24"].Value}', '{row.Cells["importQtys"].Value}', '{row.Cells["prodPrice"].Value}', '{row.Cells["Column26"].Value}')";
                     _config.setData(query);
                 }
 
@@ -270,12 +277,12 @@ namespace Construction_System
                 $"WHERE i.importId = '{_importId}';");
 
 
-                foreach (DataGridViewRow row in dataGridView2.Rows)
-                {
-                    string query = $"UPDATE [POSSALE].[dbo].[orderDetail] SET [orderQty] = [orderQty] - {row.Cells["Column24"].Value} " +
-                                   $"WHERE productId = '{row.Cells["id2"].Value}' AND orderId = '{_order}'";
-                    _config.setData(query);
-                }
+                //foreach (DataGridViewRow row in dataGridView2.Rows)
+                //{
+                //    //string query = $"UPDATE [POSSALE].[dbo].[orderDetail] SET [orderQty] = [orderQty] - {row.Cells["Column24"].Value} " +
+                //    //               $"WHERE productId = '{row.Cells["id2"].Value}' AND orderId = '{_order}'";
+                //    //_config.setData(query);
+                //}
 
                 //_config.setData($"UPDATE [POSSALE].[dbo].[order] SET [orderStatus] = 'ອະນຸມັດ' " +
                 //                $"WHERE orderId = '{_order}' AND totalOrder = (SELECT totalImport FROM [POSSALE].[dbo].[import] WHERE importId = '{_importId}')");

@@ -14,6 +14,7 @@ namespace Construction_System
     {
         Order order;
         MOrderEdit mOrder;
+        MOrder mOrder1;
         private string _idSup;
         private bool _isOrderPage;
         private bool _isDataGrid2 = false;
@@ -104,6 +105,8 @@ namespace Construction_System
                             };
                             mOrder.AddProductToDataGridView(data);
                         }
+
+                        
                     }
 
                     MyMessageBox.ShowMessage("ເພີ່ມຂໍ້ມູນສຳເລັດແລ້ວ", "", "ສຳເລັດ", MessageBoxButtons.OK, MessageBoxIcon.None);

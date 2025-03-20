@@ -10,7 +10,7 @@ namespace Construction_System
     internal class MyMessageBox
     {
         public static System.Windows.Forms.DialogResult ShowMessage(string message, string caption, string tital, System.Windows.Forms.MessageBoxButtons button, System.Windows.Forms.MessageBoxIcon icon)
-        {
+            {
             System.Windows.Forms.DialogResult dlgResult = System.Windows.Forms.DialogResult.None;
             switch (button)
             {

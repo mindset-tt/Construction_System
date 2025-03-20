@@ -270,10 +270,11 @@ namespace Construction_System
                 var productId = row.Cells["id2"].Value.ToString();
                 var checkProductQuery = $"SELECT COUNT(*) FROM [POSSALE].[dbo].[product] WHERE prodID = '{productId}'";
 
-                // With the following code:
-                _config.openConnection();
-                var cmd = new SqlCommand(checkProductQuery, _config.con);
-                var productExists = (long)cmd.ExecuteScalar() > 0;
+                var dr2 = _config.getData(checkProductQuery);
+                dr2.Read();
+                Console.WriteLine(dr2[0]);
+                var productExists = Convert.ToInt64(dr2[0]) > 0;
+                dr2.Close();
 
                 if (!productExists)
                 {

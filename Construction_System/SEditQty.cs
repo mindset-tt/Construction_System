@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Web.Services.Description;
 using System.Web.UI.WebControls;
 using System.Windows.Forms;
+using static Construction_System.POSSALEDataSet;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Construction_System
@@ -20,6 +21,7 @@ namespace Construction_System
         private bool isSale = false; private bool isMSale = false;
         private string _qtyInStore;
         private bool _fromDataGrid1 = false;
+        //private DataRow[] _deleteRow;
         public SEditQty(Sale sale, MSaleEdit mSale, string qtyInStore, bool fromDataGrid1)
         {
             InitializeComponent();
@@ -98,6 +100,7 @@ namespace Construction_System
                     }
                     else
                     {
+                        DataTable orderTable = mSale.dataGridView1.DataSource as DataTable;
                         // ✅ Check if requested import quantity exceeds available store quantity
                         if (long.Parse(textBox2.Text) > long.Parse(_qtyInStore))
                         {
@@ -125,6 +128,7 @@ namespace Construction_System
                             string prodId = row.Cells["id2"].Value?.ToString()?.Trim() ?? string.Empty;
                             if (prodId == currentProdId)
                             {
+                                
                                 getQty = Convert.ToInt64(row.Cells["Column24"].Value);
                                 row.Cells["Column24"].Value = Convert.ToInt64(textBox2.Text); // importQty
                                 row.Cells["Column26"].Value = Convert.ToInt64(textBox2.Text) * Convert.ToInt64(lblPrice.Text); // totalPrice
@@ -144,7 +148,8 @@ namespace Construction_System
                             DataRow newRow = dataTable.NewRow();
                             newRow["prodID"] = lblId.Text;
                             newRow["prodName"] = textBox1.Text;
-                            newRow["sellQtyss"] = Convert.ToInt64(textBox2.Text) + Convert.ToInt64(_qtyInStore);
+                            //newRow["sellQtyss"] = Convert.ToInt64(textBox2.Text) + Convert.ToInt64(_qtyInStore);
+                            newRow["sellQtyss"] = Convert.ToInt64(_qtyInStore);
                             newRow["sellQty"] = Convert.ToInt64(textBox2.Text);
                             newRow["unitName"] = lblUnit.Text;
                             newRow["totalPrice"] = Convert.ToInt64(lblPrice.Text) * Convert.ToInt64(textBox2.Text);
@@ -164,7 +169,7 @@ namespace Construction_System
                                 totalImportedQty += Convert.ToInt64(row.Cells["Column24"].Value);
                             }
                         }
-
+                        
                         // ✅ Update dataGridView1 (order grid) - loop backward for safe deletion
                         for (int i = mSale.dataGridView1.Rows.Count - 1; i >= 0; i--)
                         {
@@ -179,7 +184,12 @@ namespace Construction_System
                                 if (totalImportedQty >= orderQty)
                                 {
                                     // ✅ Fully imported, remove from order grid
-                                    mSale.dataGridView1.Rows.RemoveAt(i);
+                                    //mSale.dataGridView1.Rows.RemoveAt(i);
+
+                                    orderRow.Cells["Column13"].Value = 0;
+
+                                    // just make that row invisible
+                                    //orderRow.Visible = false;
                                 }
                                 else
                                 {

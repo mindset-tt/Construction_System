@@ -23,7 +23,12 @@ namespace Construction_System
             _empId = empId;
         }
 
-        private void LoadOrders(string filter = "")
+        private void MOrder_Load(object sender, EventArgs e)
+        {
+            //dataOrderBill();
+        }
+
+        public void LoadOrders(string filter = "")
         {
             if (filter != "")
             {
@@ -40,10 +45,6 @@ namespace Construction_System
             _config.LoadData(query, dataGridView1);
         }
 
-        private void MOrder_Load(object sender, EventArgs e)
-        {
-            //dataOrderBill();
-        }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -126,7 +127,7 @@ namespace Construction_System
             {
                 //var filter = $"WHERE e.[empName] LIKE '%{textBox1.Text}%' OR s.[supplierName] LIKE '%{textBox1.Text}%' OR o.[orderDate] LIKE '%{textBox1.Text}%' OR o.[totalOrder] LIKE '%{textBox1.Text}%'";
                 //LoadOrders(filter);
-                (dataGridView1.DataSource as DataTable).DefaultView.RowFilter = string.Format("empName LIKE '%{0}%' or supplierName LIKE '%{0}%'", textBox1.Text);
+                (dataGridView1.DataSource as DataTable).DefaultView.RowFilter = string.Format("orderId LIKE '%{0}%' or whoOrder LIKE '%{0}%' or supplierName LIKE '%{0}%'", textBox1.Text);
                 sumQty();
             }
             catch (Exception ex)

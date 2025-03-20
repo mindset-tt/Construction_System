@@ -69,7 +69,7 @@ namespace Construction_System
                     editQty.textBox1.Text = dataGridView2.Rows[e.RowIndex].Cells["Column23"].Value.ToString();
                     editQty.textBox2.Text = dataGridView2.Rows[e.RowIndex].Cells["Column24"].Value.ToString();
                     editQty.lblQtyEdit.Text = dataGridView2.Rows[e.RowIndex].Cells["Column24"].Value.ToString();
-                    editQty.lblPrice.Text = dataGridView2.Rows[e.RowIndex].Cells["Column26"].Value.ToString();
+                    editQty.lblPrice.Text = (long.Parse(dataGridView2.Rows[e.RowIndex].Cells["Column26"].Value.ToString()) / long.Parse(dataGridView2.Rows[e.RowIndex].Cells["Column24"].Value.ToString())).ToString();
                     editQty.lblId.Text = dataGridView2.Rows[e.RowIndex].Cells["id2"].Value.ToString();
                     editQty.ShowDialog();
                 }

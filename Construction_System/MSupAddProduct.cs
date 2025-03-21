@@ -21,10 +21,10 @@ namespace Construction_System
 
         private readonly config _config = new config();
         string query = "";
-        List<DataGridViewRow> rowsToRemove = new List<DataGridViewRow>();
-        HashSet<string> idSet = new HashSet<string>();
         private void LoadProducts(string filter = "WHERE p.[cancel] = 'no'")
         {
+            List<DataGridViewRow> rowsToRemove = new List<DataGridViewRow>();
+            HashSet<string> idSet = new HashSet<string>();
             query = $"SELECT p.[prodID], p.[prodName], t.[typeName], u.[unitName] FROM " +
                 "[POSSALE].[dbo].[product] p " +
                 "INNER JOIN [POSSALE].[dbo].[type] t ON p.typeId = t.typeId " +
@@ -52,7 +52,6 @@ namespace Construction_System
             }
 
             rowsToRemove.Clear();
-            textBox1.Text = "";
         }
 
 

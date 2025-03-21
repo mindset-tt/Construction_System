@@ -253,7 +253,7 @@ namespace Construction_System
                 var item = label3.Text.Split(' ')[0].Replace(",", "");
                 if (item == "" || item == "0")
                 {
-                    MyMessageBox.ShowMessage("ກະລຸນາເພີ່ມຈຳນວນນຳເຂົ້າສິນຄ້າກ່ອນ", "", "ກວດສອບ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MyMessageBox.ShowMessage("ຂໍອະໄພ, ກະລຸນາເພີ່ມລາຍການສິນຄ້າໃນການນຳເຂົ້າກ່ອນບັນທຶກຂໍ້ມູນ", "", "ກວດສອບ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -287,7 +287,7 @@ namespace Construction_System
                 //_config.setData($"UPDATE [POSSALE].[dbo].[order] SET [orderStatus] = 'ອະນຸມັດ' " +
                 //                $"WHERE orderId = '{_order}' AND totalOrder = (SELECT totalImport FROM [POSSALE].[dbo].[import] WHERE importId = '{_importId}')");
 
-                MyMessageBox.ShowMessage("ບັນທຶກການນຳເຂົ້າສິນຄ້າສຳເລັດແລ້ວ", "", "ສຳເລັດ", MessageBoxButtons.OK, MessageBoxIcon.None);
+                MyMessageBox.ShowMessage("ບັນທຶກການແກ້ໄຂຂໍ້ມູນການນຳເຂົ້າສິນຄ້າສຳເລັດແລ້ວ", "", "ສຳເລັດ", MessageBoxButtons.OK, MessageBoxIcon.None);
                 FM_Bill fM_Bill = new FM_Bill();
                 ImportBill importBill = new ImportBill();
                 importBill.Refresh();

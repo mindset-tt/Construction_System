@@ -20,24 +20,6 @@ namespace Construction_System
             _empId = empId;
         }
 
-        //private void dataImportBill()
-        //{
-        //    DataSet data1 = new DataSet("Contruction_System");
-        //    DataTable table1 = new DataTable("Order1");
-        //    table1.Columns.Add("idSale", typeof(long));
-        //    table1.Columns.Add("empName");
-        //    table1.Columns.Add("datetime");
-        //    table1.Columns.Add("supName");
-        //    table1.Columns.Add("qty", typeof(long));
-        //    table1.Rows.Add(25, "ນ້ອຍ", "20/02/2025", "ເອສຊີຈີ (SCG)", 15);
-        //    table1.Rows.Add(45, "ນ້ອຍ", "19/02/2025", "ຊີເອສຊີ (CSC)", 14);
-        //    table1.Rows.Add(54, "ລີຊາ", "21/02/2025", "ສຸວັນນີ", 12);
-        //    table1.Rows.Add(67, "ນ້ອຍ", "19/02/2025", "ຊີເອສຊີ (CSC)", 18);
-        //    table1.Rows.Add(68, "ນ້ອຍ", "19/02/2025", "ຊີເອສຊີ (CSC)", 140);
-        //    data1.Tables.Add(table1);
-        //    dataGridView1.DataSource = table1;
-        //}
-
         private void LoadData()
         {
             var query = "SELECT TOP (1000) [importId] ,[whoImport] ,[importDate] ,[totalImport] ,[importFromOrder] ,sp.[supplierName] FROM [POSSALE].[dbo].[import] i inner join [POSSALE].[dbo].[order] o on i.[importFromOrder] = o.orderId left join [POSSALE].[dbo].[supplier] sp on o.orderFrom = sp.supplierId where importStatus = 'ອະນຸມັດ'";
@@ -131,7 +113,7 @@ namespace Construction_System
         private void dataGridView1_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
             dataGridView1.ClearSelection();
-            dataGridView1.Columns["Column6"].DefaultCellStyle.Format = "#,###";
+            dataGridView1.Columns["Column7"].DefaultCellStyle.Format = "#,###";
             dataGridView1.Columns["Column5"].DefaultCellStyle.Format = "dd/MM/yyyy hh:mm:ss tt";
         }
     }

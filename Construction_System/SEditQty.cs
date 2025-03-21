@@ -51,7 +51,7 @@ namespace Construction_System
             {
                 if (string.IsNullOrWhiteSpace(textBox2.Text) || textBox2.Text == "0")
                 {
-                    MyMessageBox.ShowMessage("ທ່ານໄດ້ປ້ອນຂໍ້ມູນຈຳນວນຖືກຕ້ອງແລ້ວ ຫຼື ບໍ່?", "", "ກວດສອບ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MyMessageBox.ShowMessage("ຂໍອະໄພ, ທ່ານໄດ້ປ້ອນຂໍ້ມູນຈຳນວນຖືກຕ້ອງແລ້ວ ຫຼື ບໍ່?", "", "ກວດສອບ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -60,7 +60,7 @@ namespace Construction_System
 
                 if (inputQty > qtyInStore)
                 {
-                    MyMessageBox.ShowMessage("ຈຳນວນທີ່ເພີ່ມຫຼາຍກວ່າຈຳນວນທີ່ມີໃນຮ້ານ", "", "ຄໍາຖາມ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MyMessageBox.ShowMessage("ຂໍອະໄພ, ຈຳນວນທີ່ທ່ານເພີ່ມຫຼາຍກວ່າຈຳນວນທີ່ມີໃນຮ້ານ", "", "ກວດສອບ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -77,7 +77,7 @@ namespace Construction_System
 
                                 if (totalQty > qtyInStore)
                                 {
-                                    MyMessageBox.ShowMessage("ຈຳນວນທີ່ເພີ່ມຫຼາຍກວ່າຈຳນວນທີ່ມີໃນຮ້ານ", "", "ຄໍາຖາມ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    MyMessageBox.ShowMessage("ຂໍອະໄພ, ຈຳນວນທີ່ທ່ານເພີ່ມຫຼາຍກວ່າຈຳນວນທີ່ມີໃນຮ້ານ", "", "ກວດສອບ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                     return;
                                 }
 
@@ -104,14 +104,14 @@ namespace Construction_System
                         // ✅ Check if requested import quantity exceeds available store quantity
                         if (long.Parse(textBox2.Text) > long.Parse(_qtyInStore))
                         {
-                            MyMessageBox.ShowMessage("ຈຳນວນທີ່ເພີ່ມຫຼາຍກວ່າຈຳນວນທີ່ມີໃນຮ້ານ", "", "ຄໍາເຕືອນ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            MyMessageBox.ShowMessage("ຂໍອະໄພ, ຈຳນວນທີ່ທ່ານເພີ່ມຫຼາຍກວ່າຈຳນວນທີ່ມີໃນຮ້ານ", "", "ກວດສອບ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             return;
                         }
 
                         // ✅ Ensure DataTable is available as DataSource of dataGridView2
                         if (!(mSale.dataGridView2.DataSource is DataTable dataTable))
                         {
-                            MyMessageBox.ShowMessage("ບໍ່ພົບ DataTable", "", "ຜິດພາດ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MyMessageBox.ShowMessage("ຂໍອະໄພ, ບໍ່ພົບ DataTable", "", "ຜິດພາດ", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             return;
                         }
 
@@ -200,7 +200,7 @@ namespace Construction_System
                             }
                         }
 
-                        MyMessageBox.ShowMessage("ແກ້ໄຂສຳເລັດ", "", "ສຳເລັດ", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MyMessageBox.ShowMessage("ແກ້ໄຂຂໍ້ມູນສຳເລັດແລ້ວ", "", "ສຳເລັດ", MessageBoxButtons.OK, MessageBoxIcon.None);
                         Close();
                     }
 

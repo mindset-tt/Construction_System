@@ -59,16 +59,16 @@ namespace Construction_System
             }
         }
 
-        private void dataSaleBill()
+        public void dataSaleBill()
         {
             var query = "SELECT [sellId] ,[whoSell] ,[sellDate] ,[totalSell] ,[totalPriceSell] FROM [dbo].[sell] where sellStatus = 'ສຳເລັດ'";
             _config.LoadData(query, dataGridView1);
+            sumQty();
         }
 
         private void MSale_Load(object sender, EventArgs e)
         {
             dataSaleBill();
-            sumQty();
         }
 
         private void dataGridView1_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)

@@ -62,6 +62,7 @@ namespace Construction_System
             textBox6.Text = "";
             comboBox1.Text = "ກະລຸນາເລືອກ *";
             comboBox2.Text = "ກະລຸນາເລືອກ *";
+            emID = "";
             sumQty();
         }
 
@@ -217,6 +218,7 @@ namespace Construction_System
             }
         }
 
+        public string emID, emPass;
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             Checkcellclick = true;
@@ -227,31 +229,26 @@ namespace Construction_System
             textBox5.Text = dataGridView1.CurrentRow.Cells["Column8"].Value.ToString();
             textBox6.Text = dataGridView1.CurrentRow.Cells["Column9"].Value.ToString();
             comboBox2.Text = dataGridView1.CurrentRow.Cells["Column7"].Value.ToString();
+            emID = dataGridView1.CurrentRow.Cells["Column8"].Value.ToString();
+            emPass = dataGridView1.CurrentRow.Cells["Column6"].Value.ToString();
         }
 
-        private void textBox4_TextChanged(object sender, EventArgs e)
-        {
-            //string s = textBox4.Text;
-            //if (s.Length >= 4)
-            //{
-            //    double sAsD = double.Parse(s);
-            //    textBox4.Text = string.Format("{0:#,###}", sAsD).ToString();
-            //}
-            //if (textBox4.Text.Length > 1)
-            //    textBox4.SelectionStart = textBox4.Text.Length;
-            //textBox4.SelectionLength = 0;
-        }
+        //private void textBox4_TextChanged(object sender, EventArgs e)
+        //{
+        //    //string s = textBox4.Text;
+        //    //if (s.Length >= 4)
+        //    //{
+        //    //    double sAsD = double.Parse(s);
+        //    //    textBox4.Text = string.Format("{0:#,###}", sAsD).ToString();
+        //    //}
+        //    //if (textBox4.Text.Length > 1)
+        //    //    textBox4.SelectionStart = textBox4.Text.Length;
+        //    //textBox4.SelectionLength = 0;
+        //}
 
-        private void checkBox1_CheckedChanged_1(object sender, EventArgs e)
-        {
-            if (checkBox1.Checked)
-            {
-                textBox6.UseSystemPasswordChar = false;
-            }
-            else
-            {
-                textBox6.UseSystemPasswordChar = true;
-            }
-        }
+        //private void checkBox1_CheckedChanged_1(object sender, EventArgs e)
+        //{
+
+        //}
     }
 }

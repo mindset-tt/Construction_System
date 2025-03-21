@@ -55,7 +55,7 @@ namespace Construction_System
         {
             if (MyMessageBox.ShowMessage("ທ່ານຕ້ອງການອອກຈາກລະບົບແທ້ ຫຼື ບໍ່?", "", "ອອກຈາກລະບົບ", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                Application.Restart();
+                Application.Exit();
             }
         }
 
@@ -75,11 +75,13 @@ namespace Construction_System
 
         private void btnMaData_Click(object sender, EventArgs e)
         {
+            activeForm.Close();
             showSubMenu(panelData);
         }
 
         private void btnReport_Click(object sender, EventArgs e)
         {
+            activeForm.Close();
             showSubMenu(panelReport);
         }
 

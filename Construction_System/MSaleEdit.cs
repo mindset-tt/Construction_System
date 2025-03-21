@@ -229,6 +229,7 @@ namespace Construction_System
                     }
 
                     _config.setData($"DELETE FROM [POSSALE].[dbo].[sellDetail] WHERE sellId = '{_sellId}'");
+                    _config.setData($"DELETE FROM [POSSALE].[dbo].[sell] WHERE sellId = '{_sellId}'");
                     MyMessageBox.ShowMessage("ຍົກເລິກການຂາຍສິນຄ້າສຳເລັດແລ້ວ", "", "ສຳເລັດ", MessageBoxButtons.OK, MessageBoxIcon.None);
                     Close();
                     return;
@@ -269,7 +270,7 @@ namespace Construction_System
                 long totalSellPrice = long.Parse(label3.Text.Split(' ')[0].Replace(",", ""));
                 _config.setData($"UPDATE [POSSALE].[dbo].[sell] SET totalSell = {getQty}, totalPriceSell = {totalSellPrice} WHERE sellId = '{_sellId}'");
 
-                MyMessageBox.ShowMessage("ບັນທຶກຂາຍສິນຄ້າສຳເລັດແລ້ວ", "", "ສຳເລັດ", MessageBoxButtons.OK, MessageBoxIcon.None);
+                MyMessageBox.ShowMessage("ບັນທຶກການແກ້ໄຂຂໍ້ມູນການຂາຍສິນຄ້າສຳເລັດແລ້ວ", "", "ສຳເລັດ", MessageBoxButtons.OK, MessageBoxIcon.None);
 
                 FM_Bill fM_Bill = new FM_Bill();
                 SaleBill saleBill = new SaleBill();
@@ -279,16 +280,12 @@ namespace Construction_System
                 fM_Bill.crystalReportViewer1.ReportSource = saleBill;
                 fM_Bill.ShowDialog();
                 Close();
+                msale.dataSaleBill();
             }
             catch (Exception ex)
             {
                 MyMessageBox.ShowMessage("ເກີດຜິດພາດ " + ex, "", "ຜິດພາດ", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-        private void tableLayoutPanel2_Paint(object sender, PaintEventArgs e)
-        {
-
         }
     }
 }

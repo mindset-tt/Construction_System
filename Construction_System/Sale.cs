@@ -171,7 +171,7 @@ namespace Construction_System
             {
                 if (dataGridView2.RowCount == 0)
                 {
-                    MyMessageBox.ShowMessage("ທ່ານຍັງບໍ່ໄດ້ເພີ່ມສິນຄ້າໃນການຂາຍ", "", "ເກີດຂໍ້ຜີດພາດ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MyMessageBox.ShowMessage("ຂໍອະໄພ, ກະລຸນາເພີ່ມລາຍການສິນຄ້າກ່ອນຂາຍສິນຄ້າ", "", "ເກີດຂໍ້ຜີດພາດ", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
@@ -186,7 +186,7 @@ namespace Construction_System
 
                 var totalPrice = long.Parse(label2.Text.Split(' ')[0].Replace(",", ""));
 
-                query = $"INSERT INTO [POSSALE].[dbo].[sell] ([sellId], [whoSell], [sellDate], [totalSell], [totalPriceSell], [sellStatus], [reason]) " +
+                    query = $"INSERT INTO [POSSALE].[dbo].[sell] ([sellId], [whoSell], [sellDate], [totalSell], [totalPriceSell], [sellStatus], [reason]) " +
                     $"VALUES ('{sellId}', '{_empId}', GETDATE(), {dataGridView2.RowCount}, {totalPrice}, 'ສຳເລັດ', '')";
                 _config.setData(query);
                 long getQty = 0;

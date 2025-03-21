@@ -46,7 +46,7 @@ namespace Construction_System
             {
                 if (string.IsNullOrWhiteSpace(textBox2.Text) || textBox2.Text == "0")
                 {
-                    MyMessageBox.ShowMessage("ທ່ານໄດ້ປ້ອນຂໍ້ມູນຈຳນວນຖືກຕ້ອງແລ້ວ ຫຼື ບໍ່?", "", "ກວດສອບ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MyMessageBox.ShowMessage("ຂໍອະໄພ, ທ່ານໄດ້ປ້ອນຂໍ້ມູນຈຳນວນຖືກຕ້ອງແລ້ວ ຫຼື ບໍ່?", "", "ກວດສອບ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 

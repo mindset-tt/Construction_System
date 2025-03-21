@@ -34,7 +34,7 @@ namespace Construction_System
         {
             if (string.IsNullOrEmpty(textBox2.Text) || long.Parse(textBox2.Text) < 0)
             {
-                MyMessageBox.ShowMessage("ກະລຸນາປ້ອນຈຳນວນສິນຄ້າ", "", "ຄໍາຖາມ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MyMessageBox.ShowMessage("ຂໍອະໄພ, ທ່ານໄດ້ປ້ອນຂໍ້ມູນຈຳນວນຖືກຕ້ອງແລ້ວ ຫຼື ບໍ່?", "", "ກວດສອບ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -51,7 +51,7 @@ namespace Construction_System
         {
             if (string.IsNullOrEmpty(textBox2.Text) || textBox2.Text == "0" || string.IsNullOrEmpty(textBox3.Text) || textBox3.Text == "0")
             {
-                MyMessageBox.ShowMessage("ກວດສອບຂໍ້ມູນທີ່ປ້ອນ", "", "ຄໍາເຕືອນ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MyMessageBox.ShowMessage("ຂໍອະໄພ, ທ່ານໄດ້ປ້ອນຂໍ້ມູນຈຳນວນຖືກຕ້ອງແລ້ວ ຫຼື ບໍ່?", "", "ກວດສອບ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -60,24 +60,24 @@ namespace Construction_System
                 case "ແກ້ໄຂຂໍ້ມູນນຳເຂົ້າສິນຄ້າ":
                     if (long.Parse(textBox2.Text) > long.Parse(_originalQty))
                     {
-                        MyMessageBox.ShowMessage("ຈຳນວນເພີ່ມເກີນຈຳນວນທີ່ສັ່ງ", "", "ຄໍາເຕືອນ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MyMessageBox.ShowMessage("ຂໍອະໄພ, ຈຳນວນທີ່ທ່ານເພີ່ມຫຼາຍກວ່າຈຳນວນທີ່ສັ່ງຊື້", "", "ກວດສອບ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
                     _import.updateQty(Convert.ToInt64(textBox2.Text), Convert.ToInt64(textBox3.Text), long.Parse(_originalQty) - Convert.ToInt64(textBox2.Text), lblId.Text);
-                    MyMessageBox.ShowMessage("ແກ້ໄຂສຳເລັດ", "", "ສຳເລັດ", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MyMessageBox.ShowMessage("ແກ້ໄຂຂໍ້ມູນສຳເລັດແລ້ວ", "", "ສຳເລັດ", MessageBoxButtons.OK, MessageBoxIcon.None);
                     Close();
                     break;
 
                 case "ຈັດການເພີ່ມຈຳນວນນຳເຂົ້າສິນຄ້າ":
                     UpdateDataGridView();
-                    MyMessageBox.ShowMessage("ເພີ່ມຂໍ້ມູນສຳເລັດ", "", "ສຳເລັດ", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MyMessageBox.ShowMessage("ເພີ່ມຂໍ້ມູນສຳເລັດແລ້ວ", "", "ສຳເລັດ", MessageBoxButtons.OK, MessageBoxIcon.None);
                     Close();
                     break;
 
                 case "ຈັດການແກ້ໄຂຈຳນວນນຳເຂົ້າສິນຄ້າ":
                     if (long.Parse(textBox2.Text) > long.Parse(_originalQty))
                     {
-                        MyMessageBox.ShowMessage("ຈຳນວນເພີ່ມເກີນຈຳນວນທີ່ສັ່ງ", "", "ຄໍາເຕືອນ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MyMessageBox.ShowMessage("ຂໍອະໄພ, ຈຳນວນທີ່ທ່ານເພີ່ມຫຼາຍກວ່າຈຳນວນທີ່ສັ່ງຊື້", "", "ກວດສອບ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
 
@@ -135,8 +135,8 @@ namespace Construction_System
                         updateRow.Cells["Column26"].Value = textBox3.Text; // totalPrice
                     }
 
-                    MyMessageBox.ShowMessage("ແກ້ໄຂສຳເລັດ", "", "ສຳເລັດ", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        Close();
+                    MyMessageBox.ShowMessage("ແກ້ໄຂຂໍ້ມູນສຳເລັດແລ້ວ", "", "ສຳເລັດ", MessageBoxButtons.OK, MessageBoxIcon.None);
+                    Close();
                     break;
 
                 default:
@@ -150,7 +150,7 @@ namespace Construction_System
             // ✅ Use strong reference to DataTable (use _mImport's DataTable if stored)
             if (!(_mImport.dataGridView2.DataSource is DataTable dataTable))
             {
-                MyMessageBox.ShowMessage("ບໍ່ພົບ DataTable", "", "ຜິດພາດ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MyMessageBox.ShowMessage("ຂໍອະໄພ, ບໍ່ພົບ DataTable", "", "ຜິດພາດ", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 

@@ -46,9 +46,16 @@ namespace Construction_System
             {
                 if (dataGridView2.Columns.Contains("Column26"))
                 {
-                    var totalPrice = dataGridView2.Rows.Cast<DataGridViewRow>()
-                        .Sum(row => Convert.ToInt64(row.Cells["Column26"].Value));
-                    label2.Text = $"{totalPrice:#,###} ກີບ";
+                    if (dataGridView2.Rows.Count != 0)
+                    {
+                        var totalPrice = dataGridView2.Rows.Cast<DataGridViewRow>()
+                            .Sum(row => Convert.ToInt64(row.Cells["Column26"].Value));
+                        label2.Text = $"{totalPrice:#,###} ກີບ";
+                    }
+                    else
+                    {
+                        label2.Text = "0 ກີບ";
+                    }
                 }
                 else
                 {
@@ -58,13 +65,8 @@ namespace Construction_System
             }
             catch (Exception ex)
             {
-                ShowMessage($"ເກີດຂໍ້ຜີດພາດ {ex}", "ຂໍ້ຜິດພາດ");
+                MyMessageBox.ShowMessage("ເກີດຂໍ້ຜີດພາດ " + ex + " ", "", "ເກີດຂໍ້ຜີດພາດ", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-        private void ShowMessage(string message, string content)
-        {
-            MyMessageBox.ShowMessage(message, "", content, MessageBoxButtons.OK, MessageBoxIcon.None);
         }
 
         private void dataGridView1_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
@@ -113,7 +115,7 @@ namespace Construction_System
             }
             catch (Exception ex)
             {
-                ShowMessage($"ເກີດຂໍ້ຜີດພາດ {ex}", "ຂໍ້ຜິດພາດ");
+                MyMessageBox.ShowMessage("ເກີດຂໍ້ຜີດພາດ " + ex + " ", "", "ເກີດຂໍ້ຜີດພາດ", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -133,12 +135,12 @@ namespace Construction_System
                                 $"WHERE o.orderId = '{dataGridView1.Rows[e.RowIndex].Cells["id1"].Value}'";
                     _config.LoadData(query, dataGridView2);
                     SumQty();
-                    ShowMessage("ເພີ່ມຂໍ້ມູນສຳເລັດແລ້ວ", "ສຳເລັດ");
+                    MyMessageBox.ShowMessage("ເພີ່ມຂໍ້ມູນສຳເລັດແລ້ວ", "", "ສຳເລັດ", MessageBoxButtons.OK, MessageBoxIcon.None);
                 }
             }
             catch (Exception ex)
             {
-                ShowMessage($"ເກີດຂໍ້ຜີດພາດ {ex}", "ຂໍ້ຜິດພາດ");
+                MyMessageBox.ShowMessage("ເກີດຂໍ້ຜີດພາດ " + ex + " ", "", "ເກີດຂໍ້ຜີດພາດ", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -194,7 +196,7 @@ namespace Construction_System
             }
             catch (Exception ex)
             {
-                ShowMessage($"ເກີດຂໍ້ຜີດພາດ {ex}", "ຂໍ້ຜິດພາດ");
+                MyMessageBox.ShowMessage("ເກີດຂໍ້ຜີດພາດ " + ex + " ", "", "ເກີດຂໍ້ຜີດພາດ", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -202,7 +204,7 @@ namespace Construction_System
         {
             if (dataGridView2.RowCount == 0)
             {
-                ShowMessage("ທ່ານຍັງບໍ່ໄດ້ເພີ່ມສິນຄ້າໃນການນຳເຂົ້າສິນຄ້າ", "ຂໍ້ຜິດພາດ");
+                MyMessageBox.ShowMessage("ຂໍອະໄພ, ກະລຸນາເພີ່ມລາຍການສິນຄ້າກ່ອນນຳເຂົ້າສິນຄ້າ", "", "ເກີດຂໍ້ຜີດພາດ", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -253,7 +255,7 @@ namespace Construction_System
                 query = $"UPDATE [POSSALE].[dbo].[order] SET [orderStatus] = 'ອະນຸມັດ' WHERE [orderId] = '{dataGridView1.CurrentRow.Cells["id1"].Value}'";
                 _config.setData(query);
 
-                ShowMessage("ການນຳເຂົ້າສິນຄ້າສຳເລັດ", "ສຳເລັດ");
+                MyMessageBox.ShowMessage("ການນຳເຂົ້າສິນຄ້າສຳເລັດ", "", "ສຳເລັດ", MessageBoxButtons.OK, MessageBoxIcon.None);
 
 
                 //Prlonging bill 
@@ -275,7 +277,7 @@ namespace Construction_System
             }
             catch (Exception ex)
             {
-                ShowMessage($"ເກີດຂໍ້ຜີດພາດ {ex}", "ຂໍ້ຜິດພາດ");
+                MyMessageBox.ShowMessage("ເກີດຂໍ້ຜີດພາດ " + ex + " ", "", "ເກີດຂໍ້ຜີດພາດ", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

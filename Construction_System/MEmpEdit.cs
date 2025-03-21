@@ -41,13 +41,13 @@ namespace Construction_System
                                       $"'{mEmployee.textBox6.Text}', 'active')";
                             _config.setDataEmp(query);
                             mEmployee.LoadData();
-
+                            this.Close();
                         }
                         else
                         {
                             MyMessageBox.ShowMessage("ຂໍອະໄພ, ຊື່ຜູ້ໃຊ້ ຫຼື ລະຫັດຜ່ານ ບໍ່ຖຶກຕ້ອງ!", "", "ຜິດພາດ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         }
-                        Close();
+                        //Close();
                         break;
 
                     case "ແກ້ໄຂຂໍ້ມູນພະນັກງານ":
@@ -63,14 +63,27 @@ namespace Construction_System
                                 $"empPass = '{mEmployee.textBox6.Text}' " +
                                 $"WHERE empId = '{mEmployee.dataGridView1.CurrentRow.Cells["Column8"].Value}'";
                             _config.updateDataEmp(query);
-                            mEmployee.LoadData();
 
+                            if (mEmployee.emID == mEmployee._empId)
+                            {
+                                if (mEmployee.emID != mEmployee.textBox5.Text || mEmployee.emPass != mEmployee._EMPPAss)
+                                {
+
+                                    DialogResult dialog = MyMessageBox.ShowMessage("ຂໍອະໄພ, ລະບົບກຳລັງດຳເນີນການເລີ່ມຕົ້ນເຂົ້າສູ່ລະບົບອີກຄັ້ງ!", "", "ແຈ້ງເຕືອນ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    if (dialog == DialogResult.OK)
+                                    {
+                                        Application.Restart();
+                                    }
+                                }
+                            }
+                            mEmployee.LoadData();
+                            this.Close();
                         }
                         else
                         {
                             MyMessageBox.ShowMessage("ຂໍອະໄພ, ຊື່ຜູ້ໃຊ້ ຫຼື ລະຫັດຜ່ານ ບໍ່ຖຶກຕ້ອງ!", "", "ຜິດພາດ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         }
-                        Close();
+                        //Close();
                         break;
 
                     case " ລົບຂໍ້ມູນພະນັກງານ":
@@ -81,14 +94,23 @@ namespace Construction_System
                                 $" WHERE [empId] = '{mEmployee.dataGridView1.CurrentRow.Cells["Column8"].Value}'";
                             _config.setData(query);
                             MyMessageBox.ShowMessage("ລົບຂໍ້ມູນສຳເລັດແລ້ວ", "", "ສຳເລັດ", MessageBoxButtons.OK, MessageBoxIcon.None);
-                            mEmployee.LoadData();
 
+                            if (mEmployee.emID == mEmployee._empId)
+                            {
+                                DialogResult dialog = MyMessageBox.ShowMessage("ຂໍອະໄພ, ລະບົບກຳລັງດຳເນີນການເລີ່ມຕົ້ນເຂົ້າສູ່ລະບົບອີກຄັ້ງ!", "", "ແຈ້ງເຕືອນ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                if (dialog == DialogResult.OK)
+                                {
+                                    Application.Restart();
+                                }
+                            }
+                            mEmployee.LoadData();
+                            this.Close();
                         }
                         else
                         {
                             MyMessageBox.ShowMessage("ຂໍອະໄພ, ຊື່ຜູ້ໃຊ້ ຫຼື ລະຫັດຜ່ານ ບໍ່ຖຶກຕ້ອງ!", "", "ຜິດພາດ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         }
-                        Close();
+                        //Close();
                         break;
 
                     default:

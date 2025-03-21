@@ -120,8 +120,8 @@ namespace Construction_System
                     $"VALUES ('{prodID}','{textBox2.Text}','{textBox3.Text}', '{comboBox1.SelectedValue}', '{comboBox2.SelectedValue}', " +
                     $"'{textBox4.Text}', '{textBox5.Text}', 'no')");
                 _config.setData(query);
-                MyMessageBox.ShowMessage("ເພິ່ມຂໍ້ມູນສຳເລັດແລ້ວ", "", "ສຳເລັດ", MessageBoxButtons.OK, MessageBoxIcon.None);
                 LoadProducts();
+                MyMessageBox.ShowMessage("ເພິ່ມຂໍ້ມູນສຳເລັດແລ້ວ", "", "ສຳເລັດ", MessageBoxButtons.OK, MessageBoxIcon.None);
                 textBox2.Select();
             }
         }
@@ -160,11 +160,15 @@ namespace Construction_System
             e.RowIndex >= 0 && dataGridView1.Columns[e.ColumnIndex].HeaderCell.Value.ToString() == "ລົບ")
             {
                 //TODO - Button Clicked - Execute Code Here
-                query = $"UPDATE [POSSALE].[dbo].[product] SET [cancel] = 'yes'" +
+                DialogResult dialog = MyMessageBox.ShowMessage("ທ່ານຕ້ອງການລົບຂໍ້ມູນ ແທ້ ຫຼື ບໍ່", "", "ກວດສອບ", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (dialog == DialogResult.Yes)
+                {
+                    query = $"UPDATE [POSSALE].[dbo].[product] SET [cancel] = 'yes'" +
                                 $" WHERE [prodID] = '{dataGridView1.CurrentRow.Cells["id1"].Value}'";
-                _config.setData(query);
-                LoadProducts();
-                MyMessageBox.ShowMessage("ລົບຂໍ້ມູນສຳເລັດແລ້ວ", "", "ສຳເລັດ", MessageBoxButtons.OK, MessageBoxIcon.None);
+                    _config.setData(query);
+                    LoadProducts();
+                    MyMessageBox.ShowMessage("ລົບຂໍ້ມູນສຳເລັດແລ້ວ", "", "ສຳເລັດ", MessageBoxButtons.OK, MessageBoxIcon.None);
+                }
             }
         }
 

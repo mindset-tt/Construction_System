@@ -57,8 +57,7 @@ namespace Construction_System
             {
                 if (string.IsNullOrEmpty(comboBox1.Text))
                 {
-                    //ShowMessage("ກະລຸນາເລືອກຂໍ້ມູນຜູ້ສະໜອງ");
-                    ShowMessage("ກະລຸນາເລືອກຂໍ້ມູນຜູ້ສະໜອງ", "ຂໍ້ຜິດພາດ");
+                    MyMessageBox.ShowMessage("ກະລຸນາເລືອກຂໍ້ມູນຜູ້ສະໜອງ", "", "ແຈ້ງເຕືອນ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     dataGridView1.DataSource = null;
                 }
                 else
@@ -76,7 +75,8 @@ namespace Construction_System
             }
             catch (Exception ex)
             {
-                ShowMessage($"ສິ່ງທີ່ຄົ້ນຫາບໍ່ຖືກຕ້ອງ {ex}", "ຂໍ້ຜິດພາດ");
+                MyMessageBox.ShowMessage("ເກີດຂໍ້ຜີດພາດ " + ex + " ", "", "ເກີດຂໍ້ຜີດພາດ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
             }
         }
 
@@ -86,7 +86,7 @@ namespace Construction_System
             {
                 if (string.IsNullOrEmpty(comboBox1.Text) || comboBox1.Text == "ກະລຸນາເລືອກ")
                 {
-                    ShowMessage("ກະລຸນາເລືອກຂໍ້ມູນຜູ້ສະໜອງ", "ຂໍ້ຜິດພາດ");
+                    MyMessageBox.ShowMessage("ກະລຸນາເລືອກຂໍ້ມູນຜູ້ສະໜອງ", "", "ແຈ້ງເຕືອນ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     var filter = "WHERE p.cancel = 'none'";
                     dataGridView2.Rows.Clear();
                     //dataGridView1.DataSource = null;
@@ -103,27 +103,29 @@ namespace Construction_System
             }
             catch (Exception ex)
             {
-                ShowMessage($"ເກີດຂໍ້ຜີດພາດ {ex}", "ຂໍ້ຜິດພາດ");
+                MyMessageBox.ShowMessage("ເກີດຂໍ້ຜີດພາດ " + ex + " ", "", "ເກີດຂໍ້ຜີດພາດ", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        private void ShowMessage(string message, string content)
-        {
-            MyMessageBox.ShowMessage(message, "", content, MessageBoxButtons.OK, MessageBoxIcon.None);
-        }
 
         private void sumQty()
         {
             try
             {
-                var totalQty = dataGridView2.Rows.Cast<DataGridViewRow>()
-                    .Sum(row => Convert.ToInt64(row.Cells["Column24"].Value));
-                label2.Text = $"{totalQty:#,###}   ອັນ";
+                if (dataGridView2.Rows.Count != 0)
+                {
+                    var totalQty = dataGridView2.Rows.Cast<DataGridViewRow>()
+                        .Sum(row => Convert.ToInt64(row.Cells["Column24"].Value));
+                    label2.Text = $"{totalQty:#,###}   ອັນ";
+                }
+                else
+                {
+                    label2.Text = "0" + "   ອັນ";
+                }
             }
             catch (Exception ex)
             {
-                //ShowMessage($"ເກີດຂໍ້ຜີດພາດ {ex}");
-                ShowMessage($"ເກີດຂໍ້ຜີດພາດ {ex}", "ຂໍ້ຜິດພາດ");
+                MyMessageBox.ShowMessage("ເກີດຂໍ້ຜີດພາດ " + ex + " ", "", "ເກີດຂໍ້ຜີດພາດ", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -158,7 +160,7 @@ namespace Construction_System
                 {
                     var editQty = new OrEditQty(this, null, dataGridView1.Rows[e.RowIndex].Cells["Column8"].Value.ToString(), true, false, null)
                     {
-                        label1 = { Text = " ເພີ່ມຈຳນວນສັ່ງຊື້ສິນຄ້າ", Image = Construction_System.Properties.Resources.add_button },
+                        label1 = { Text = " ເພີ່ມຈໍານວນສັ່ງຊື້ສິນຄ້າ", Image = Construction_System.Properties.Resources.add_button },
                         button1 = { Text = "ເພີ່ມ" },
                         textBox1 = { Text = dataGridView1.Rows[e.RowIndex].Cells["Column12"].Value.ToString() },
                         lblUnit = { Text = dataGridView1.Rows[e.RowIndex].Cells["Column14"].Value.ToString() },
@@ -171,7 +173,7 @@ namespace Construction_System
             }
             catch (Exception ex)
             {
-                ShowMessage($"ເກີດຂໍ້ຜີດພາດ {ex}", "ຂໍ້ຜິດພາດ");
+                MyMessageBox.ShowMessage("ເກີດຂໍ້ຜີດພາດ " + ex + " ", "", "ເກີດຂໍ້ຜີດພາດ", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -203,7 +205,7 @@ namespace Construction_System
             }
             catch (Exception ex)
             {
-                ShowMessage($"ເກີດຂໍ້ຜີດພາດ {ex}", "ຂໍ້ຜິດພາດ");
+                MyMessageBox.ShowMessage("ເກີດຂໍ້ຜີດພາດ " + ex + " ", "", "ເກີດຂໍ້ຜີດພາດ", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -229,13 +231,13 @@ namespace Construction_System
         {
             if (comboBox1.SelectedValue.ToString() == "-1")
             {
-                ShowMessage("ກະລຸນາເລືອກຜູ້ສະໜອງ", "ຂໍ້ຜິດພາດ");
+                MyMessageBox.ShowMessage("ກະລຸນາເລືອກຂໍ້ມູນຜູ້ສະໜອງ", "", "ແຈ້ງເຕືອນ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             if (dataGridView2.RowCount == 0)
             {
-                ShowMessage("ທ່ານຍັງບໍ່ໄດ້ເພີ່ມສິນຄ້າໃນການສິ່ງຊື້", "ຂໍ້ຜິດພາດ");
+                MyMessageBox.ShowMessage("ຂໍອະໄພ, ກະລຸນາເພີ່ມລາຍການສິນຄ້າກ່ອນສັ່ງຊື້ສິນຄ້າ", "", "ເກີດຂໍ້ຜີດພາດ", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -244,7 +246,7 @@ namespace Construction_System
                 // Check idSup in dataGridView2 is content in comboBox1.SelectedValue
                 if (!row.Cells["idSup"].Value.ToString().Contains(comboBox1.SelectedValue.ToString()))
                 {
-                    ShowMessage("ຜູ້ສະໜອງບໍ່ຖືກຕ້ອງ", "ຂໍ້ຜິດພາດ");
+                    MyMessageBox.ShowMessage("ຂໍອະໄພ, ຂໍ້ມູນຜູ້ສະໜອງບໍ່ຖືກຕ້ອງ ", "", "ເກີດຂໍ້ຜີດພາດ", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
             }
@@ -278,7 +280,7 @@ namespace Construction_System
 
                 if (!productExists)
                 {
-                    ShowMessage($"Product ID {productId} does not exist in the product table.", "Error");
+                    MyMessageBox.ShowMessage($"ຂໍອະໄພ, ເກີດຂໍ້ຜີດພາດ Product ID {productId} does not exist in the product table.", "", "ເກີດຂໍ້ຜີດພາດ", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     _config.closeConnection();
                     return;
                 }
@@ -288,7 +290,7 @@ namespace Construction_System
                 _config.setData("INSERT INTO [POSSALE].[dbo].[orderDetail] ([orderId], [productId], [orderQty]) " +
                                $"VALUES ('{orderId}', '{productId}', {row.Cells["Column24"].Value})");
             }
-            ShowMessage("ສິ່ງຊື້ສຳເລັດແລ້ວ", "ສຳເລັດ");
+            MyMessageBox.ShowMessage("ການສັ່ງຊື້ສິນຄ້າສຳເລັດ", "", "ສຳເລັດ", MessageBoxButtons.OK, MessageBoxIcon.None);
 
             //dataGridView2.DataSource = null;
             //clear the combobox

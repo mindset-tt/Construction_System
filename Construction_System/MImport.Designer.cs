@@ -217,6 +217,7 @@
             this.Column1.ReadOnly = true;
             this.Column1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.Column1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Column1.Visible = false;
             this.Column1.Width = 55;
             // 
             // Column2
@@ -253,6 +254,7 @@
             // 
             this.Column5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Column5.DataPropertyName = "importDate";
+            this.Column5.FillWeight = 60F;
             this.Column5.HeaderText = "ວັນທີນຳເຂົ້າ";
             this.Column5.MinimumWidth = 50;
             this.Column5.Name = "Column5";

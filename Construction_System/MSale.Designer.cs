@@ -232,6 +232,7 @@
             // 
             this.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Column3.DataPropertyName = "sellId";
+            this.Column3.FillWeight = 80F;
             this.Column3.HeaderText = "ລະຫັດໃບບິນ";
             this.Column3.MinimumWidth = 50;
             this.Column3.Name = "Column3";
@@ -241,7 +242,8 @@
             // 
             this.Column4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Column4.DataPropertyName = "whoSell";
-            this.Column4.HeaderText = "ພະນັກງານຂາຍ";
+            this.Column4.FillWeight = 60F;
+            this.Column4.HeaderText = "ພະນັກງານ";
             this.Column4.MinimumWidth = 50;
             this.Column4.Name = "Column4";
             this.Column4.ReadOnly = true;

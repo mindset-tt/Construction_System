@@ -140,26 +140,6 @@ namespace Construction_System
         {
             try
             {
-                //OrEditQty editQty = new OrEditQty(null, this, null, false, false);
-                //var senderGrid1 = (DataGridView)sender;
-                //if (senderGrid1.Columns[e.ColumnIndex] is DataGridViewImageColumn &&
-                //    e.RowIndex >= 0)
-                //{
-                //    //TODO - Button Clicked - Execute Code Here
-                //    //MyMessageBox.ShowMessage(dataGridView2.Rows[e.RowIndex].Cells[3].Value.ToString(), "", "ຍິນດີຕ້ອນຮັບ", MessageBoxButtons.OK, MessageBoxIcon.None);
-                //    editQty.label1.Text = " ຈັດການເພີ່ມຈຳນວນສັ່ງຊື້ສິນຄ້າ";
-                //    editQty.label1.Image = Construction_System.Properties.Resources.add_button;
-                //    editQty.label1.Size = new System.Drawing.Size(216, 26);
-                //    editQty.button1.Text = "ເພີ່ມ";
-                //    editQty.textBox1.Text = dataGridView1.Rows[e.RowIndex].Cells["Column12"].Value.ToString();
-                //    editQty.lblUnit.Text = dataGridView1.Rows[e.RowIndex].Cells["Column14"].Value.ToString();
-                //    //editQty.lblPrice.Text = dataGridView1.Rows[e.RowIndex].Cells[6].Value.ToString();
-                //    editQty.lblId.Text = dataGridView1.Rows[e.RowIndex].Cells["id1"].Value.ToString();
-                //    editQty.ShowDialog();
-                //    dataGridView1.ClearSelection();
-                //    //dataGridView2.Columns["Column24"].DefaultCellStyle.Format = "#,###";
-                //    //dataGridView2.Columns["Column26"].DefaultCellStyle.Format = "#,###";
-                //}
                 if (dataGridView1.Columns[e.ColumnIndex] is DataGridViewImageColumn && e.RowIndex >= 0)
                 {
                     var editQty = new OrEditQty(null, this, dataGridView1.Rows[e.RowIndex].Cells["Column8"].Value.ToString(), false, false, _order)
@@ -186,34 +166,6 @@ namespace Construction_System
         {
             try
             {
-                //OrEditQty editQty = new OrEditQty(null, this, null, false, false);
-                //var senderGrid = (DataGridView)sender;
-
-                //if (senderGrid.Columns[e.ColumnIndex] is DataGridViewImageColumn &&
-                //e.RowIndex >= 0 && dataGridView2.Columns[e.ColumnIndex].HeaderCell.Value.ToString() == "ລົບ")
-                //{
-                //    //TODO - Button Clicked - Execute Code Here
-                //    dataGridView2.Rows.RemoveAt(dataGridView2.Rows[e.RowIndex].Index);
-                //    //MyMessageBox.ShowMessage("ເພີ່ມຂໍ້ມູນສຳເລັດແລ້ວ", "", "ສຳເລັດ", MessageBoxButtons.OK, MessageBoxIcon.None);
-                //}
-
-                //if (senderGrid.Columns[e.ColumnIndex] is DataGridViewImageColumn &&
-                //    e.RowIndex >= 0 && dataGridView2.Columns[e.ColumnIndex].HeaderCell.Value.ToString() == "ແກ້ໄຂ")
-                //{
-                //    //TODO - Button Clicked - Execute Code Here
-                //    //MyMessageBox.ShowMessage(dataGridView2.Rows[e.RowIndex].Cells[3].Value.ToString(), "", "ຍິນດີຕ້ອນຮັບ", MessageBoxButtons.OK, MessageBoxIcon.None);
-                //    editQty.label1.Text = "ຈັດການແກ້ໄຂຈຳນວນສັ່ງຊື້ສິນຄ້າ";
-                //    editQty.label1.Image = Construction_System.Properties.Resources.pencil;
-                //    editQty.label1.Size = new System.Drawing.Size(216, 26);
-                //    editQty.button1.Text = "ແກ້ໄຂ";
-                //    editQty.textBox1.Text = dataGridView2.Rows[e.RowIndex].Cells["Column23"].Value.ToString();
-                //    editQty.textBox2.Text = dataGridView2.Rows[e.RowIndex].Cells["Column24"].Value.ToString();
-                //    //editQty.lblId.Text = dataGridView2.Rows[e.RowIndex].Cells["id2"].Value.ToString();
-                //    editQty.ShowDialog();
-
-
-                //}
-
                 var senderGrid = (DataGridView)sender;
                 if (senderGrid.Columns[e.ColumnIndex] is DataGridViewImageColumn && e.RowIndex >= 0)
                 {
@@ -276,7 +228,7 @@ namespace Construction_System
                 if (totalOrder == "" || totalOrder == "0")
                 {
 
-                    MyMessageBox.ShowMessage("ທ່ານຍັງບໍ່ໄດ້ເພີ່ມສິນຄ້າໃນການສິ່ງຊື້", "", "ຂໍ້ຜິດພາດ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MyMessageBox.ShowMessage("ຂໍອະໄພ, ກະລຸນາເພີ່ມລາຍການສິນຄ້າໃນການສັ່ງຊື້ກ່ອນບັນທຶກຂໍ້ມູນ", "", "ກວດສອບ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
                 //delete all order detail first
@@ -295,7 +247,7 @@ namespace Construction_System
                 query = $"UPDATE [POSSALE].[dbo].[order] SET [totalOrder] = {totalOrder} WHERE [orderId] = '{_order}'";
                 _config.setData(query);
 
-                MyMessageBox.ShowMessage("ປ່ຽນຈຳນວນສັ່ງຊື້ສິນຄ້າສຳເລັດແລ້ວ", "", "ສຳເລັດ", MessageBoxButtons.OK, MessageBoxIcon.None);
+                MyMessageBox.ShowMessage("ບັນທຶກການແກ້ໄຂຂໍ້ມູນການສັ່ງຊື້ສິນຄ້າສຳເລັດແລ້ວ", "", "ສຳເລັດ", MessageBoxButtons.OK, MessageBoxIcon.None);
 
                 FM_Bill fM_Bill = new FM_Bill();
                 OrderBill orderBill = new OrderBill();

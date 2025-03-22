@@ -13,7 +13,7 @@ namespace Construction_System
             InitializeComponent();
             timer1.Start();
             hideSubMenu();
-            openChildForm(new Sale(EMPID));
+            btnLayer.Image = Construction_System.Properties.Resources.layers;
         }
 
         private void hideSubMenu()
@@ -55,7 +55,7 @@ namespace Construction_System
         {
             if (MyMessageBox.ShowMessage("ທ່ານຕ້ອງການອອກຈາກລະບົບແທ້ ຫຼື ບໍ່?", "", "ອອກຈາກລະບົບ", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                Application.Exit();
+                Application.Restart();
             }
         }
 
@@ -98,12 +98,12 @@ namespace Construction_System
         {
             if (maxi == false)
             {
-                btnLayer.Image = Construction_System.Properties.Resources.maximize;
+                btnLayer.Image = Construction_System.Properties.Resources.layers;
                 maxi = true;
             }
             else
             {
-                btnLayer.Image = Construction_System.Properties.Resources.layers;
+                btnLayer.Image = Construction_System.Properties.Resources.maximize;
                 maxi = false;
             }
         }
@@ -210,7 +210,8 @@ namespace Construction_System
         private void Main_Load(object sender, EventArgs e)
         {
             WindowState = FormWindowState.Maximized;
-            label2.Text = EMPNAME;
+            label2.Text = EMPID + " / " + EMPNAME;
+            openChildForm(new Sale(EMPID));
         }
     }
 }

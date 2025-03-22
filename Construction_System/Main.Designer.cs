@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.btnReIm = new System.Windows.Forms.Button();
             this.btnReOrder = new System.Windows.Forms.Button();
             this.btnReWaInc = new System.Windows.Forms.Button();
@@ -574,7 +575,7 @@
             // 
             // label2
             // 
-            this.label2.Font = new System.Drawing.Font("Noto Sans Lao", 10F, System.Drawing.FontStyle.Bold);
+            this.label2.Font = new System.Drawing.Font("Noto Sans Lao", 11F, System.Drawing.FontStyle.Bold);
             this.label2.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.label2.Location = new System.Drawing.Point(216, 0);
             this.label2.Name = "label2";
@@ -585,7 +586,7 @@
             // 
             // label1
             // 
-            this.label1.Font = new System.Drawing.Font("Noto Sans Lao", 10F);
+            this.label1.Font = new System.Drawing.Font("Noto Sans Lao", 11F);
             this.label1.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.label1.Location = new System.Drawing.Point(3, 0);
             this.label1.Name = "label1";
@@ -665,6 +666,7 @@
             this.Controls.Add(this.panelSideMenu);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(1000, 600);
             this.Name = "Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

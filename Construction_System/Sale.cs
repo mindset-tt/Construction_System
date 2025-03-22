@@ -107,7 +107,7 @@ namespace Construction_System
         {
             try
             {
-                if (dataGridView2.Rows.Count >= -1)
+                if (dataGridView2.Rows.Count != 0)
                 {
                     long totalPrice = 0;
                     for (int i = 0; i < dataGridView2.RowCount; i++)

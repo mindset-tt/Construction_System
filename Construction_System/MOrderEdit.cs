@@ -26,9 +26,6 @@ namespace Construction_System
             _empId = empId;
             _order = Order;
             _supplierId = supplierId;
-            LoadProducts();
-            LoadOrderDetail();
-            label3.Text = "0" + "   ອັນ";
 
         }
 
@@ -92,7 +89,7 @@ namespace Construction_System
         {
             try
             {
-                if (dataGridView2.Rows.Count >= -1)
+                if (dataGridView2.Rows.Count != 0)
                 {
                     long totalQty = 0;
                     foreach (DataGridViewRow row in dataGridView2.Rows)
@@ -263,6 +260,14 @@ namespace Construction_System
             {
                 MyMessageBox.ShowMessage("ເກີດຂໍ້ຜີດພາດ " + ex + " ", "", "ເກີດຂໍ້ຜີດພາດ", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void MOrderEdit_Load(object sender, EventArgs e)
+        {
+            label2.Text = "ຈັດການຂໍ້ມູນເລກທີໃບບິນສັ່ງຊື້:  " + _order.ToString();
+            LoadProducts();
+            LoadOrderDetail();
+            label3.Text = "0" + "   ອັນ";
         }
     }
 }

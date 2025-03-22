@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
             this.label1 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -98,7 +99,7 @@
             // label4
             // 
             this.label4.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label4.Font = new System.Drawing.Font("Times New Roman", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
             this.label4.Location = new System.Drawing.Point(14, 482);
             this.label4.Name = "label4";
@@ -111,9 +112,9 @@
             // 
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Noto Sans Lao", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Font = new System.Drawing.Font("Noto Sans Lao", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
-            this.label3.Location = new System.Drawing.Point(73, 334);
+            this.label3.Location = new System.Drawing.Point(73, 337);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(77, 26);
             this.label3.TabIndex = 47;
@@ -124,11 +125,11 @@
             // 
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Noto Sans Lao", 12F);
+            this.label2.Font = new System.Drawing.Font("Noto Sans Lao", 12F, System.Drawing.FontStyle.Bold);
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
             this.label2.Location = new System.Drawing.Point(73, 268);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(48, 26);
+            this.label2.Size = new System.Drawing.Size(49, 26);
             this.label2.TabIndex = 46;
             this.label2.Text = "ຊື່ຜູ້ໃຊ້";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -137,7 +138,7 @@
             // 
             this.txtbPassword.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.txtbPassword.Font = new System.Drawing.Font("Noto Sans Lao", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtbPassword.Location = new System.Drawing.Point(70, 364);
+            this.txtbPassword.Location = new System.Drawing.Point(70, 367);
             this.txtbPassword.Name = "txtbPassword";
             this.txtbPassword.Size = new System.Drawing.Size(306, 32);
             this.txtbPassword.TabIndex = 45;
@@ -222,6 +223,7 @@
             this.Controls.Add(this.btnCloseLogin);
             this.Controls.Add(this.btnLogin);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Login";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

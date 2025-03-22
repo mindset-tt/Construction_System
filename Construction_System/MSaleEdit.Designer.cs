@@ -288,13 +288,13 @@
             // 
             this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label2.Font = new System.Drawing.Font("Noto Sans Lao", 14F, System.Drawing.FontStyle.Bold);
+            this.label2.Font = new System.Drawing.Font("Noto Sans Lao", 13F, System.Drawing.FontStyle.Bold);
             this.label2.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.label2.Location = new System.Drawing.Point(0, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(379, 44);
             this.label2.TabIndex = 57;
-            this.label2.Text = "ຈັດການຂໍ້ມູນໃບບິນການຂາຍ";
+            this.label2.Text = "ຈັດການຂໍ້ມູນເລກທີໃບບິນຂາຍ:";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panel6

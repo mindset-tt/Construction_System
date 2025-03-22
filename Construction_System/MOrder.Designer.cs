@@ -236,7 +236,7 @@
             this.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Column3.DataPropertyName = "orderId";
             this.Column3.FillWeight = 80F;
-            this.Column3.HeaderText = "ລະຫັດໃບບິນ";
+            this.Column3.HeaderText = "ເລກທີໃບບິນ";
             this.Column3.Name = "Column3";
             this.Column3.ReadOnly = true;
             // 

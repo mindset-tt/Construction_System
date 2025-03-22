@@ -117,48 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="Column21.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="Column22.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="Column22.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAA
-        bQAAAG0BjlwfygAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAG1SURBVDhPjY/d
-        L0JhHMcfL3PlnxB1EV1ka7PCmY1rVy6YmRtmc4WNO7OZvMyGcdGFiAvSJvwDkpdzRiVGnS1JM6dkRp1U
-        WtnPeejYmT3Kxee5eT6f73MOAoB/41OpLC6FIuOUyz+8SqXrqbq6nCiSYNVqjpbJAMPW1MB9bS0819VZ
-        ifJv7oJBJnB5mTkVwrBGA7xOJ5IiBlIcDseZx+N5DQQCwB0dvfAUJR2IESMRbkQ17aDtUYZhgPX5nKHH
-        R4js70fEkZhOt0gMMdyAYpIblAM3rAT2cDd07fWCz++3iSMxiroFhErzxqEhObyNy+B9ugpuDiwPeOQG
-        j4TDa4JXgt2CcXqqApL6SkhtUeCnt0NXLLsieMWi/6/43dwAaWsT8KZGWvB+YgwxTkjjze84vqo9EbQi
-        aYz5OiKzLaP54sQfMQaBxVIWtU9lng1td9I4tZF72aQVPpscY1CUWeh7tekhRs+nE0sNSWmcKBBjkHdv
-        wo0H4k4DxN3LfHKrNZ77Z0a4zxtjUGd7G5jnBuDNbfzmfJnj15t3hLuCMQb1dndk+3u6styxYYa/MNaD
-        bayUJJIB9Ak8Ls8RC1OsOQAAAABJRU5ErkJggg==
-</value>
-  </data>
-  <metadata name="Column23.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="Column24.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="Column25.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="id2.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="idSup.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="OrderID.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
   <metadata name="Column11.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="Column11.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAA
@@ -190,6 +152,44 @@
     <value>True</value>
   </metadata>
   <metadata name="Column8.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="Column21.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="Column22.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="Column22.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAA
+        bQAAAG0BjlwfygAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAG1SURBVDhPjY/d
+        L0JhHMcfL3PlnxB1EV1ka7PCmY1rVy6YmRtmc4WNO7OZvMyGcdGFiAvSJvwDkpdzRiVGnS1JM6dkRp1U
+        WtnPeejYmT3Kxee5eT6f73MOAoB/41OpLC6FIuOUyz+8SqXrqbq6nCiSYNVqjpbJAMPW1MB9bS0819VZ
+        ifJv7oJBJnB5mTkVwrBGA7xOJ5IiBlIcDseZx+N5DQQCwB0dvfAUJR2IESMRbkQ17aDtUYZhgPX5nKHH
+        R4js70fEkZhOt0gMMdyAYpIblAM3rAT2cDd07fWCz++3iSMxiroFhErzxqEhObyNy+B9ugpuDiwPeOQG
+        j4TDa4JXgt2CcXqqApL6SkhtUeCnt0NXLLsieMWi/6/43dwAaWsT8KZGWvB+YgwxTkjjze84vqo9EbQi
+        aYz5OiKzLaP54sQfMQaBxVIWtU9lng1td9I4tZF72aQVPpscY1CUWeh7tekhRs+nE0sNSWmcKBBjkHdv
+        wo0H4k4DxN3LfHKrNZ77Z0a4zxtjUGd7G5jnBuDNbfzmfJnj15t3hLuCMQb1dndk+3u6styxYYa/MNaD
+        bayUJJIB9Ak8Ls8RC1OsOQAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <metadata name="Column23.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="Column24.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="Column25.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="id2.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="idSup.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="OrderID.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="dataGridViewImageColumn1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">

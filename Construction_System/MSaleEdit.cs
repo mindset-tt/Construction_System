@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace Construction_System
@@ -40,6 +41,7 @@ namespace Construction_System
 
         private void MSaleEdit_Load(object sender, EventArgs e)
         {
+            label2.Text = "ຈັດການຂໍ້ມູນເລກທີໃບບິນຂາຍ:  " + _sellId.ToString();
             LoadProducts();
             LoadSaleDetail();
         }
@@ -69,13 +71,21 @@ namespace Construction_System
         {
             try
             {
-                long totalPrice = 0;
-                foreach (DataGridViewRow row in dataGridView2.Rows)
+                if (dataGridView2.Rows.Count != 0)
                 {
-                    if (!row.IsNewRow)
-                        totalPrice += Convert.ToInt64(row.Cells["Column26"].Value);
+                    long totalPrice = 0;
+                    foreach (DataGridViewRow row in dataGridView2.Rows)
+                    {
+                        if (!row.IsNewRow)
+                            totalPrice += Convert.ToInt64(row.Cells["Column26"].Value);
+                    }
+                    label3.Text = totalPrice.ToString("#,###") + " ກີບ";
                 }
-                label3.Text = totalPrice.ToString("#,###") + " ກີບ";
+                else
+                {
+                    label3.Text = "0 ກີບ";
+                }
+                
             }
             catch (Exception ex)
             {

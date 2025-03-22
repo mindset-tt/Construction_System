@@ -31,11 +31,18 @@ namespace Construction_System
         {
             try
             {
-                long totalPrice = dataGridView2.Rows.Cast<DataGridViewRow>()
-                    .Where(r => r.Cells["Column26"].Value != null)
-                    .Sum(r => Convert.ToInt64(r.Cells["Column26"].Value));
+                if (dataGridView2.Rows.Count != 0)
+                {
+                    long totalPrice = dataGridView2.Rows.Cast<DataGridViewRow>()
+                        .Where(r => r.Cells["Column26"].Value != null)
+                        .Sum(r => Convert.ToInt64(r.Cells["Column26"].Value));
 
-                label3.Text = totalPrice.ToString("#,###") + " ກີບ";
+                    label3.Text = totalPrice.ToString("#,###") + " ກີບ";
+                }
+                else
+                {
+                    label3.Text = "0 ກີບ";
+                }
             }
             catch (Exception ex)
             {
@@ -114,6 +121,7 @@ namespace Construction_System
 
         private void MImportEdit_Load(object sender, EventArgs e)
         {
+            label2.Text = "ຈັດການຂໍ້ມູນເລກທີໃບບິນນຳເຂົ້າ:  " + _importId.ToString();
             LoadOrderDetailId(true);
             LoadImportDetailId();
             LoadOrderDetailId(false); // Re-apply to adjust based on loaded import
